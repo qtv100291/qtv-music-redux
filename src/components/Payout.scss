@@ -1,0 +1,126 @@
+@import '../variables.scss';
+
+.payout-main{
+    width: 90%;
+    max-width: 1200px; 
+    margin: 102px auto 50px auto;
+    h2{
+        font-size: 30px;
+    }
+    h3{
+        font-size: 25px!important;
+    }
+    .payout-container {
+        margin-top: 25px;
+        align-items: flex-start;
+    }
+    .payout-user-info{
+        width: 90%;
+        max-width: 825px;
+        .payout-form{
+            width: 100%;
+            .payout-user-info-detail{
+                width: 100%;
+                box-sizing: border-box;
+                padding: 30px;
+                border-radius: 10px;
+                border: 1px solid #afafaf;
+                h3 {
+                    margin-bottom: 25px;
+                }
+            }
+            .payment-method{
+                margin-top: 35px;
+                width: 100%;
+                box-sizing: border-box;
+                padding: 30px;
+                border-radius: 10px;
+                border: 1px solid #afafaf;
+                .card-method-content{
+                    margin-top: 25px;
+                    margin-left: 27px;
+                }
+            }
+            button{
+                @include button;
+                display: block;
+                margin: 40px auto 0 auto;
+                width: 200px;
+                height: 50px;
+                font-size: 22px;
+                border: none;
+                outline: none;
+            }
+            .note-order-button{
+                margin-top: 15px;
+                font-style: italic;
+                text-align: center;
+            }
+        }
+    }
+    .payout-shopping-cart{
+        width: 90%;
+        max-width: 350px;
+        box-sizing: border-box;
+        border: 1px solid #afafaf;
+        border-radius: 10px;
+        padding: 10px;
+        .payout-shopping-container{
+            .payout-shopping-header{
+                padding: 15px 0;
+                border-bottom: 1px solid #afafaf;
+                a{  
+                    text-decoration: none;
+                    color: black;
+                    width: 80px;
+                    height: 35px;
+                    border: 1px solid #afafaf;
+                    border-radius: 5px;
+                    &:hover{
+                        background-color: rgb(223, 223, 223);
+                    }
+                    .back-to-cart-button{
+                        font-size: 18px;
+                        line-height: 35px;
+                        text-align: center; 
+                    }
+                }
+            }
+        }
+        .payout-shopping-body{
+            padding: 5px 0;
+            .item-list{
+                font-size: 14px;
+                border-bottom: 1px solid #afafaf;
+                p{
+                    padding: 5px;
+                    margin: 0;
+                }
+                p:nth-child(2){
+                    text-align: right;
+                }
+            }
+        }
+        .payout-shopping-footer{
+            padding: 5px 0;
+            div{
+                padding: 5px 0;
+            }
+            .total-money{
+                font-size: 18px;
+                span{
+                    color: $color-active;    
+                    font-weight: 500;
+                }
+            }
+        }
+    }
+}
+
+.card-method-content{
+    display: none;
+}
+.displaying{
+    display: block;
+}
+

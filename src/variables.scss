@@ -1,0 +1,19 @@
+
+$color-active:#DC2751;
+$color-active-hover: #ff1d52;
+$color-bg-navbar: #282834;
+$font-roboto: 'Roboto', sans-serif;
+$font-catamaran: 'Catamaran', sans-serif;
+
+@mixin button{
+    color: white;
+    background-color: $color-active;
+    border-radius: 999px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover{
+        cursor: pointer;
+        background-color: $color-active-hover;
+    }
+}

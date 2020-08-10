@@ -1,0 +1,54 @@
+@import '../variables.scss';
+
+.search-page-main{
+    width: 90%;
+    max-width: 1200px;
+    margin: 72px auto;
+    .result-list{
+        margin-top: 30px;
+        
+    }
+    .result-list-title{
+        font-size: 30px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        .keyword{
+            font-weight: 700;
+            color: $color-active;
+        }
+        .result-number{
+            font-size: 18px;
+            font-weight: 500;
+            color: rgb(167, 167, 167);
+        }
+    }
+    .product-part-sort{
+        height: 40px;
+        margin-bottom: 25px;
+        .dropdown{
+            width: 290px;
+            span{
+                width: 110px;
+                margin-right: 10px;
+                display: inline-block;
+            }
+            strong {
+                display: inline-block;
+                width: 130px;
+            }
+            button{
+                width: 100%;
+                background-color: white;
+                outline: none;
+                color: black;
+                border-color: #BDB4B4;
+                height: 40px;
+            }
+        }
+    }
+    .result-container{
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 35px 35px;
+    }
+}
