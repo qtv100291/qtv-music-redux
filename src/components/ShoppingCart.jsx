@@ -57,8 +57,5 @@ const ShoppingCart = ({ shoppingCart,
     )
 }
 
-    
-
- 
 export default ShoppingCart;
 

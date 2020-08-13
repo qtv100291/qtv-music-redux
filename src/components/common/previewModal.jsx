@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import shoppingCartFunc from '../../ultis/shoppingCartFunc';
 import './previewModal.scss'
 import { createRef } from 'react';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 class PreviewModal extends Component {
     state = { 

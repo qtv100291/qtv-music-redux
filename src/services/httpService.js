@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 
 axios.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem("token");
-
+// axios.defaults.headers.common["X-Firebase-ETag"] = true;
 axios.interceptors.response.use(null, error=>{
     const expectedError =
     error.response &&
@@ -29,7 +29,9 @@ export default {
     get: axios.get,
     post: axios.post,
     put: axios.put,
-    delete: axios.delete
+    delete: axios.delete,
+    put:axios.put,
+    patch: axios.patch
 }
 
 

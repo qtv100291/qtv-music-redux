@@ -3,7 +3,7 @@
 .account-main{
     width: 90%;
     max-width: 1200px;
-    margin: 72px auto;
+    margin: 102px auto 42px auto;
     .account-container{
         width: 100%;
         .account-side-bar{
@@ -72,6 +72,9 @@
                 border-radius: 5px;
             }
         }
+        .account-content{
+            width: 90%;
+            max-width: 875px;
+        }
     }
-
 }

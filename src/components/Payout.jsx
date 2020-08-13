@@ -6,7 +6,8 @@ import payoutService from '../services/payoutService';
 import { Link } from 'react-router-dom';
 import sendOrder from '../services/orderService';
 import additionalFunctionDom from '../ultis/additionalFunctionDom';
-
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 class Payout extends Form {
     provinceInit = {
@@ -34,9 +35,6 @@ class Payout extends Form {
         province: [{...this.provinceInit}],
         district: [{...this.districtInit}],
         commune : [{...this.communeInit}],
-        provinceValue: "None",
-        districtValue : "None",
-        communeValue : "None"
     }
 
     inputCheck = {
@@ -55,20 +53,52 @@ class Payout extends Form {
         cardCvv : "phoneCheck"
     }
 
+    userLoadProperty = ["receiverName", "receiverPhone", "receiverProvince", "receiverDistrict", "receiverCommune", "receiverStreet","cardType" , "cardNumber", "cardOwner", "cardExpireDate", "cardCvv"]
+    
+    userDataProperty = [["name"], ["phone"], ["address","province"], ["address","district"], ["address","commune"], ["address","street"], ["payment","cardType"], ["payment", "cardNumber"], ["payment", "cardOwner"], ["payment", "cardExpireDate"], ["payment", "cardCvv"]];
+
     async componentDidMount() {
+        if(this.props.shoppingCart.length === 0) window.location ="/"
         window.scrollTo(0, 0);
         this.props.onLoadingScreen();
         additionalFunctionDom.fixBody();
-        let data = {...this.state.data};
-        data["paymentMethod"] = "cash";
+        const { userData } = this.props
+        const userLoadProperty  = [...this.userLoadProperty];
+        const userDataProperty = [...this.userDataProperty];
+        const userLoad = {};
+        for (let i = 0; i < userLoadProperty.length ; i++){
+            if (userDataProperty[i].length === 1){
+                userLoad[userLoadProperty[i]] = userData[userDataProperty[i][0]];
+            }
+            else {
+                userLoad[userLoadProperty[i]] = userData[userDataProperty[i][0]][userDataProperty[i][1]];
+            }
+        }
         const provinceList = await payoutService.getProvince();
         const province =[{...this.provinceInit},...provinceList];
-        this.setState({ data, province })
+        userLoad["paymentMethod"] = "cash";
+        if (userLoad.userProvince !== "") {
+            await this.hanldeDistrict(userLoad.receiverProvince)
+        }
+        if (userLoad.userDistrict !== "") {
+            await this.hanldeCommune(userLoad.receiverDistrict)
+        }
+        this.setState({ data : userLoad, province })
         document.title = "Thanh Toán";
         setTimeout( () => {
             this.props.onLoadingScreen();
             additionalFunctionDom.releaseBody();
         },1200)  
+    }
+
+    handleWaitPropsFullyLoaded = () => {
+        setTimeout(() => {
+            const { userData } = this.props;
+            if (!userData) {
+                this.handleWaitPropsFullyLoaded();
+            }
+            else return userData
+        },100)
     }
 
     hanldeDistrict = async idProvince => {
@@ -93,15 +123,31 @@ class Payout extends Form {
         }
     }
 
-    doSubmit = async () => {
+    doSubmit = () => {
+        additionalFunctionDom.fixBody()
+        const MySwal = withReactContent(Swal)
         const {data} = this.state;
         const { shoppingCart } = this.props;
-        const oderInfo = new addfunc.GetPaymentInfo( data, shoppingCart)
-        await sendOrder(oderInfo);
+        const tradeHistory = addfunc.buildHistoryTrade(shoppingCart);
+        const orderInfo = new addfunc.GetPaymentInfo( data, shoppingCart);
+        // this.props.onTradeHistory(tradeHistory);
+        // sendOrder(orderInfo);
+        
+        MySwal.fire({
+            icon: 'success',
+            text: 'Cảm ơn quý khách đã tin tưởng QTV Music, nhân viên của chúng tôi sẽ liên lạc với quý khách trong thời gian sớm nhất.',
+            confirmButtonText: 'Quay Về Trang Chủ',
+          }).then(() => {
+            // window.location ="/"
+        })
+
+        
     }
 
+
     render() { 
-        const { province, district, commune} = this.state ;
+        
+        const { province, district, commune} = this.state;
         let { shoppingCart } = this.props;
         shoppingCart = shoppingCart ? shoppingCart : [];
         const { paymentMethod } = this.state.data;   
@@ -124,6 +170,8 @@ class Payout extends Form {
                 name: "JCB"
             }
         ]
+        
+        
         return (  
             <main className="payout-main">
                 <h2 className="payout-title">Thanh Toán</h2>

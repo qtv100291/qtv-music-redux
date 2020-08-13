@@ -6,7 +6,9 @@ const apiEndpoint = apiUrl + '/users'
 function updateUser(userId, userData, shoppingCart){
     const userDataUpdate = {...userData};
     userDataUpdate.shoppingCart = [...shoppingCart];
-    http.put(apiEndpoint + `/${userId}`, userDataUpdate);
+    http.patch(apiEndpoint + `/${userId}`, userDataUpdate);
 }
 
 export default updateUser;
+
+

@@ -28,11 +28,9 @@ function releaseBody(){
 
 function checkAreAllInputFilled(){
     const inputs = document.querySelectorAll('main  input');
-    console.log(inputs)
     for (let i = 0; i < inputs.length; i++){
         if ( inputs[i].value.replace(/\s/g,"") === "" ) return false 
     }
-    console.log("hehe")
     return true
 }
 

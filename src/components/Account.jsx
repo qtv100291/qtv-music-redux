@@ -1,17 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Avatar from '../assets/homepage-assets/manager.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import UserInformation from '../components/account/userInformation';
 import UserTradeHistory from '../components/account/userTradeHistory';
+import additionalFunctionDom from '../ultis/additionalFunctionDom';
 import './Account.scss'
 import { useState } from 'react';
 
-const Account = ({onLoadingScree, userData}) => {
+const Account = ({onLoadingScreen, userData, onUpdateUser}) => {
     const [activeTab, setActiveTab] = useState(1);
-    if (!userData) return null
+    useEffect(()=>{
+        document.title = "Tài Khoản";
+        window.scrollTo(0, 0);
+        onLoadingScreen();
+        additionalFunctionDom.fixBody();
+        setTimeout( () => {
+            onLoadingScreen();
+            additionalFunctionDom.releaseBody();
+        },1200) 
+    },[])
+
     const handleChangeTab = id => {
         if (id === activeTab) return 
         else setActiveTab(id)
+    }
+
+    const handleLogOut = () => {
+        localStorage.removeItem("token");
+        window.location = "/";
     }
 
     return ( 
@@ -21,7 +37,7 @@ const Account = ({onLoadingScree, userData}) => {
                     <div className="account-menu-member-general d-flex align-items-center">
                         <img src={Avatar} alt="avatar"/>
                         <div className="welcome-member">Xin Chào
-                            <strong className="member-name"> {userData.name}</strong>
+                            <strong className="member-name" title={userData.name}> {userData.name}</strong>
                         </div>
                     </div>
                     <ul className="account-menu-sidebar">
@@ -34,10 +50,11 @@ const Account = ({onLoadingScree, userData}) => {
                             Lịch Sử Giao Dịch
                         </li>
                     </ul>
-                    <div className="log-out-button">Đăng Xuất</div>
+                    <div className="log-out-button" onClick={handleLogOut}>Đăng Xuất</div>
                 </section>
                 <section className="account-content">
-                    {activeTab === 1 ? <UserInformation userData ={userData}/> : <UserTradeHistory tradeHistory = {userData.tradeHistory}/>}
+                    {activeTab === 1 ? <UserInformation userData ={userData} onUpdateUser ={onUpdateUser} /> 
+                                        : <UserTradeHistory tradeHistory = {userData.tradeHistory}/>}
                 </section>
             </div>
         </main>

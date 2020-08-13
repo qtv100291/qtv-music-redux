@@ -25,10 +25,13 @@ import authService from './services/loginService';
 import shoppingCartFunc from './ultis/shoppingCartFunc';
 import updateUser from './services/updateService';
 import addfunc from './ultis/additionalFunction';
+import additionalFunctionDom from './ultis/additionalFunctionDom';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from "react-toastify";
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 IconLibrary.addIcon();
 
@@ -57,18 +60,19 @@ class App extends Component {
   }
 
   handleUpdateShoppingCart = newItem => {
+    const MySwal = withReactContent(Swal)
     const shoppingCartPrev = this.state.shoppingCart ? [...this.state.shoppingCart] : new Array(0);
     const shoppingCart = shoppingCartFunc.addItemToShoppingCart(shoppingCartPrev, newItem);
     this.setState({ shoppingCart });
-    toast.success('Đã thêm vào giỏ hàng', {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined
-    });
+    additionalFunctionDom.fixBody();
+    MySwal.fire({
+      icon: 'success',
+      html: 'Đã Thêm Vào Giỏ Hàng',
+      showConfirmButton: false,
+      timer: 1250,
+    }).then(() => {
+      additionalFunctionDom.releaseBody();
+    })
     if (this.state.user){
       updateUser(this.state.user.sub, this.state.userData, shoppingCart)
     } 
@@ -151,8 +155,23 @@ class App extends Component {
     this.setState({isLoadingScreen});
   }
 
+  handleUpdateUserInformation = userData => {
+    this.setState({ userData });
+    updateUser(this.state.user.sub, userData, this.state.shoppingCart);
+  }
+
+  handleUpdateTradeHistory = tradeHistory => {
+    const shoppingCart = [];
+    this.setState({shoppingCart});
+    const userData = {...this.userData}
+    const tradeHistoryUpdate = [...this.state.userData.tradeHistory,...tradeHistory];
+    userData.tradeHistory = [...tradeHistoryUpdate];
+    this.setState({userData});
+    updateUser(this.state.user.sub, userData, shoppingCart);
+  }
+
   render() { 
-    const {user, shoppingCart, userData} = this.state
+    const { shoppingCart, user, userData} = this.state;
     return ( 
       <React.Fragment>
         <ToastContainer/>
@@ -185,20 +204,32 @@ class App extends Component {
                 updateShoppingCart= {this.handleUpdateShoppingCart}
               />}/>
             <Route path="/gio-hang"
-              render={(props) => <ShoppingCart {...props} 
-                shoppingCart ={ shoppingCart } 
-                onPlusQuantity = {this.handlePlusQuantity}
-                onMinusQuantity = {this.handleMinusQuantity}
-                onChangeQuantity = {this.handleChangeQuantity}
-                onDeleteItem = {this.handleDeleteItem}
-                onCheckEmpty = {this.handleCheckEmpty}
-                onLoadingScreen = {this.handleLoadingScreen}
+                  render={(props) => <ShoppingCart {...props} 
+                    shoppingCart ={ shoppingCart } 
+                    onPlusQuantity = {this.handlePlusQuantity}
+                    onMinusQuantity = {this.handleMinusQuantity}
+                    onChangeQuantity = {this.handleChangeQuantity}
+                    onDeleteItem = {this.handleDeleteItem}
+                    onCheckEmpty = {this.handleCheckEmpty}
+                    onLoadingScreen = {this.handleLoadingScreen}
             />}/>
-            <ProtectedRoute path="/thanh-toan" component= {Payout} shoppingCart= { shoppingCart } onLoadingScreen = {this.handleLoadingScreen}/>
-            <ProtectedRoute path="/tai-khoan" component= {Account} onLoadingScreen = {this.handleLoadingScreen} userData={userData}/>
+            {userData && <ProtectedRoute path="/thanh-toan" 
+                            component= {Payout} 
+                            userData={userData}
+                            shoppingCart= { shoppingCart } 
+                            onLoadingScreen = {this.handleLoadingScreen}
+                            onTradeHistory ={this.handleUpdateTradeHistory}
+                            
+            />}
+            {userData && <ProtectedRoute path="/tai-khoan" 
+                            component= {Account} 
+                            onLoadingScreen = {this.handleLoadingScreen} 
+                            userData={userData}
+                            onUpdateUser={this.handleUpdateUserInformation}
+            />}
             <Route path="/khong-tim-thay" component={NotFoundPage}/>
             <Route exact path="/" render={(props) => <HomePage {...props} updateShoppingCart= {this.handleUpdateShoppingCart} onLoadingScreen = {this.handleLoadingScreen}/>}/>
-            <Redirect to="/khong-tim-thay"/>
+            {userData && <Redirect to="/khong-tim-thay"/>}
         </Switch>
         <ScrollTopIcon/>
         <Footer/>

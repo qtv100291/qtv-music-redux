@@ -174,7 +174,7 @@ class Form extends Component {
       );
     }
 
-    renderSelect(name, label, options, idName) {
+    renderSelect(name, label, options, idName, obligatory = "true") {
       const { data, errors } = this.state;
       return (
         <Select
@@ -183,6 +183,7 @@ class Form extends Component {
           label={label}
           idName={idName}
           options={options}
+          obligatory={obligatory}
           error = {errors[name]}
           onChange={this.handleChangeSelect}
           error={errors[name]}

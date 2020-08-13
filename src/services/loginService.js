@@ -32,12 +32,12 @@ export async function getUserData(userId){//get user's data and synchronize serv
     const {data : user} = await http.get(apiEndpointUser + `/${userId}`);
     const shoppingCartServer = [...user.shoppingCart];
     const shoppingCartLocal = shoppingCartFunc.loadCartLocal() || [];
-    console.log(shoppingCartLocal)
     const shoppingCart = shoppingCartFunc.merge2shoppingCart(shoppingCartServer, shoppingCartLocal) // merger shopping from server and shopping card on user's computer
     const userData = {...user}
     userData.shoppingCart = [...shoppingCart];
-    http.put(apiEndpointUser + `/${userId}`,userData);//updat shopping car on server
+    http.patch(apiEndpointUser + `/${userId}`,userData);//update shopping car on server
     localStorage.removeItem("qtv-cart");
+    delete userData.password;
     return userData
 }
 

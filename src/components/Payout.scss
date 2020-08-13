@@ -124,3 +124,11 @@
     display: block;
 }
 
+.swal2-actions{
+    > .swal2-styled.swal2-confirm{
+        @include button;
+        width: 250px;
+        outline: none;
+    }
+}
+

@@ -155,7 +155,8 @@ function GetPaymentInfo(data , shoppingCart){
     this.address = {
         province : data.receiverProvince,
         district : data.receiverDistrict,
-        commnune : data.receiverCommune
+        commnune : data.receiverCommune,
+        street : data.street
     }
     this.note = data.reciverNote;
     this.paymentMethod = data.paymentMethod;
@@ -184,6 +185,29 @@ const checkOnly2Digit = value => {//function check value is a number from 1 to 9
     }
   }
 
+const buildHistoryTrade = shoppingCart =>{
+    const dateSave = function(){
+        let date = new Date().getDate().toString();
+        if (date < 10){
+            date = `0${date}`
+        }
+        return date;
+    }(); 
+        
+    const monthSave = function(){
+        let month = (new Date().getMonth() + 1).toString();
+        if (month < 10){
+            month = `0${month}`;
+        }
+        return month;
+    }();
+    const yearSave = new Date().getFullYear();
+    const timeNow = `${dateSave}/${monthSave}/${yearSave}`;
+    for (let i = 0; i < shoppingCart.length; i++){
+        shoppingCart[i].time = timeNow;
+    }
+    return shoppingCart
+}
 
 export default {
     filterMusic,
@@ -205,6 +229,7 @@ export default {
     totalItemCalculation,
     totalMoneyCalculation,
     GetPaymentInfo,
-    checkOnly2Digit
+    checkOnly2Digit,
+    buildHistoryTrade 
 }
 

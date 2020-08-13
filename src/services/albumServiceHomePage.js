@@ -3,13 +3,13 @@ import { apiUrl } from "../config.json";
 import _ from 'lodash';
 import addfunc from '../ultis/additionalFunction';
 
-const apiEndpoint = apiUrl + '/musicdata';
+const apiEndpoint = apiUrl + '/musicData';
 
 
 export async function getAlbum(arrayId){
     let albumArray = [];
     for ( let id of arrayId ){
-        const { data } = await http.get(apiEndpoint + '/' + id)
+        const { data } = await http.get(apiEndpoint + '/' + id )
         albumArray.push(data)
     }
     return albumArray;
@@ -25,7 +25,7 @@ export function getAlbumDetail(id){
     return albumDetail;
 }
 
-export async function getRelatedAlbum( bandName, country, albumId){ //get 2 others album of considered band and 2 others album in same country (Vietname or International )
+export async function getRelatedAlbum( bandName, country, albumId){ //get 2 others albums of considered band and 2 others albums in same country (Vietname or International )
     let randomValueBand, randomValueCountry;
     let { data : albumBand } = await http.get(apiEndpoint + '?bandName=' + bandName.split(" ").join("+"));
     let { data : albumCountry } = await http.get(apiEndpoint + '?country=' + country.split(" ").join("+"));
