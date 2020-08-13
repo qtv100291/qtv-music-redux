@@ -6,13 +6,12 @@ import { Link } from 'react-router-dom';
 import shoppingCartFunc from '../../ultis/shoppingCartFunc';
 import './previewModal.scss'
 import { createRef } from 'react';
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import loadingIconSmall from '../../assets/homepage-assets/loading-icon-small.gif';
 
 class PreviewModal extends Component {
     state = { 
         album :{},
-        onLoading: false
+        isLoading: false
     }
 
     myModal = createRef();
@@ -20,9 +19,11 @@ class PreviewModal extends Component {
     async componentDidUpdate(prevProps) {
         if (this.props.isOpeningModal !== prevProps.isOpeningModal){
             if (this.props.previewId === null) return
+            this.setState({ isLoading : true })
             const {data : album} = await getAlbumDetail(this.props.previewId);
             this.setState({ album });
             this.myModal.current.scrollTo (0,0);
+            this.setState({ isLoading : false })
         }
     }
 
@@ -47,8 +48,8 @@ class PreviewModal extends Component {
             price, 
             // previewSong, 
             // previewSongName, 
-            description} = this.state.album;
-
+            description,} = this.state.album;
+        const { isLoading } = this.state
         const imagePath = '/' + albumCover + '/cover.jpg';
         // const mp3Path = '/' + albumCover + '/' + previewSong;
         const productPath = '/san-pham/' + (albumName && albumName.replace(/ /g, "-")) + '-' +id;
@@ -58,6 +59,9 @@ class PreviewModal extends Component {
                             : "preview-modal"}
                 > 
                 <div className="preview-modal-container d-flex justify-content-between align-items-center" >
+                    <div className={isLoading? "loading-screen-modal" : "loading-screen-modal turn-off"}>
+                        <img src={loadingIconSmall} alt="loading icon"/>
+                    </div>
                     <div className="close-button d-flex justify-content-center align-items-center" onClick={this.handleCloseModal}><FontAwesomeIcon icon="times-circle"/></div>
                     <div className="preview-modal-photo">
                         <img src={imagePath} alt={albumName}/>

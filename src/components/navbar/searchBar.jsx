@@ -7,12 +7,14 @@ import addfunc from '../../ultis/additionalFunction';
 import { createRef } from 'react';
 import history from '../../ultis/history';
 import {withRouter} from 'react-router-dom';
+import loadingIconSmall from '../../assets/homepage-assets/loading-icon-small.gif';
 
 class SearchBar extends Component {
     state = { 
         isDisplaying: false,
         keyword : "",
-        searchResult:null
+        searchResult:null,
+        isLoading:false
     }
 
     myInput = createRef()
@@ -29,10 +31,11 @@ class SearchBar extends Component {
             return
         }
         else {
+            this.setState({ isLoading : true })
             const keyword = input.value;
             this.setState({ keyword, isSearching : true });
             const searchResult = await searchAlbum(input.value);
-            this.setState ({ searchResult })
+            this.setState ({ searchResult, isLoading : false })
         }
     }
 
@@ -70,9 +73,10 @@ class SearchBar extends Component {
 
     
     render() { 
-        const { searchResult, keyword, isDisplaying, isSearching } = this.state
+        const { searchResult, keyword, isDisplaying, isLoading } = this.state
         return ( 
             <div className="search-bar-icon-part navbar-icon-item" title ="Tìm Kiếm">
+                
                 <div className="search-bar-icon d-flex justify-content-center align-items-center" onClick={this.handleChangeIcon}>
                     {!isDisplaying ? <FontAwesomeIcon icon = "search" className="real-font-awesome icon-navbar"/> : <FontAwesomeIcon icon = "times" className="real-font-awesome icon-navbar"/>}
                 </div>
@@ -89,6 +93,9 @@ class SearchBar extends Component {
                     />
                     <div className="icon-search-container">
                         <FontAwesomeIcon icon = "search" className="real-font-awesome icon-search"/>
+                        <div className={isLoading? "loading-search-bar" : "loading-search-bar turn-off"}>
+                            <img src={loadingIconSmall} alt="loading icon"/>
+                        </div>
                     </div>
                     <div className="result">
                         {searchResult && 

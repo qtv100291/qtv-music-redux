@@ -29,6 +29,24 @@
         background-color: white;
         box-sizing: content-box;
         position: relative;
+        .loading-screen-modal{
+            position: absolute;
+            width: calc(100% - 15px);
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(228, 228, 228);
+            > img {
+                width: 80px;
+                height: 80px;
+            }
+            &.turn-off{
+                display: none;
+            }
+        }
         .close-button{
             position: absolute;
             top: -25px;
@@ -121,6 +139,10 @@
             }
             .preview-modal-presentation{
                 width: 100%;
+                // overflow: hidden;
+                // &.turn-off{
+                //     overflow: auto;
+                // }
                 .preview-modal-presentation-title{
                     font-size: 20px;
                     margin-top: 25px;

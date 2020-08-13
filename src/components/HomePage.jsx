@@ -30,10 +30,9 @@ class HomePage extends Component {
         const albumOfTheWeek = await getAlbum(["23"]);
         this.setState({ vietnameseAlbum, internationalAlbum, albumOfTheWeek});
         document.title = "QTV Music";
-        setTimeout( () => {
-            this.props.onLoadingScreen();
-            additionalFunctionDom.releaseBody();
-        },250)  
+        this.props.onLoadingScreen();
+        additionalFunctionDom.releaseBody();
+  
     }
 
     handleOpening = id => {

@@ -20,9 +20,9 @@ const ContactUs = ({onLoadingScreen}) => {
             <BreadCrumb titleParent="Liên Hệ"/>
             <section className="about-us">
                 <h2 className="about-us-title title-section">Câu Chuyện Về Chúng Tôi</h2>
-                <p>Đầu những năm 90 của thế kỉ trước, khi mà Rock và Metal bắt đầu được phổ biến rộng rãi hơn tại Việt Nam, đặc biệt là trong giới sinh viên. Khi ấy niềm vui được sỡ hữu một băng catset</p>
-                <p>QTV Music được xây dựng bởi một nhóm các bạn trẻ đam mê với nhạc Rock/Metal đầu những năm 2010, với mong muốn lan tỏa và chia sẻ niềm đam mê được sở hữu những album chất lượng đến với các fan hâm mộ của thể loại Rock/Metal tại Việt Nam.</p>
-                <p>Trải qua gần 10 năm thành lập, đến nay QTV Music là nhà phân phối băng đĩa nhạc online hàng đầu tại Việt Nam, các sản phẩm được giới thiệu trên QTV Music đều được cam kết đảm bảo 100% là hàng chính hãng được các hãng đĩa phát hành.</p>
+                <p>Đầu những năm 90 của thế kỉ trước, khi mà Rock và Metal bắt đầu được phổ biến rộng rãi hơn tại Việt Nam, đặc biệt là trong giới sinh viên. Khi ấy niềm vui được sỡ hữu một băng catset hay một đĩa CD chính gốc thật khó có gì diễn tả nổi. Trong đó có một nhóm sinh viên đến từ các trường Xây Dựng, Bách Khoa,... đã cùng đứng ra mở một cửa hiệu kinh doanh băng đĩa nhạc chính hãng, với mong muốn lan tỏa và chia sẻ niềm đam mê được sở hữu những album chất lượng đến với các fan hâm mộ của thể loại Rock/Metal tại Việt Nam, đó cũng chính là tiền thân của QTV Music hiện nay.</p>
+                <p>Không chỉ là nơi mua bán, QTV Music còn là nơi những người hâm mộ của Rock/Metal tìm đến để cùng chia sẻ cho nhau những đam mê về các ban nhạc hay các ca khúc thịnh hành thời bấy giờ.</p>
+                <p>Trải qua gần 20 năm thành lập, đến nay QTV Music là nhà phân phối băng đĩa nhạc online hàng đầu tại Việt Nam, các sản phẩm được giới thiệu trên QTV Music đều được cam kết đảm bảo 100% là hàng chính hãng được các hãng đĩa phát hành.</p>
             </section>
             <section className="shop-information ">
                 <h2 className="shop-information-title title-section"> Thông Tin Liên Hệ</h2>

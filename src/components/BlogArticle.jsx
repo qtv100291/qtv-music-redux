@@ -24,7 +24,7 @@ class BlogArticle extends Component {
             setTimeout( () => {
                 this.props.onLoadingScreen();
                 additionalFunctionDom.releaseBody();
-            },500)  
+            },800)  
         }
         catch(ex){
             console.log(ex.response)

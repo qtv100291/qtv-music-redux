@@ -12,7 +12,7 @@ const ShoppingCart = ({ shoppingCart,
                         onDeleteItem,
                         onCheckEmpty,
                         onLoadingScreen }) => {
-
+                            
     useEffect(() => {
         document.title = "Giỏ Hàng";
         window.scrollTo(0, 0);
@@ -48,11 +48,10 @@ const ShoppingCart = ({ shoppingCart,
                         <p className="total-money-tax d-flex justify-content-between">Thuế VAT <span>{addfunc.separator1000(addfunc.totalMoneyCalculation(shoppingCart)/10)} VND</span></p> 
                         <p className="total-money-value d-flex justify-content-between align-items-center">TỔNG<span>{addfunc.separator1000((addfunc.totalMoneyCalculation(shoppingCart)*1.1).toFixed(0))} VND</span></p> 
                     </div>
-                    <Link to="thanh-toan"><div className="payout-button d-flex align-items-center justify-content-center">THANH TOÁN</div></Link>
+                    {shoppingCart.length !== 0 && <Link to="thanh-toan"><div className="payout-button d-flex align-items-center justify-content-center">THANH TOÁN</div></Link>}
                 </section>
                 }
             </div>
-            
         </main>
     )
 }

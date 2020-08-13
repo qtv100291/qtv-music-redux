@@ -129,7 +129,7 @@ class AlbumDetail extends Component {
                                     onClick = {this.handleActiveTab}
                                     data-button ="2"
                                 >
-                                    Track List
+                                    Tracklist
                                 </div>
                             </div>
                             <div className="product-presentation-content">
