@@ -3,13 +3,25 @@
 .blog-detail{
     width: 100%;
     max-width: 1200px;
-    margin: 72px auto 70px auto;
+    margin: 102px auto 50px auto;
+    .bread-crumb{
+        font-size: 18px;
+        a {
+            text-decoration: none;
+            color: black;
+            font-weight: 600;
+            &:hover {
+                color: $color-active;
+            }
+        }
+        
+    }
     .section-article-content{
         width: 100%;
-        margin-top: 50px;
+        margin-top: 20px;
         .title-article{
             font-weight: bold;
-            font-size: 35px;
+            font-size: 40px;
             line-height: 50px;
             margin: 0;
         }
@@ -83,6 +95,34 @@
                 width: 100%;
                 height: 50.625vw;
                 max-height: 450px;
+            }
+        }
+        .article-source{
+            font-style: italic;
+            font-size: 18px;
+            text-align: right;
+        }
+    }
+    .section-related-articles{
+        margin-top: 40px;
+        h2{
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+        .related-article-item{
+            a { 
+                margin-bottom: 10px;
+                margin-right: 15px;
+                display: inline-block;
+                text-decoration: none;
+                color: black;
+                font-size: 20px;
+                &:hover{
+                    color: $color-active;
+                }
+            }
+            span{
+                font-style: italic;
             }
         }
     }

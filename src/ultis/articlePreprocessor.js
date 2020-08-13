@@ -50,7 +50,11 @@ export default function articlePreprocessor(article) {
                                     <iframe src=${elementArray[2]} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
                                     <p>${elementArray[3]}</p>
                                 </div>`;
-                break;    
+                break;  
+
+            case "source":
+                outputPart = `<p class="article-source">${elementArray[1]}</p>`;
+                break;  
             default :
                 break;
             

@@ -1,13 +1,19 @@
 import React, {  useEffect } from 'react';
 import './PurchaseGuidance.scss';
 import BreadCrumb from './common/breadCrumb';
+import additionalFunctionDom from '../ultis/additionalFunctionDom';
 
-
-const ServicePolicy = () => {
+const ServicePolicy = ({onLoadingScreen}) => {
     useEffect(() => {
         document.title = "Điều Khoản Dịch Vụ";
-        window.scrollTo(0,0)
-    })
+        window.scrollTo(0, 0);
+        onLoadingScreen();
+        additionalFunctionDom.fixBody();
+        setTimeout( () => {
+            onLoadingScreen();
+            additionalFunctionDom.releaseBody();
+        },1000) 
+    },[])
     return ( 
         <main className="purchase-guidance">
             <BreadCrumb titleParent="Điều Khoản Dịch Vụ"/>

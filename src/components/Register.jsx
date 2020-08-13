@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import Form from './common/form';
 import './Register.scss';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import registerNewUser from '../services/registerService';
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content';
+import additionalFunctionDom from '../ultis/additionalFunctionDom';
 
 
 
@@ -23,18 +25,18 @@ class Register extends Form {
     }
 
     doSubmit = async () => {
+        const MySwal = withReactContent(Swal);
         try {
             const { data : user } = this.state
             await registerNewUser(user);
-            toast.info('Đăng Ký Thành Công', {
-                position: "top-center",
-                autoClose: 2000,
-                hideProgressBar: true,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                });
+            MySwal.fire({
+                icon: 'success',
+                html: 'Đăng Ký Thành Công',
+                showConfirmButton: false,
+                timer: 1250,
+              }).then(() => {
+                additionalFunctionDom.releaseBody();
+            })
             this.props.history.replace('/dang-nhap');
         }
         catch(ex){

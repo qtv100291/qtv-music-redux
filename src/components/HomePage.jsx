@@ -33,7 +33,7 @@ class HomePage extends Component {
         setTimeout( () => {
             this.props.onLoadingScreen();
             additionalFunctionDom.releaseBody();
-        },1200)  
+        },250)  
     }
 
     handleOpening = id => {

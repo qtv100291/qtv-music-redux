@@ -1,6 +1,5 @@
 import http from './httpService';
 import { apiUrl } from "../config.json";
-import shoppingCartFunc from '../ultis/shoppingCartFunc';
 
 const apiEndpoint = apiUrl + '/register';
 
@@ -28,5 +27,7 @@ export default function registerNewUser(user){
     }
     return http.post(apiEndpoint,data)
 }
+
+
 
 

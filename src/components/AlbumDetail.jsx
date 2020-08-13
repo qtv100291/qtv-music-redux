@@ -33,7 +33,7 @@ class AlbumDetail extends Component {
             setTimeout( () => {
                 this.props.onLoadingScreen();
                 additionalFunctionDom.releaseBody();
-            },1200)  
+            },300)  
         }
         catch(ex){
             if (ex.response && ex.response.status === 404){

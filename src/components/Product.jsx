@@ -39,7 +39,7 @@ class Product extends Component {
         setTimeout( () => {
             this.props.onLoadingScreen();
             additionalFunctionDom.releaseBody();
-        },1200) 
+        },500) 
     }
 
     componentDidUpdate(prevProps, prevState){

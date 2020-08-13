@@ -1,5 +1,8 @@
 import axios from 'axios';
 import { toast } from "react-toastify";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content';
+import additionalFunctionDom from '../ultis/additionalFunctionDom';
 
 
 axios.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem("token");
@@ -11,15 +14,15 @@ axios.interceptors.response.use(null, error=>{
     error.response.status < 500;
 
   if (!expectedError) {
-    toast.error('Đã có lỗi xảy ra. Xin thử lại', {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: false,
-      progress: undefined,
-  });
+    const MySwal = withReactContent(Swal);
+    MySwal.fire({
+      icon: 'error',
+      html: 'Đã Có Lỗi Xảy Ra. Xin Thử Lại',
+      showConfirmButton: false,
+      timer: 1250,
+    }).then(() => {
+      additionalFunctionDom.releaseBody();
+  })
   }
 
   return Promise.reject(error);

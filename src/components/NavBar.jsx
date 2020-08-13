@@ -61,5 +61,5 @@ const NavBar = ({ user, shoppingCart }) => {
         </nav>
      );
 }
- 
+
 export default NavBar;

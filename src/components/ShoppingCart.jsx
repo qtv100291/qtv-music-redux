@@ -21,7 +21,7 @@ const ShoppingCart = ({ shoppingCart,
         setTimeout( () => {
             onLoadingScreen();
             additionalFunctionDom.releaseBody();
-        },1200)
+        },300)
     },[])
 
     return ( 

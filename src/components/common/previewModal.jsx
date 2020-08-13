@@ -11,7 +11,8 @@ import withReactContent from 'sweetalert2-react-content'
 
 class PreviewModal extends Component {
     state = { 
-        album :{}
+        album :{},
+        onLoading: false
     }
 
     myModal = createRef();
