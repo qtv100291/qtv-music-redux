@@ -4,6 +4,21 @@
     width: 100%;
     max-width: 1200px;
     margin: 45px auto 0 auto;
+    @include desktop{
+        width: 95%;
+    }
+    @include large-tablet{
+        width: 95%;
+        margin-top: 40px;
+    }
+    @include tablet{
+        width: 95%;
+        margin-top: 35px;
+    }
+    @include mobile{
+        width: 95%;
+        margin-top: 30px;
+    }
     .album-title{
         height: 40px;
         margin-bottom: 20px;
@@ -17,6 +32,62 @@
             font-weight: 600;
             font-size: 24px;
             margin: 0;
+            @include tablet{
+                font-size: 22px;
+            }
+            @include mobile{
+                font-size: 22px;
+            }
+        }
+    }
+    .album-container{
+        width: 100%;
+         > .swiper-container {
+            width: 100%;
+            > .swiper-button-next, .swiper-button-prev{
+                visibility: hidden;
+                padding: 0;
+                border-radius: 99px;
+                background-color: white;
+                border: 1px solid ;
+                @include desktop{
+                    visibility: visible;
+                    height: 50px;
+                    width: 50px;   
+                }
+                @include large-tablet{
+                    visibility: visible;
+                    height: 45px;
+                    width: 45px;   
+                }
+                @include tablet{
+                    visibility: visible;
+                    height: 45px;
+                    width: 45px;  
+                }
+                @include mobile{
+                    visibility: visible;
+                    height: 40px;
+                    width: 40px;  
+                }
+                &::after{
+                    @include desktop{
+                        font-size: 30px;
+                    }
+                    @include large-tablet{
+                        font-size: 25px;
+                    }
+                    @include tablet{
+                        font-size: 25px;
+                    }
+                    @include mobile{
+                        font-size: 20px;
+                    }
+                }             
+            }
         }
     }
 }
+
+
+

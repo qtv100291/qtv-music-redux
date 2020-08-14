@@ -49,7 +49,7 @@ class Subscription extends Form{
                 <h3>Đăng Ký Nhận Bản Tin</h3>
                 <h5>Để cập nhật những thông tin mới nhất từ QTV Music</h5>
                 <form onSubmit={(e) => this.handleSubmit(data,e)} className="email-subscription-form d-flex">
-                    {this.renderInputType1("email-subscription", "Nhập Email Của Bạn...", "500px")}
+                    {this.renderInputType1("email-subscription", "Nhập Email Của Bạn...")}
                     <input type="submit" value="Đăng Ký"/>
                 </form>
             </section>

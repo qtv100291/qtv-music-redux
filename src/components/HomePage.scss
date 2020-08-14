@@ -2,5 +2,13 @@
 
 .main-container{
     margin-top: 72px;
-    overflow: auto;
+    @include large-tablet {
+        margin-top: 62px;
+    }
+    @include tablet {
+        margin-top: 62px;
+    }
+    @include mobile {
+        margin-top: 68px;
+    }
 }

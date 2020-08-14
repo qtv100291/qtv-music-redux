@@ -18,7 +18,8 @@ class HomePage extends Component {
         albumOfTheWeek: [],
         isOpeningModal : false, 
         previewId: null,
-        inPreView : false
+        inPreView : false,
+        windowWidth: null
     }
     
     async componentDidMount(){
@@ -28,7 +29,9 @@ class HomePage extends Component {
         const vietnameseAlbum  = await getAlbum(["5", "10", "14", "33"]);
         const internationalAlbum = await getAlbum(["6", "32", "26", "18"]);
         const albumOfTheWeek = await getAlbum(["23"]);
-        this.setState({ vietnameseAlbum, internationalAlbum, albumOfTheWeek});
+        const windowWidth = window.innerWidth;
+        window.addEventListener("resize",this.updateWindowWidth)
+        this.setState({ vietnameseAlbum, internationalAlbum, albumOfTheWeek, windowWidth});
         document.title = "QTV Music";
         this.props.onLoadingScreen();
         additionalFunctionDom.releaseBody();
@@ -43,6 +46,11 @@ class HomePage extends Component {
     handleClose = () => {
         additionalFunctionDom.releaseBody();
         this.setState({ isOpeningModal : false, previewId: null, inPreView : false });
+    }
+
+    updateWindowWidth = () => {
+        const windowWidth = window.innerWidth;
+        this.setState({ windowWidth })
     }
 
     render() { 
@@ -60,15 +68,17 @@ class HomePage extends Component {
                     album = {this.state.vietnameseAlbum}
                     key = {"homepage-1"}
                     onOpen = {this.handleOpening}
+                    windowWidth ={ this.state.windowWidth }
                 />
                 <AlbumHomePage
                     title = {"Rock/Metal Quốc Tế"}
                     album = {this.state.internationalAlbum}
                     key = {"homepage-2"}
                     onOpen = {this.handleOpening}
+                    windowWidth ={ this.state.windowWidth }
                 />
                 <AlbumOfTheWeek {...this.state.albumOfTheWeek[0]}/>
-                <FamousArtist />
+                <FamousArtist windowWidth ={ this.state.windowWidth }/>
                 <Subscription/>
             </main>
          );

@@ -1,17 +1,15 @@
 import http from './httpService';
 import { apiUrl } from "../config.json";
-import _ from 'lodash';
+import _, { values } from 'lodash';
 import addfunc from '../ultis/additionalFunction';
 
 const apiEndpoint = apiUrl + '/musicData';
 
 
 export async function getAlbum(arrayId){
-    let albumArray = [];
-    for ( let id of arrayId ){
-        const { data } = await http.get(apiEndpoint + '/' + id )
-        albumArray.push(data)
-    }
+    const albumArray = await Promise.all(arrayId.map(id => http.get(apiEndpoint + '/' + id )))
+                                .then(values => values.map(value => value.data))
+
     return albumArray;
 }
 

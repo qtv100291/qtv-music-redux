@@ -1,0 +1,57 @@
+@import '../variables.scss';
+
+.navbar-mobile{
+    position: fixed;
+    top: 0;
+    height: 0;
+    height: 62px;
+    width: 100%;
+    background-color: $color-bg-navbar;
+    z-index: 20;
+    @include mobile {
+        height: 48px;
+    }
+    @include desktop {
+        display: none;
+    }
+    @include large-desktop {
+        display: none;
+    }
+    .navbar-mobile-container{
+        width: 95%;
+        height: 100%;
+        margin: 0 auto;
+        .navbar-logo-mobile{
+            text-decoration: none;
+                h1{
+                    margin: 0;
+                    font-style: normal;
+                    font-weight: 800;
+                    font-size: 32px;
+                    font-family: $font-catamaran;
+                    color: white;
+                    @include mobile {
+                        font-size: 28px;
+                    }
+            }
+        }
+        .navbar-mobile-container-item {
+            height: 100%;
+            > span{
+                display: inline-block;
+                width: 2px;
+                background-color: white;
+                margin: 0 20px;
+                height: 100%;
+                @include mobile {
+                    margin: 0 10px;
+                }
+                @include tablet {
+                    margin: 0 15px;
+                }
+            }
+            
+        }
+    }
+    
+}

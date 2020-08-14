@@ -80,7 +80,7 @@ class SearchBar extends Component {
                 <div className="search-bar-icon d-flex justify-content-center align-items-center" onClick={this.handleChangeIcon}>
                     {!isDisplaying ? <FontAwesomeIcon icon = "search" className="real-font-awesome icon-navbar"/> : <FontAwesomeIcon icon = "times" className="real-font-awesome icon-navbar"/>}
                 </div>
-                <div className={!isDisplaying ? "search-bar d-flex align-items-center" : "search-bar displaying d-flex align-items-center"}>
+                <div className={!isDisplaying ? "search-bar d-flex align-items-center justify-content-between" : "search-bar displaying d-flex align-items-center justify-content-between"}>
                     <input type="text" 
                         onChange={this.handleSearchInput}
                         onBlur = {this.handleLoseFocus} 

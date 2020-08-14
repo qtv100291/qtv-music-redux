@@ -6,11 +6,24 @@
     width: 100%;
     background-color: $color-bg-navbar;
     z-index: 20;
+    display: flex;
+    @include large-tablet {
+        display: none;
+    }
+    @include tablet{
+        display: none;
+    }
+    @include mobile{
+        display: none;
+    }
     .navbar-container{
         width: 100%;
         max-width: 1200px;
         margin: 0 auto;
         height: 72px;
+        @include desktop {
+            width: 95%;
+        }
         .navbar-logo{
             text-decoration: none;
             h1{

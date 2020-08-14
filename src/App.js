@@ -27,11 +27,11 @@ import updateUser from './services/updateService';
 import addfunc from './ultis/additionalFunction';
 import additionalFunctionDom from './ultis/additionalFunctionDom';
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast } from "react-toastify";
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content'
+import NavbarMobile from './components/NavbarMobile';
 
 IconLibrary.addIcon();
 
@@ -174,9 +174,9 @@ class App extends Component {
     const { shoppingCart, user, userData} = this.state;
     return ( 
       <React.Fragment>
-        <ToastContainer/>
         <LoadingScreen isLoadingScreen = {this.state.isLoadingScreen}/>
         <NavBar user = {user} shoppingCart= {shoppingCart}/>
+        <NavbarMobile />
         <Switch>
             <Route path="/san-pham/:album" 
               render={(props) => <AlbumDetail {...props} 

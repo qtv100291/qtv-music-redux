@@ -6,7 +6,17 @@
         &:hover{
             cursor: pointer;
             color: $color-active;
+            @include mobile {
+                color: white;
+            }
+            @include tablet {
+                color: white;
+            }
+            @include large-tablet {
+                color: white;
+            }
         }
+        
     }
 }
 
@@ -46,6 +56,19 @@
         border-bottom: 1px solid rgb(109, 109, 109);
         border-left: 1px solid rgb(109, 109, 109);
         border-right: 1px solid rgb(109, 109, 109);
+        @include mobile {
+            position: fixed;
+            top: 45px;
+            left: 0;
+            width: 100%;
+            z-index: 20;
+        }
+        @include tablet {
+            top: 40px;
+        }
+        @include large-tablet {
+            top: 40px;
+        }
         > input{
             width: 300px;
             border: none;
@@ -95,6 +118,9 @@
             border-radius: 0 0 3px 3px;
             scrollbar-width:thin;
             scrollbar-color:#C4C4C4;
+            @include mobile {
+                width: 100%;
+            }
             &::-webkit-scrollbar{
                 width: 7px;
             }

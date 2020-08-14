@@ -1,12 +1,11 @@
 import axios from 'axios';
-import { toast } from "react-toastify";
 import Swal from 'sweetalert2'
 import withReactContent from 'sweetalert2-react-content';
 import additionalFunctionDom from '../ultis/additionalFunctionDom';
 
 
 axios.defaults.headers.common["Authorization"] = "Bearer " + localStorage.getItem("token");
-// axios.defaults.headers.common["X-Firebase-ETag"] = true;
+
 axios.interceptors.response.use(null, error=>{
     const expectedError =
     error.response &&
@@ -22,7 +21,7 @@ axios.interceptors.response.use(null, error=>{
       timer: 1250,
     }).then(() => {
       additionalFunctionDom.releaseBody();
-  })
+    })
   }
 
   return Promise.reject(error);

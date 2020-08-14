@@ -8,6 +8,14 @@
         text-indent: 10px;
         line-height: 36px;
         outline: none;
+        width: 500px;
+        @include tablet{
+            width: 400px;
+        }
+        @include mobile{
+            margin: 0 auto;
+            width: 90%;
+        }
     }
     &::placeholder{
         text-indent: 10px;

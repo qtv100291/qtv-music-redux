@@ -15,15 +15,41 @@ import 'swiper/components/navigation/navigation.scss';
 import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
 import { Link } from 'react-router-dom';
+import { auto } from '@popperjs/core';
 
 // install Swiper components
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
 
-export default () => {
-  return (
+export default ({windowWidth}) => {
+    const slidesPerView = windowWidth => {
+        switch (true){
+            case windowWidth >= 992:
+                return 3;
+            case  576<= windowWidth && windowWidth < 992:
+                return 2; 
+            case  windowWidth < 576: 
+                return 1;
+            }
+    }  
+
+    const spaceBetween = windowWidth => {
+        switch (true){
+            case windowWidth >= 992:
+                return 40;
+            case  576<= windowWidth && windowWidth < 992:
+                return 25; 
+            case  windowWidth < 576: 
+                return 20;
+        }
+    }  
+
+    const slideNumber = slidesPerView(windowWidth);
+    const space = spaceBetween(windowWidth)
+
+    return (
         <Swiper
-        spaceBetween={40}
-        slidesPerView={3}
+        spaceBetween={space}
+        slidesPerView={slideNumber}
         navigation
         >
         <SwiperSlide >

@@ -10,7 +10,7 @@ import './NavBar.scss';
 const NavBar = ({ user, shoppingCart }) => {
 
     return ( 
-        <nav className="navbar-desktop d-flex justify-content-between align-items-center">
+        <nav className="navbar-desktop justify-content-between align-items-center">
             <div className="navbar-container d-flex justify-content-between align-items-center">
                 <Link className="navbar-logo" to="/">
                     <h1>QTV Music</h1>
