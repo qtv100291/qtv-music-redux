@@ -1,26 +1,54 @@
 @import '../variables.scss';
 
 .purchase-guidance{
-    width: 90%;
+    width: 100%;
     max-width: 1200px;
     margin: 72px auto 72px auto;
+    @include desktop {
+        width: 95%;
+    }
+    @include large-tablet {
+        margin-top: 62px;
+        width: 95%;
+    }
+    @include tablet {
+        margin-top: 62px;
+        width: 95%;
+    }
+    @include mobile {
+        margin-top: 68px;
+        margin-bottom: 40px;
+        width: 95%;
+    }
     .content-section{
         width: 100%;
         margin-top: 30px;
+        @include mobile {
+            margin-top: 20px;
+        }
         .article-part{
             width: 100%;
             h2{
                 font-size: 35px;
                 text-align: center;
                 margin-bottom: 15px;
+                @include mobile {
+                    font-size: 30px;
+                }
             }
             .item-policy{
                 width: 100%;
                 p{
                     font-size: 18px;
+                    @include mobile {
+                        font-size: 16px;
+                    }
                 }
                 h3{
                     font-size: 25px;
+                    @include mobile {
+                        font-size: 22px;
+                    }
                 }
             }
         }

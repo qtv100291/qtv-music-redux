@@ -4,12 +4,30 @@
     width: 100%;
     max-width: 1200px;
     margin: 72px auto 0px auto;
+    @include desktop {
+        width: 95%;
+    }
+    @include large-tablet {
+        margin-top: 62px;
+        width: 95%;
+    }
+    @include tablet {
+        margin-top: 62px;
+        width: 95%;
+    }
+    @include mobile {
+        margin-top: 68px;
+        width: 95%;
+    }
     > .banner-breadcrumb{
         background-image: url("/san-pham-banner.jpg");
     }
     >.product-section-container{
         width: 100%;
         margin-top: 30px;
+        @include mobile{
+            margin-top: 20px;
+        }
         .filter-part{
             .filter-part-title{
                 line-height: 40px;
@@ -19,23 +37,80 @@
             }
             width: 100%;
             max-width: 280px;
+            @include desktop {
+                max-width: 270px;
+            }
+            @include large-tablet{
+                display: none;
+            }
+            @include tablet{
+                display: none;
+            }
+            @include mobile{
+                display: none;
+            }
         }
         .product-part{
             width: 100%;
             max-width: 880px;
+            @include desktop {
+                margin-left: 20px;
+            }
+            @include large-tablet {
+                max-width: 100%;
+            }
             .product-part-sort{
                 height: 40px;
                 margin-bottom: 20px;
+                @include mobile{
+                    height: 35px;
+                    margin-bottom: 30px;
+                }
+                .filter-icon{
+                    width: 40px;
+                    height: 40px;
+                    background-color: $color-active;
+                    border-radius: 3px;
+                    font-size: 20px;
+                    color: white;
+                    @include large-desktop {
+                        display: none!important;
+                    }
+                    @include desktop {
+                        display: none!important;
+                    }
+                    @include mobile {
+                        width: 35px;
+                        height: 35px;
+                        font-size: 18px;
+                    }
+                }
                 .dropdown{
                     width: 290px;
+                    @include mobile {
+                        width: 250px;
+                    }
+                    .dropdown-toggle{
+                        @include mobile{
+                            padding: 5px;
+                        }
+                    }
                     span{
                         width: 110px;
                         margin-right: 10px;
                         display: inline-block;
+                        @include mobile {
+                            width: 90px;
+                            font-size: 14px;
+                        }
                     }
                     strong {
                         display: inline-block;
                         width: 130px;
+                        @include mobile {
+                            width: 115px;
+                            font-size: 14px;
+                        }
                     }
                     button{
                         width: 100%;
@@ -50,7 +125,43 @@
             .product-part-container{
                 display: grid;
                 grid-template-columns: repeat(3, 1fr);
-                gap: 35px 35px;
+                @include large-desktop {
+                    gap: 35px 35px;
+                }
+                @include desktop {
+                    > .album-item {
+                        width: 100%;
+                    }
+                    gap: 25px 25px;
+                }
+                @include large-tablet {
+                    > .album-item {
+                        width: 100%;
+                    }
+                    gap: 30px 30px;
+                }
+                @include tablet {
+                    > .album-item {
+                        width: 100%;
+                        > .album-name{
+                            font-size: 16px;
+                        }
+                        > .album-band-name{
+                            font-size: 14px;
+                        }
+                        > .album-price {
+                            font-size: 20px;
+                        }
+                    }
+                    gap: 30px 30px;
+                }
+                @include mobile {
+                    grid-template-columns: repeat(1, 1fr);
+                    > .album-item {
+                        width: 80%;
+                    }
+                    gap: 30px 30px;
+                }
             }
         }
     }

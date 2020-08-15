@@ -16,4 +16,29 @@ body {
     margin: 0;
 }
 
+.bread-crumb-line{
+  width: 95%;
+  margin: 0 auto;
+  > a {
+      font-weight: 600;
+      color: black;
+      text-decoration: none;
+      &:hover {
+          color: $color-active;
+      }
+  }
+  @include large-desktop {
+      display: none;
+  }
+  @include desktop{
+      display: none;
+  }
+  @include large-tablet{
+      display: none;
+  }
+  @include tablet {
+      display: none;
+  }
+}
+
 

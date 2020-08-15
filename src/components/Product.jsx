@@ -7,7 +7,10 @@ import PaginationBasic from './common/pagination';
 import PreviewModal from './common/previewModal';
 import { getAllAlbum } from '../services/albumServiceHomePage';
 import addfunc from '../ultis/additionalFunction';
+import { Link } from 'react-router-dom';
 import additionalFunctionDom from '../ultis/additionalFunctionDom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Modal from 'react-bootstrap/Modal'
 import './Product.scss';
 
 class Product extends Component {
@@ -22,7 +25,8 @@ class Product extends Component {
         currentPage : 1,
         isOpeningModal : false, 
         previewId: null,
-        inPreView : false
+        inPreView : false,
+        isModalShowing: false
      }
 
     async componentDidMount() {
@@ -96,6 +100,15 @@ class Product extends Component {
                         selectedValueSort : "Tên Từ A Đến Z",
                         sortOrderBy : "Tên Từ A Đến Z", 
                     })
+        this.setState( { isModalShowing : false })
+    }
+
+    handleCloseFilter = () => {
+        this.setState( { isModalShowing : false })
+    }
+
+    handleShow = () => {
+        this.setState( { isModalShowing : true })
     }
 
     render() { 
@@ -107,12 +120,32 @@ class Product extends Component {
 
         return ( 
             <main className="product-section">
+                <Modal show={this.state.isModalShowing} onHide={this.handleCloseFilter}>
+                    <Modal.Header closeButton>
+                    <Modal.Title>Bộ Lọc</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <FilterContent 
+                            filterList ={this.state.vietnameseFilter} 
+                            filterValue = {selectedFilterValue}
+                            onFilter={this.handleFilter}
+                        />
+                        <FilterContent 
+                            filterList ={this.state.internationalFilter} 
+                            filterValue = {selectedFilterValue}
+                            onFilter={this.handleFilter}
+                        />
+                    </Modal.Body>
+                </Modal>
                 <PreviewModal   
                     isOpeningModal = {this.state.isOpeningModal} 
                     previewId = {this.state.previewId}
                     onClose={this.handleClose}
                     updateShoppingCart={this.props.updateShoppingCart}
                 />
+                <div className="bread-crumb-line">
+                    <Link to="/">Trang Chủ</Link>  /  Sản Phẩm
+                </div>
                 <BreadCrumb titleParent="Sản Phẩm"/>
                 <div className="product-section-container d-flex justify-content-between">
                     <section className="filter-part">
@@ -129,7 +162,7 @@ class Product extends Component {
                         />
                     </section>
                     <section className="product-part">
-                        <div className="product-part-sort">
+                        <div className="product-part-sort d-flex justify-content-between align-items-center">
                             <Dropdown>
                                 <Dropdown.Toggle id="dropdown-basic">
                                     <span>Sắp xếp theo</span><strong>{this.state.selectedValueSort}</strong>
@@ -141,6 +174,9 @@ class Product extends Component {
                                     <Dropdown.Item onClick={() => this.handleSort("Giá Giảm Dần")}>Giá Giảm Dần</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
+                            <div className="filter-icon d-flex align-items-center justify-content-center"  onClick={this.handleShow}>
+                                <FontAwesomeIcon icon="filter"/>
+                            </div>
                         </div>
                         <div className="product-part-container">
                             {albumDisplay.map( album => <AlbumItem {...album} key={album.id} onOpen = {this.handleOpening}/>  ) }

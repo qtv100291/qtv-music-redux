@@ -8,6 +8,18 @@
     background-size: cover;
     overflow: auto;
     position: relative;
+    @include desktop{
+        height: 25vw;
+    }
+    @include large-tablet{
+        height: 25vw;
+    }
+    @include tablet{
+        height: 25vw;
+    }
+    @include mobile{
+        display: none;
+    }
     .overlay-banner-breadcrumb{
         width: 100%;
         height: 100%;
@@ -24,6 +36,22 @@
         color: white;
         z-index: 2;
         position: relative;
+        @include desktop{
+            margin-top: 60px;
+            font-size: 45px;
+        }
+        @include large-tablet{
+            margin-top: 50px;
+            font-size: 40px;
+            font-weight: 700;
+            line-height: 50px;
+        }
+        @include tablet{
+            margin-top: 30px;
+            font-size: 35px;
+            font-weight: 700;
+            line-height: 50px;
+        }
     }
     ol {
         z-index: 2;
@@ -32,11 +60,21 @@
         list-style: none;
         height: 60px;
         color: white;
+        font-size: 18px;
+        @include desktop{
+            height: 55px;
+        }
+        @include large-tablet{
+            height: 45px;
+        }
+        @include tablet{
+            height: 35px;
+            font-size: 16px;
+        }
         li{
             padding: 0 10px;
             text-decoration: none;
             font-weight: bold;
-            font-size: 18px;
             a{
                 color: $color-active;
                 text-decoration: none;

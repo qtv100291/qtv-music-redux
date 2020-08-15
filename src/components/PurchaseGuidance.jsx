@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import './PurchaseGuidance.scss';
 import BreadCrumb from './common/breadCrumb';
 import additionalFunctionDom from '../ultis/additionalFunctionDom';
+import { Link } from 'react-router-dom';
 
 
 const PurchaseGuidance = ({onLoadingScreen}) => {
@@ -19,6 +20,9 @@ const PurchaseGuidance = ({onLoadingScreen}) => {
     return ( 
         <main className="purchase-guidance">
             <BreadCrumb titleParent="Hướng Dẫn Mua Hàng"/>
+            <div className="bread-crumb-line">
+                    <Link to="/">Trang Chủ</Link>  /  Hướng Dẫn Mua Hàng
+            </div>
             <section className="content-section">
                 <div className="article-part">
                     <h2 className="article-title">HƯỚNG DẪN MUA HÀNG</h2>

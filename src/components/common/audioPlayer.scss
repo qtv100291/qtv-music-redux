@@ -10,23 +10,38 @@
     #play-button{
         font-size: 50px;
         color: #007aff;
+        @include mobile{
+            font-size: 40px;
+            align-items: center;
+        }
         &:hover{
             cursor: pointer;
         }
     }
     .audio-player-detail{
-        margin-left: 25px;
+        margin-left: 10px;
         width: calc(100% - 50px - 25px);
+        @include mobile{
+            width: calc(100% - 40px - 15px);
+        }
         .audio-player-song-name{
             position: relative;
             overflow: hidden;
             margin-top: 5px;
+            @include mobile{
+                margin-top: 0px;
+            }
             .song-name-preview{
                 font-weight: 500;
                 font-size: 16px;
                 line-height: 20px;
                 padding-right: 40px;
                 margin-bottom: 5px;
+                @include mobile{
+                    margin-bottom: 0px;
+                    font-size: 14px;
+                    padding-right: 0px;
+                }
 
             }
             .song-name-preview.is-playing{
@@ -43,6 +58,9 @@
                 width: calc(100% - 135px);
                 display: flex;
                 align-items: center;
+                @include mobile{
+                    width: calc(100% - 110px);
+                }
                 .progress-bar-content{
                     position: absolute;
                     left: 0;
@@ -90,9 +108,15 @@
                 }
             }
             .audio-time{
+                @include mobile{
+                    font-size: 14px;
+                }
                 .time-play {
                     display: inline-block;
                     width: 22px;
+                    @include mobile{
+                        width: 20px;
+                    }
                 }
             }
         }

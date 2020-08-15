@@ -1,5 +1,5 @@
 function loadCartLocal(){//load infomation from qtv cart in localstorage
-    if (localStorage.getItem('qtv-cart') === null) return null
+    if (localStorage.getItem('qtv-cart') === null) return []
     else {
         const shoppingCart = JSON.parse(localStorage.getItem('qtv-cart'))
         return shoppingCart

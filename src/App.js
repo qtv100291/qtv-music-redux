@@ -203,7 +203,7 @@ class App extends Component {
                 onLoadingScreen = {this.handleLoadingScreen}
                 updateShoppingCart= {this.handleUpdateShoppingCart}
               />}/>
-            <Route path="/gio-hang"
+            {shoppingCart && <Route path="/gio-hang"
                   render={(props) => <ShoppingCart {...props} 
                     shoppingCart ={ shoppingCart } 
                     onPlusQuantity = {this.handlePlusQuantity}
@@ -212,7 +212,7 @@ class App extends Component {
                     onDeleteItem = {this.handleDeleteItem}
                     onCheckEmpty = {this.handleCheckEmpty}
                     onLoadingScreen = {this.handleLoadingScreen}
-            />}/>
+            />}/>}
             {userData && <ProtectedRoute path="/thanh-toan" 
                             component= {Payout} 
                             userData={userData}

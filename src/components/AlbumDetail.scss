@@ -4,14 +4,53 @@
     width: 100%;
     max-width: 1200px;
     margin: 72px auto 0 auto;
+    @include desktop {
+        width: 95%;
+    }
+    @include large-tablet {
+        margin-top: 62px;
+        width: 95%;
+    }
+    @include tablet {
+        margin-top: 62px;
+        width: 95%;
+    }
+    @include mobile {
+        margin-top: 68px;
+        width: 95%;
+    }
     .banner-breadcrumb{
         background-image: url("/san-pham-detail-banner.jpg");
     }
     .section-album-detail-container{
         margin-top: 70px;
+        @include large-tablet {
+            margin-top: 55px;
+        }
+        @include tablet {
+            flex-wrap: wrap;
+            margin-top: 50px;
+        }
+        @include mobile {
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
         .album-cover-photo{
             width: 100%;
             max-width: 475px;
+            @include desktop {
+                width: calc(40% - 20px);
+            }
+            @include large-tablet {
+                width: calc(40% - 15px);
+            }
+            @include tablet {
+                width: 80%;
+                margin: 0 auto;
+            }
+            @include mobile{
+                width: 100%;
+            }
             .album-cover-photo-container{
                 width: 100%;
                 padding-top: 100%;
@@ -30,31 +69,52 @@
         .album-detail{
             width: 100%;
             max-width: 650px;
+            @include desktop {
+                width: calc(60% - 20px);
+            }
+            @include large-tablet {
+                width: calc(60% - 15px);
+            }
+            @include tablet {
+                margin-top: 40px;
+                width: 100%;
+            }
+            @include mobile{
+                width: 100%;
+                margin-top: 30px;
+            }
             .album-name{
                 width: 100%;
-                height: 35px;
                 line-height: 35px;
                 font-size: 28px;
                 font-weight: 600;
                 margin-bottom: 10;
+                @include mobile{
+                    font-size: 25px;
+                }
             }
             .album-band-name{
                 width: 100%;
-                height: 35px;
                 line-height: 35px;
                 font-size: 24px;
                 font-weight: 600;
                 color: #B4B4B4;
                 margin-bottom: 10px;
+                @include mobile{
+                    font-size: 22px;
+                }
             }
             .album-price{
                 width: 100%;
-                height: 35px;
                 line-height: 35px;
                 font-size: 30px;
                 font-weight: bold;
                 color: $color-active;
                 margin-bottom: 30px;
+                @include mobile{
+                    font-size: 28px;
+                    margin-bottom: 20px;
+                }
             }
             .button-add-to-cart{
                 @include button;
@@ -64,6 +124,10 @@
                 font-weight: 500;
                 font-size: 16px;
                 margin-top: 40px;
+                @include mobile{
+                    width: 100%;
+                    margin-top: 25px;
+                }
             }
             .product-presentation{
                 width: 100%;
@@ -116,6 +180,10 @@
                         p{
                             margin-bottom: 0;
                             padding: 15px 0px;
+                        }
+                        p:nth-child(2){
+                            min-width: 60px;
+                            text-align: right;
                         }
                     }
                 }

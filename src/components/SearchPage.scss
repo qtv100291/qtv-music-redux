@@ -1,9 +1,24 @@
 @import '../variables.scss';
 
 .search-page-main{
-    width: 90%;
+    width: 100%;
     max-width: 1200px;
     margin: 72px auto;
+    @include desktop {
+        width: 95%;
+    }
+    @include large-tablet {
+        margin-top: 62px;
+        width: 95%;
+    }
+    @include tablet {
+        margin-top: 62px;
+        width: 95%;
+    }
+    @include mobile {
+        margin-top: 68px;
+        width: 95%;
+    }
     .result-list{
         margin-top: 30px;
         
@@ -12,6 +27,12 @@
         font-size: 30px;
         font-weight: 600;
         margin-bottom: 20px;
+        @include tablet {
+            font-size: 28px;
+        }
+        @include mobile {
+            font-size: 25px;
+        }
         .keyword{
             font-weight: 700;
             color: $color-active;
@@ -27,14 +48,30 @@
         margin-bottom: 25px;
         .dropdown{
             width: 290px;
-            span{
-                width: 110px;
-                margin-right: 10px;
-                display: inline-block;
-            }
-            strong {
-                display: inline-block;
-                width: 130px;
+                @include mobile {
+                    width: 250px;
+                }
+                .dropdown-toggle{
+                    @include mobile{
+                        padding: 5px;
+                    }
+                }
+                span{
+                    width: 110px;
+                    margin-right: 10px;
+                    display: inline-block;
+                    @include mobile {
+                        width: 90px;
+                        font-size: 14px;
+                    }
+                }
+                strong {
+                    display: inline-block;
+                    width: 130px;
+                    @include mobile {
+                        width: 115px;
+                        font-size: 14px;
+                }
             }
             button{
                 width: 100%;
@@ -49,6 +86,45 @@
     .result-container{
         display: grid;
         grid-template-columns: repeat(4, 1fr);
-        gap: 35px 35px;
+        @include large-desktop {
+            gap: 40px 40px;
+        }
+        @include desktop {
+            grid-template-columns: repeat(3, 1fr);
+            > .album-item {
+                width: 100%;
+            }
+            gap: 25px 25px;
+        }
+        @include large-tablet {
+            grid-template-columns: repeat(3, 1fr);
+            > .album-item {
+                width: 100%;
+            }
+            gap: 30px 30px;
+        }
+        @include tablet {
+            grid-template-columns: repeat(3, 1fr);
+            > .album-item {
+                width: 100%;
+                > .album-name{
+                    font-size: 16px;
+                }
+                > .album-band-name{
+                    font-size: 14px;
+                }
+                > .album-price {
+                    font-size: 20px;
+                }
+            }
+            gap: 30px 30px;
+        }
+        @include mobile {
+            grid-template-columns: repeat(1, 1fr);
+            > .album-item {
+                width: 80%;
+            }
+            gap: 30px 30px;
+        }
     }
 }

@@ -3,25 +3,28 @@
 .album-item{
     width: 270px;
     @include desktop {
-        margin : 0 auto
+        margin : 0 auto;
     }
     @include large-tablet {
-        margin : 0 auto
+        margin : 0 auto;
     }
     @include tablet {
-        margin : 0 auto
+        margin : 0 auto;
     }
     @include mobile {
-        margin : 0 auto
+        margin : 0 auto;
     }
     .album-photo{
         width: 100%;
-        height: 270px;
+        padding-top: 100%;
         position: relative;
         overflow: hidden;
-        a{
+        a{  
+            position: absolute;
+            left: 0;
+            top: 0;
             width: 100%;
-            height: 100px;
+            height: 100%;
             img{
                 width: 100%;
                 height: 100%;

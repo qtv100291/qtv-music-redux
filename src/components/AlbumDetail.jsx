@@ -7,6 +7,7 @@ import { getAlbumDetail, getRelatedAlbum } from '../services/albumServiceHomePag
 import addfunc from '../ultis/additionalFunction';
 import additionalFunctionDom from '../ultis/additionalFunctionDom';
 import shoppingCartFunc from '../ultis/shoppingCartFunc';
+import { Link } from 'react-router-dom';
 import'./AlbumDetail.scss';
 
 class AlbumDetail extends Component {
@@ -16,7 +17,8 @@ class AlbumDetail extends Component {
         relatedAlbum: [],
         isOpeningModal : false, 
         previewId: null,
-        inPreView : false
+        inPreView : false,
+        windowWidth: null
     }
 
     async componentDidMount(){
@@ -30,6 +32,9 @@ class AlbumDetail extends Component {
             const relatedAlbum  = await getRelatedAlbum(this.state.album.bandName, this.state.album.country, this.state.album.id);
             this.setState( { relatedAlbum } )
             document.title = this.state.album.albumName;
+            const windowWidth = window.innerWidth;
+            window.addEventListener("resize",this.updateWindowWidth);
+            this.setState({ windowWidth })
             setTimeout( () => {
                 this.props.onLoadingScreen();
                 additionalFunctionDom.releaseBody();
@@ -73,6 +78,11 @@ class AlbumDetail extends Component {
         this.props.updateShoppingCart(newItem);
     }
 
+    updateWindowWidth = () => {
+        const windowWidth = window.innerWidth;
+        this.setState({ windowWidth })
+    }
+
     render() { 
         const { releaseYear,
                 albumName, 
@@ -97,6 +107,9 @@ class AlbumDetail extends Component {
                                 updateShoppingCart={this.props.updateShoppingCart}
                 />
                 <BreadCrumb title={albumName} titleParent="Sản Phẩm"/>
+                <div className="bread-crumb-line">
+                    <Link to="/">Trang Chủ</Link>  /  <Link to="/san-pham">Sản Phẩm</Link>  / {albumName}
+                </div>
                 <section className="section-album-detail-container d-flex justify-content-between">
                     <div className="album-cover-photo">
                         <div className="album-cover-photo-container">
@@ -153,9 +166,10 @@ class AlbumDetail extends Component {
                 </section>
                 <section className="related-album">
                     <AlbumHomePage 
-                        title = {"Có Thể Bạn Cũng Quan Tâm"}
+                        title = {"Có Thể Bạn Cũng Thích"}
                         album = {this.state.relatedAlbum}
                         onOpen = {this.handleOpening}
+                        windowWidth ={ this.state.windowWidth }
                     />
                 </section>
             </main>

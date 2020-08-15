@@ -66,7 +66,7 @@ class AudioPlayer extends Component {
 
     render() { 
         return (
-            <div className="audio-player-container d-flex">
+            <div className="audio-player-container d-flex align-items-center">
                 <FontAwesomeIcon 
                     icon = {this.state.isPlaying ? faPauseCircle : faPlayCircle} 
                     title = { this.state.isPlaying ? "Dừng" : "Nghe Thử" }

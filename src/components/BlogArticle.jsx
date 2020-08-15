@@ -3,8 +3,6 @@ import './BlogArticle.scss';
 import addfunc from '../ultis/additionalFunction';
 import { Link } from 'react-router-dom';
 import { getArticle } from '../services/articleService';
-import calendar from '../assets/blog/calendar-1.png';
-import pen from '../assets/blog/pen-1.png';
 import articlePreprocessor from '../ultis/articlePreprocessor';
 import additionalFunctionDom from '../ultis/additionalFunctionDom';
 

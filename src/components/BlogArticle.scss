@@ -4,6 +4,21 @@
     width: 100%;
     max-width: 1200px;
     margin: 102px auto 50px auto;
+    @include desktop {
+        width: 95%;
+    }
+    @include large-tablet {
+        margin-top: 82px;
+        width: 95%;
+    }
+    @include tablet {
+        margin-top: 82px;
+        width: 95%;
+    }
+    @include mobile {
+        margin-top: 70px;
+        width: 95%;
+    }
     .bread-crumb{
         font-size: 18px;
         a {
@@ -24,6 +39,16 @@
             font-size: 40px;
             line-height: 50px;
             margin: 0;
+            @include large-tablet {
+                font-size: 35px;
+            }
+            @include tablet {
+                font-size: 35px;
+            }
+            @include mobile {
+                font-size: 30px;
+                line-height: 40px;
+            }
         }
         .article-description-info{
             margin: 10px auto 20px auto;
@@ -58,6 +83,9 @@
         .article-header-photo{
             width: 100%;
             margin-bottom: 25px;
+            img {
+                width: 100%;
+            }
         }
         .article-photo{
             width: 100%;
@@ -81,6 +109,9 @@
             font-weight: 400;
             font-size: 18px;
             margin-bottom: 10px;
+            @include mobile {
+                font-size: 16px;
+            }
         }
         .article-title-part{
             font-size: 25px;
@@ -108,6 +139,9 @@
         h2{
             font-size: 30px;
             margin-bottom: 10px;
+            @include mobile{
+                font-size: 25px;
+            }
         }
         .related-article-item{
             a { 
@@ -120,9 +154,32 @@
                 &:hover{
                     color: $color-active;
                 }
+                @include large-tablet {
+                    display: block;
+                    margin-bottom: 0px;
+                }
+                @include tablet {
+                    display: block;
+                    margin-bottom: 0px;
+                }
+                @include mobile {
+                    display: block;
+                    font-size: 18px;
+                    margin-bottom: 0px;
+                }
             }
             span{
                 font-style: italic;
+                margin-bottom: 10px;
+                @include large-tablet {
+                    display: block;
+                }
+                @include tablet {
+                    display: block;
+                }
+                @include mobile {
+                    display: block;
+                }
             }
         }
     }

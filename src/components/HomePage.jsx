@@ -30,7 +30,7 @@ class HomePage extends Component {
         const internationalAlbum = await getAlbum(["6", "32", "26", "18"]);
         const albumOfTheWeek = await getAlbum(["23"]);
         const windowWidth = window.innerWidth;
-        window.addEventListener("resize",this.updateWindowWidth)
+        window.addEventListener("resize",this.updateWindowWidth);
         this.setState({ vietnameseAlbum, internationalAlbum, albumOfTheWeek, windowWidth});
         document.title = "QTV Music";
         this.props.onLoadingScreen();
@@ -66,14 +66,12 @@ class HomePage extends Component {
                 <AlbumHomePage 
                     title = {"Rock/Metal Việt Nam"}
                     album = {this.state.vietnameseAlbum}
-                    key = {"homepage-1"}
                     onOpen = {this.handleOpening}
                     windowWidth ={ this.state.windowWidth }
                 />
                 <AlbumHomePage
                     title = {"Rock/Metal Quốc Tế"}
                     album = {this.state.internationalAlbum}
-                    key = {"homepage-2"}
                     onOpen = {this.handleOpening}
                     windowWidth ={ this.state.windowWidth }
                 />
