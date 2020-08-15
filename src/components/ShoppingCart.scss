@@ -1,9 +1,24 @@
 @import '../variables.scss';
 
 .shopping-cart-main {
-    width: 90%;
+    width: 100%;
     max-width: 1200px;
     margin: 112px auto 22px auto;
+    @include desktop {
+        width: 95%;
+    }
+    @include large-tablet {
+        margin-top: 92px;
+        width: 95%;
+    }
+    @include tablet {
+        margin-top: 62px;
+        width: 95%;
+    }
+    @include mobile {
+        margin-top: 68px;
+        width: 95%;
+    }
     .shopping-cart-title{
         font-size: 30px;
         span{
@@ -15,19 +30,47 @@
         margin-top: 40px;
         width: 100%;
         align-items: flex-start;
+        @include large-tablet {
+            flex-wrap: wrap;
+        }
+        @include tablet {
+            flex-wrap: wrap;
+        }
+        @include mobile {
+            flex-wrap: wrap;
+        }
         .list-item-section{
-            width: 90%;
+            width: 100%;
             max-width: 850px;
+            @include desktop{
+                width: calc(100% - 300px);
+            }
+            @include large-tablet {
+                max-width: 100%;
+            }
+            @include tablet {
+                max-width: 100%;
+            }
+            @include mobile{
+                max-width: 100%;
+            }
             > h3 {
                 text-align: center;
             }
         }
         .total-money{
             width: 90%;
-            max-width: 325px;
+            max-width: 420px;
+            margin: 0 auto;
             text-align: right;
             font-size: 16px;
             font-weight: 500;
+            @include desktop{
+                max-width: 275px;
+            }
+            @include mobile{
+                width: 100%;
+            }
             .total-money-container{
                 background-color: rgb(224, 224, 224);
                 border-radius: 5px;
@@ -36,16 +79,15 @@
                 margin: 0px auto;
                 padding: 15px 0;
                 letter-spacing: 0.5px;
-                span{
-                    letter-spacing: 1px;
-                }
-                
+                    span{
+                        letter-spacing: 1px;
+                    }
                 }
                 .total-money-tax{
                     padding-bottom: 20px;
                     border-bottom: 1px solid white;
                 }
-                .total-money-value {
+                .total-money-value{
                     span {
                         letter-spacing: 1px;
                         color: $color-active;

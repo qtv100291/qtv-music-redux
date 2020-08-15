@@ -9,6 +9,18 @@
     .item-photo {
         width: 150px;
         margin: 15px 30px;
+        @include desktop{
+            width: 130px;
+            margin: 15px 15px;
+        }
+        @include tablet{
+            width: 130px;
+            margin: 15px 15px;
+        }
+        @include mobile{
+            width: 120px;
+            margin: 15px 25px;
+        }
         .item-photo-container{
             width: 100%;
             padding-top: 100%;
@@ -25,14 +37,36 @@
     .item-info {
         width: calc(100% - 180px);
         margin: 15px 0;
+        @include tablet{
+            flex-wrap: wrap;
+        }
+        @include mobile{
+            flex-wrap: wrap;
+        }
         .item-info-container{
             width: 200px;
+            @include tablet{
+                width: 50%;
+            }
+            @include mobile{
+                width: 60%;
+                min-width: 180px;
+            }
             a {
                 text-decoration:none;
                 color: black;
                 h3{
                     display: inline-block;
                     font-size: 20px;
+                    @include desktop{
+                        font-size: 18px;
+                    }
+                    @include tablet{
+                        font-size: 18px;
+                    }
+                    @include mobile{
+                        font-size: 16px;
+                    }
                 }
                 &:hover{
                     cursor: pointer;
@@ -42,10 +76,28 @@
             .band-name{
                 font-size: 18px;
                 color: #B4B4B4;
+                @include desktop{
+                    font-size: 16px;
+                }
+                @include tablet{
+                    font-size: 16px;
+                }
+                @include mobile{
+                    font-size: 14px;
+                }
             }
             .album-price{
                 font-size: 22px;
                 color: $color-active;
+                @include desktop{
+                    font-size: 20px;
+                }
+                @include tablet{
+                    font-size: 20px;
+                }
+                @include mobile{
+                    font-size: 18px;
+                }
             }
             .delete-button{
                 &:hover{
@@ -57,6 +109,15 @@
             }
         }
         .item-quantity{
+            @include tablet{
+                width: 50%;
+                display: flex;
+                justify-content: center;
+            }
+            @include mobile{
+                margin-top: 20px;
+                width: 100%;
+            }
             input{
                 width: 50px;
                 height: 36px;
@@ -64,11 +125,23 @@
                 border-style: solid;
                 border-color: rgb(175, 175, 175);
                 font-size: 18px;
-                line-height: 42px;
+                line-height: 36px;
                 text-align: center;
                 outline: none;
                 background: none;
                 font-weight: 700;
+                @include desktop {
+                    width: 40px;
+                }
+                @include tablet {
+                    width: 40px;
+                }
+                @include mobile {
+                    width: 40px;
+                    height: 32px;
+                    font-size: 16px;
+                    line-height: 32px;
+                }
             }
             .button-quantity{
                 width: 36px;
@@ -79,12 +152,35 @@
                     cursor: pointer;
                     background-color: rgb(175, 175, 175);
                 }
+                @include mobile {
+                    height: 32px;
+                    width: 32px;
+                }
             }
         }
         .item-total-money{
             width: 250px;
+            @include tablet{
+                margin: 40px 0 0 auto;
+                width: 50%;
+            }
+            @include mobile{
+                margin: 20px 0 0 0;
+                width: 100%;
+                justify-content: flex-start!important;
+                display: block!important;
+            }
             h3{
                 font-size: 22px;
+                @include desktop {
+                    font-size: 20px;
+                }
+                @include tablet {
+                    font-size: 20px;
+                }
+                @include mobile{
+                    font-size: 18px;
+                }
             }
            
         }

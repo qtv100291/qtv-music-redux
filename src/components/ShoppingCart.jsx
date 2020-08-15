@@ -42,7 +42,7 @@ const ShoppingCart = ({ shoppingCart,
                 </section>
                 <section className="total-money">
                     <div className="total-money-container">
-                        <p className="total-money-title d-flex justify-content-between">Tạm Tính: <span>{addfunc.separator1000(addfunc.totalMoneyCalculation(shoppingCart))} VND</span></p>
+                        <p className="total-money-title d-flex justify-content-between">Tạm Tính<span>{addfunc.separator1000(addfunc.totalMoneyCalculation(shoppingCart))} VND</span></p>
                         <p className="total-money-tax d-flex justify-content-between">Thuế VAT <span>{addfunc.separator1000(addfunc.totalMoneyCalculation(shoppingCart)/10)} VND</span></p> 
                         <p className="total-money-value d-flex justify-content-between align-items-center">TỔNG<span>{addfunc.separator1000((addfunc.totalMoneyCalculation(shoppingCart)*1.1).toFixed(0))} VND</span></p> 
                     </div>
