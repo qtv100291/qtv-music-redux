@@ -156,8 +156,17 @@ class App extends Component {
   }
 
   handleUpdateUserInformation = userData => {
+    const MySwal = withReactContent(Swal)
     this.setState({ userData });
     updateUser(this.state.user.sub, userData, this.state.shoppingCart);
+    MySwal.fire({
+      icon: 'success',
+      html: 'Đã Cập Nhật Thông Tin',
+      showConfirmButton: false,
+      timer: 1250,
+    }).then(() => {
+      additionalFunctionDom.releaseBody();
+    })
   }
 
   handleUpdateTradeHistory = tradeHistory => {
@@ -169,6 +178,16 @@ class App extends Component {
     this.setState({userData});
     updateUser(this.state.user.sub, userData, shoppingCart);
   }
+
+  handleCloseLoadingScreen = () => {
+    this.setState( { isLoadingScreen: false} )
+    
+  }
+
+  handleOpenLoadingScreen = () => {
+    this.setState( { isLoadingScreen: true } )
+  }
+
 
   render() { 
     const { shoppingCart, user, userData} = this.state;
@@ -203,7 +222,7 @@ class App extends Component {
                 onLoadingScreen = {this.handleLoadingScreen}
                 updateShoppingCart= {this.handleUpdateShoppingCart}
               />}/>
-            {shoppingCart && <Route path="/gio-hang"
+            <Route path="/gio-hang"
                   render={(props) => <ShoppingCart {...props} 
                     shoppingCart ={ shoppingCart } 
                     onPlusQuantity = {this.handlePlusQuantity}
@@ -211,25 +230,28 @@ class App extends Component {
                     onChangeQuantity = {this.handleChangeQuantity}
                     onDeleteItem = {this.handleDeleteItem}
                     onCheckEmpty = {this.handleCheckEmpty}
-                    onLoadingScreen = {this.handleLoadingScreen}
-            />}/>}
-            {userData && <ProtectedRoute path="/thanh-toan" 
+                    onOpenLoadingScreen = {this.handleOpenLoadingScreen}
+                    onCloseLoadingScreen = {this.handleCloseLoadingScreen}
+            />}/>
+            <ProtectedRoute path="/thanh-toan" 
                             component= {Payout} 
                             userData={userData}
                             shoppingCart= { shoppingCart } 
-                            onLoadingScreen = {this.handleLoadingScreen}
+                            onOpenLoadingScreen = {this.handleOpenLoadingScreen}
+                            onCloseLoadingScreen = {this.handleCloseLoadingScreen}
                             onTradeHistory ={this.handleUpdateTradeHistory}
                             
-            />}
-            {userData && <ProtectedRoute path="/tai-khoan" 
+            />
+            <ProtectedRoute path="/tai-khoan" 
                             component= {Account} 
-                            onLoadingScreen = {this.handleLoadingScreen} 
+                            onOpenLoadingScreen = {this.handleOpenLoadingScreen}
+                            onCloseLoadingScreen = {this.handleCloseLoadingScreen}
                             userData={userData}
                             onUpdateUser={this.handleUpdateUserInformation}
-            />}
+            />
             <Route path="/khong-tim-thay" component={NotFoundPage}/>
             <Route exact path="/" render={(props) => <HomePage {...props} updateShoppingCart= {this.handleUpdateShoppingCart} onLoadingScreen = {this.handleLoadingScreen}/>}/>
-            {userData && <Redirect to="/khong-tim-thay"/>}
+            <Redirect to="/khong-tim-thay"/>
         </Switch>
         <ScrollTopIcon/>
         <Footer/>

@@ -60,16 +60,24 @@
         }
         .total-money{
             width: 90%;
-            max-width: 420px;
-            margin: 0 auto;
+            max-width: 325px;
             text-align: right;
             font-size: 16px;
             font-weight: 500;
             @include desktop{
                 max-width: 275px;
             }
+            @include large-tablet{
+                max-width: 400px;
+                margin: 0 auto;
+            }
+            @include tablet{
+                max-width: 400px;
+                margin: 0 auto;
+            }
             @include mobile{
                 width: 100%;
+                max-width: 100%;
             }
             .total-money-container{
                 background-color: rgb(224, 224, 224);

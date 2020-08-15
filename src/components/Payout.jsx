@@ -43,6 +43,7 @@ class Payout extends Form {
         receiverProvince : "selectEmptyCheck",
         receiverDistrict : "selectEmptyCheck",
         receiverCommune : "selectEmptyCheck",
+        receiverStreet : "emptyCheck"
     }
 
     inputCheckForCardPayment = {
@@ -57,12 +58,14 @@ class Payout extends Form {
     
     userDataProperty = [["name"], ["phone"], ["address","province"], ["address","district"], ["address","commune"], ["address","street"], ["payment","cardType"], ["payment", "cardNumber"], ["payment", "cardOwner"], ["payment", "cardExpireDate"], ["payment", "cardCvv"]];
 
-    async componentDidMount() {
+    async componentDidMount(){
+        if (!this.props.shoppingCart) return;
         if(this.props.shoppingCart.length === 0) window.location ="/"
         window.scrollTo(0, 0);
-        this.props.onLoadingScreen();
+        this.props.onOpenLoadingScreen();
         additionalFunctionDom.fixBody();
-        const { userData } = this.props
+        const { userData } = this.props;
+        if (!userData) return;
         const userLoadProperty  = [...this.userLoadProperty];
         const userDataProperty = [...this.userDataProperty];
         const userLoad = {};
@@ -86,9 +89,15 @@ class Payout extends Form {
         this.setState({ data : userLoad, province })
         document.title = "Thanh Toán";
         setTimeout( () => {
-            this.props.onLoadingScreen();
+            this.props.onCloseLoadingScreen();
             additionalFunctionDom.releaseBody();
-        },1200)  
+        },800)  
+    }
+
+    componentDidUpdate(prevProps) {
+        if (prevProps.userData !== this.props.userData || prevProps.shoppingCart !== this.props.shoppingCart ){
+            this.componentDidMount();
+        }
     }
 
     handleWaitPropsFullyLoaded = () => {
@@ -130,15 +139,14 @@ class Payout extends Form {
         const { shoppingCart } = this.props;
         const tradeHistory = addfunc.buildHistoryTrade(shoppingCart);
         const orderInfo = new addfunc.GetPaymentInfo( data, shoppingCart);
-        // this.props.onTradeHistory(tradeHistory);
-        // sendOrder(orderInfo);
-        
+        this.props.onTradeHistory(tradeHistory);
+        sendOrder(orderInfo);
         MySwal.fire({
             icon: 'success',
             text: 'Cảm ơn quý khách đã tin tưởng QTV Music, nhân viên của chúng tôi sẽ liên lạc với quý khách trong thời gian sớm nhất.',
             confirmButtonText: 'Quay Về Trang Chủ',
           }).then(() => {
-            // window.location ="/"
+            window.location ="/"
         })
 
         
@@ -146,10 +154,9 @@ class Payout extends Form {
 
 
     render() { 
-        
         const { province, district, commune} = this.state;
-        let { shoppingCart } = this.props;
-        shoppingCart = shoppingCart ? shoppingCart : [];
+        const { shoppingCart, userData } = this.props;
+        console.log( shoppingCart, userData)
         const { paymentMethod } = this.state.data;   
         const cardType = [
             {
@@ -171,7 +178,8 @@ class Payout extends Form {
             }
         ]
         
-        
+        if (Boolean(userData) === false || Boolean(shoppingCart) === false) return null;
+        else
         return (  
             <main className="payout-main">
                 <h2 className="payout-title">Thanh Toán</h2>

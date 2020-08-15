@@ -11,19 +11,23 @@ const ShoppingCart = ({ shoppingCart,
                         onChangeQuantity, 
                         onDeleteItem,
                         onCheckEmpty,
-                        onLoadingScreen }) => {
+                        onOpenLoadingScreen,
+                        onCloseLoadingScreen }) => {
                             
     useEffect(() => {
         document.title = "Giỏ Hàng";
         window.scrollTo(0, 0);
-        onLoadingScreen();
+        onOpenLoadingScreen();
         additionalFunctionDom.fixBody();
+        console.log("hehe")
         setTimeout( () => {
-            onLoadingScreen();
+            onCloseLoadingScreen();
             additionalFunctionDom.releaseBody();
+            console.log("hoho")
         },300)
     },[])
-    console.log(shoppingCart)
+    if (!shoppingCart) return null
+    else
     return ( 
         <main className="shopping-cart-main">
             <h2 className="shopping-cart-title">Giỏ Hàng <span>( {( Boolean(shoppingCart) === false || shoppingCart.length === 0) ? "0" : addfunc.totalItemCalculation(shoppingCart)} sản phẩm )</span></h2>

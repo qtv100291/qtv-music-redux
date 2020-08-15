@@ -7,17 +7,17 @@ import additionalFunctionDom from '../ultis/additionalFunctionDom';
 import './Account.scss'
 import { useState } from 'react';
 
-const Account = ({onLoadingScreen, userData, onUpdateUser}) => {
+const Account = ({onOpenLoadingScreen, onCloseLoadingScreen, userData, onUpdateUser}) => {
     const [activeTab, setActiveTab] = useState(1);
     useEffect(()=>{
         document.title = "Tài Khoản";
         window.scrollTo(0, 0);
-        onLoadingScreen();
+        onOpenLoadingScreen();
         additionalFunctionDom.fixBody();
         setTimeout( () => {
-            onLoadingScreen();
+            onCloseLoadingScreen();
             additionalFunctionDom.releaseBody();
-        },300) 
+        },500) 
     },[])
 
     const handleChangeTab = id => {
@@ -30,6 +30,8 @@ const Account = ({onLoadingScreen, userData, onUpdateUser}) => {
         window.location = "/";
     }
 
+    if (!userData) return null;
+    else
     return ( 
         <main className="account-main">
             <div className="account-container d-flex justify-content-between">

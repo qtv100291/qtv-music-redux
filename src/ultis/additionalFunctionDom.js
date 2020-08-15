@@ -126,7 +126,8 @@ function checkCardExpireDate(inputName){
 function checkhtmlHeight(){
     const htmlHieght = document.documentElement.offsetHeight;
     const windowHeight = window.innerHeight;
-    if (htmlHieght < windowHeight)  document.querySelector('footer').classList.add('fixed');
+    const footerHieght = document.querySelector('footer').offsetHeight;
+    if (htmlHieght + footerHieght < windowHeight)  document.querySelector('footer').classList.add('fixed');
     else document.querySelector('footer').classList.remove('fixed');
 }
 
