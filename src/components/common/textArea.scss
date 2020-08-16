@@ -3,6 +3,7 @@
 .text-area{
     margin-top: 25px;
     margin-bottom: 10px;
+    flex-wrap: wrap;
     label{
         width: 150px;
     }
@@ -20,5 +21,14 @@
         text-indent: 16px;
         outline: none;
         resize: none;
+        @include large-tablet{
+            width: 90%;
+        }
+        @include tablet{
+            width: 345px
+        }
+        @include mobile{
+            width: 100%;
+        }
     }
 }

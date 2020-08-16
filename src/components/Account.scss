@@ -1,14 +1,41 @@
 @import '../variables.scss';
 
 .account-main{
-    width: 90%;
+    width: 100%;
     max-width: 1200px;
     margin: 102px auto 42px auto;
+    @include desktop {
+        width: 95%;
+    }
+    @include large-tablet {
+        margin-top: 92px;
+        width: 95%;
+    }
+    @include tablet {
+        margin-top: 82px;
+        width: 90%;
+    }
+    @include mobile {
+        margin-top: 68px;
+        width: 95%;
+    }
     .account-container{
         width: 100%;
+        @include tablet{
+            flex-wrap: wrap;
+        }
+        @include mobile{
+            flex-wrap: wrap;
+        }
         .account-side-bar{
-            width: 90%;
+            width: 100%;
             max-width: 250px;
+            @include tablet {
+                max-width: 100%;
+            }
+            @include mobile{
+                max-width: 100%;
+            }
             .account-menu-member-general{
                 width: 243px;
                 height: 45px;
@@ -73,8 +100,22 @@
             }
         }
         .account-content{
-            width: 90%;
+            width: 100%;
             max-width: 875px;
+            @include desktop{
+                width: calc(100% - 300px);
+            }
+            @include large-tablet{
+                width: calc(100% - 275px);
+            }
+            @include tablet {
+                max-width: 100%;
+                margin-top: 30px;
+            }
+            @include mobile {
+                max-width: 100%;
+                margin-top: 30px;
+            }
         }
     }
 }

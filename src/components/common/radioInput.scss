@@ -2,6 +2,12 @@
 
 .radio-input{
     height: 32px;
+    @include large-tablet {
+        height: auto;
+    }
+    @include mobile {
+        height: auto;
+    }
     label{
         margin: 0;
         margin-left: 15px; 

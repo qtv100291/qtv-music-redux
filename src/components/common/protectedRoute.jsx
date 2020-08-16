@@ -4,11 +4,13 @@ import authService from '../../services/loginService';
 
 
 const ProtectedRoute = ({path, component: Component, ...rest }) => {
+    const user = authService.getCurrentUser();
+    const timeNow = Date.now()/1000;
     return ( 
         <Route 
             path = {path}
             render = {props =>{
-                if (!authService.getCurrentUser())
+                if (!(user && user.exp > timeNow))
                     return (
                         <Redirect 
                             to = {{
@@ -18,7 +20,7 @@ const ProtectedRoute = ({path, component: Component, ...rest }) => {
                             }
                         />
                     )
-                return <Component {...props} {...rest}/>
+                else return <Component {...props} {...rest}/>
                 }
             }
         />

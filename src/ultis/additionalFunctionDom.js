@@ -94,7 +94,7 @@ function checkRetype(inputName){
 
 function selectEmptyCheck(inputName){
     const input = document.querySelector(`#${inputName}`).value;
-    const error = "Bạn phải chọn một địa điểm"
+    const error = "Bạn phải chọn một mục"
     if (input === "None") return error
     else return "";
 }

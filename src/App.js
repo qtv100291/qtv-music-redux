@@ -42,7 +42,7 @@ class App extends Component {
 
   async componentDidMount() {
     //Authentication
-    const user = await authService.getCurrentUser();
+    const user = authService.getCurrentUser();
     const timeNow = Date.now()/1000;
     if (user && user.exp > timeNow){
       const userId = user.sub
