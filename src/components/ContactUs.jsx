@@ -40,7 +40,7 @@ const ContactUs = ({onLoadingScreen}) => {
                         <p>Trụ sở công ty: Tầng 10, tòa nhà Hồ Gươm Plaza, Hà Đông, Hà Nội</p>
                         <p>Số điện thoại: <a href="tel:19001570">19001570</a> </p>
                         <p>Email: qtv-music@gmail.com</p>
-                        <p>Website: qtv-music@gmail.com</p>
+                        <p>Website: qtv-music.web.app/</p>
                     </div>
                 </div>
             </section>

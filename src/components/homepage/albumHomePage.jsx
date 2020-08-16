@@ -48,7 +48,7 @@ const AlbumHomePage = ({title, album, onOpen, windowWidth}) => {
                 {
                     album.length > 0 &&
                     album.map(albumItem => ( 
-                    <SwiperSlide>
+                    <SwiperSlide key={albumItem.id}>
                         <AlbumItem {...albumItem} key={albumItem.id} onOpen = {onOpen}/>
                     </SwiperSlide>
                     ))

@@ -12,14 +12,15 @@ class Form extends Component {
     handleSubmit =  async e => {
         e.preventDefault();
         const errors = additionalFunctionDom.checkInput(this.inputCheck); // check and print errors (if any)
+        let newErros = {...errors};
         await this.setState({ errors, serverError: "" })
         if (this.state.data.paymentMethod === "card"){
           const prevErrors = {...this.state.errors}
           const errors = additionalFunctionDom.checkInput(this.inputCheckForCardPayment);
-          const newErros = {...prevErrors,...errors};
+          newErros = {...prevErrors,...errors};
           this.setState({errors : newErros})
         }
-        if (additionalFunctionDom.checkIfThereAreAnyError(errors)) return;
+        if (additionalFunctionDom.checkIfThereAreAnyError(newErros)) return;
         this.doSubmit();
     }
 

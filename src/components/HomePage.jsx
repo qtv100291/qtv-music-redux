@@ -33,9 +33,10 @@ class HomePage extends Component {
         window.addEventListener("resize",this.updateWindowWidth);
         this.setState({ vietnameseAlbum, internationalAlbum, albumOfTheWeek, windowWidth});
         document.title = "QTV Music";
-        this.props.onLoadingScreen();
-        additionalFunctionDom.releaseBody();
-  
+        setTimeout(() => {
+            this.props.onLoadingScreen();
+            additionalFunctionDom.releaseBody();
+        },200)
     }
 
     handleOpening = id => {

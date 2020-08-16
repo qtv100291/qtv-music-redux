@@ -17,7 +17,7 @@ const Account = ({onOpenLoadingScreen, onCloseLoadingScreen, userData, onUpdateU
         setTimeout( () => {
             onCloseLoadingScreen();
             additionalFunctionDom.releaseBody();
-        },500) 
+        },1200) 
     },[])
 
     const handleChangeTab = id => {

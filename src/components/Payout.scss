@@ -106,6 +106,13 @@
                     height: 40px;
                     font-size: 20px;
                 }
+                &:disabled{
+                    opacity: 0.7;
+                }
+                &:disabled:hover{
+                    background-color: $color-active;
+                    cursor: auto;
+                }
             }
             .note-order-button{
                 margin-top: 15px;

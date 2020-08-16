@@ -26,7 +26,6 @@ import shoppingCartFunc from './ultis/shoppingCartFunc';
 import updateUser from './services/updateService';
 import addfunc from './ultis/additionalFunction';
 import additionalFunctionDom from './ultis/additionalFunctionDom';
-import 'react-toastify/dist/ReactToastify.css';
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Swal from 'sweetalert2'
@@ -171,11 +170,10 @@ class App extends Component {
 
   handleUpdateTradeHistory = tradeHistory => {
     const shoppingCart = [];
-    this.setState({shoppingCart});
-    const userData = {...this.userData}
+    const userData = {...this.state.userData}
     const tradeHistoryUpdate = [...this.state.userData.tradeHistory,...tradeHistory];
     userData.tradeHistory = [...tradeHistoryUpdate];
-    this.setState({userData});
+    this.setState({userData,shoppingCart});
     updateUser(this.state.user.sub, userData, shoppingCart);
   }
 
@@ -233,7 +231,7 @@ class App extends Component {
                     onOpenLoadingScreen = {this.handleOpenLoadingScreen}
                     onCloseLoadingScreen = {this.handleCloseLoadingScreen}
             />}/>
-            {userData && <ProtectedRoute path="/thanh-toan" 
+            <ProtectedRoute path="/thanh-toan" 
                             component= {Payout} 
                             userData={userData}
                             shoppingCart= { shoppingCart } 
@@ -241,7 +239,7 @@ class App extends Component {
                             onCloseLoadingScreen = {this.handleCloseLoadingScreen}
                             onTradeHistory ={this.handleUpdateTradeHistory}
                             
-            />}
+            />
             <ProtectedRoute path="/tai-khoan" 
                             component= {Account} 
                             onOpenLoadingScreen = {this.handleOpenLoadingScreen}

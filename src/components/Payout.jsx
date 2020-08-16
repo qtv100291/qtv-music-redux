@@ -59,8 +59,7 @@ class Payout extends Form {
     userDataProperty = [["name"], ["phone"], ["address","province"], ["address","district"], ["address","commune"], ["address","street"], ["payment","cardType"], ["payment", "cardNumber"], ["payment", "cardOwner"], ["payment", "cardExpireDate"], ["payment", "cardCvv"]];
 
     async componentDidMount(){
-        if (!this.props.shoppingCart) return null;
-        if (this.props.shoppingCart.length === 0 ) window.location ="/";
+        // if (!this.props.shoppingCart) return null;
         window.scrollTo(0, 0);
         this.props.onOpenLoadingScreen();
         additionalFunctionDom.fixBody();
@@ -91,14 +90,15 @@ class Payout extends Form {
         setTimeout( () => {
             this.props.onCloseLoadingScreen();
             additionalFunctionDom.releaseBody();
-        },800)  
+        },400)  
     }
 
-    // componentDidUpdate(prevProps) {
-    //     if (prevProps.userData !== this.props.userData || prevProps.shoppingCart !== this.props.shoppingCart ){
-    //         this.componentDidMount();
-    //     }
-    // }
+    componentDidUpdate(prevProps) {
+        if (prevProps.userData !== this.props.userData || prevProps.shoppingCart !== this.props.shoppingCart ){
+            const prevHistory = prevProps.userData ? prevProps.userData.tradeHistory.length : this.props.userData.tradeHistory.length;
+            if (prevHistory === this.props.userData.tradeHistory.length) this.componentDidMount()
+        }
+    }
 
     handleWaitPropsFullyLoaded = () => {
         setTimeout(() => {
@@ -140,12 +140,12 @@ class Payout extends Form {
         const tradeHistory = addfunc.buildHistoryTrade(shoppingCart);
         const orderInfo = new addfunc.GetPaymentInfo( data, shoppingCart);
         this.props.onTradeHistory(tradeHistory);
-        sendOrder(orderInfo);
+        // sendOrder(orderInfo);
         MySwal.fire({
             icon: 'success',
             text: 'Cảm ơn quý khách đã tin tưởng QTV Music, nhân viên của chúng tôi sẽ liên lạc với quý khách trong thời gian sớm nhất.',
             confirmButtonText: 'Quay Về Trang Chủ',
-          }).then(() => {
+          }).then( () => {
             window.location ="/"
         })        
     }
@@ -154,7 +154,6 @@ class Payout extends Form {
     render() { 
         const { province, district, commune} = this.state;
         const { shoppingCart, userData } = this.props;
-        console.log( shoppingCart, userData)
         const { paymentMethod } = this.state.data;   
         const cardType = [
             {
@@ -208,7 +207,7 @@ class Payout extends Form {
                                     <p className="empty-warning"><span className="obligation-mark">*</span> Bạn không được để trống mục này</p>
                                 </div>
                             </div>
-                            <button className="order-button" >Đặt Hàng</button>
+                            <button className="order-button" disabled={shoppingCart.length === 0 ? true : false}>Đặt Hàng</button>
                             <p className="note-order-button">(Kiểm tra kĩ thông tin trước khi nhấn nút)</p>
                         </form>
                     </section>
