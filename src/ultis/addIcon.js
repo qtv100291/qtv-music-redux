@@ -1,10 +1,13 @@
 import { library} from '@fortawesome/fontawesome-svg-core' 
-import {  fas, faSearch, faUserLock, faShoppingBag, faUserCheck, faPlayCircle, faPlay, faTimesCircle, faTimes, faPlus, faMinus, faTrash, faUserAlt, faBookmark, faBars, faFilter  } from '@fortawesome/free-solid-svg-icons';
+import {  fas, faSearch, faUserLock, faShoppingBag, faUserCheck, faPlayCircle, faPlay, faTimesCircle, faTimes, faPlus, faMinus, faTrash, faUserAlt, faBookmark, faBars, faFilter, faCompactDisc, faUser, faHome, faPhoneAlt  } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons'
 
 
 function addIcon(){
-    library.add( fab, fas,  faSearch, faUserLock, faShoppingBag, faUserCheck, faPlayCircle, faPlay,faTimesCircle, faTimes, faPlus, faMinus, faTrash, faUserAlt, faBookmark, faBars, faFilter )
+    library.add( fab, fas,  faSearch, faUserLock, faShoppingBag, 
+        faUserCheck, faPlayCircle, faPlay,faTimesCircle, faTimes, 
+        faPlus, faMinus, faTrash, faUserAlt, faBookmark, faBars, 
+        faFilter, faCompactDisc, faUser, faHome, faPhoneAlt )
 };
 
 export default {

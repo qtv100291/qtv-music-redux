@@ -1,9 +1,23 @@
-import React from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Footer.scss';
+import AboutThisWebsite from './navbar/aboutThisWebsite';
+import additionalFunctionDom from '../ultis/additionalFunctionDom';
 
 const NavBar = () => {
+    const [isOpening, setIsOpening] = useState(false);
+
+    const handleOpening = () => {
+        additionalFunctionDom.fixBody();
+        setIsOpening(true)
+    }
+
+    const handleClosing = () => {
+        additionalFunctionDom.releaseBody();
+        setIsOpening(false)
+    }
+
     return ( 
         <footer>
             <nav className="footer-desktop d-flex justify-content-between align-items-center">
@@ -39,8 +53,9 @@ const NavBar = () => {
                     </div>
                 </div>
             </nav>
+            <AboutThisWebsite onClose ={handleClosing} isOpening={isOpening}/>
             <div className="footer-about-website d-flex justify-content-center">
-                    <h5>QTV Music @ 2020 - <span>About This Website</span></h5>
+                    <h5>QTV Music @ 2020</h5>
             </div>
         </footer>
         

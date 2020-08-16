@@ -11,6 +11,10 @@
     display: block;
     border-radius: 7px;
     z-index: 20;
+    @include mobile{
+        width: 35px;
+        height: 35px;
+    }
     &:hover{
         cursor: pointer;
         background-color: $color-active-hover;

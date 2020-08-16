@@ -24,6 +24,11 @@ class Register extends Form {
         passwordRegisterRetype : "checkRetype"
     }
 
+    componentDidMount() {
+        document.title = "Đăng Ký";
+        window.scrollTo(0,0)
+    }
+
     doSubmit = async () => {
         const MySwal = withReactContent(Swal);
         try {
@@ -64,7 +69,7 @@ class Register extends Form {
                     {this.renderInputType2("phoneRegister","Số Điện Thoại","text","true")}
                     {this.renderInputType2("passwordRegister","Mật Khẩu Chứa Ít Nhất 6 Kí Tự","password")}
                     {this.renderInputType2("passwordRegisterRetype","Nhập Lại Mật Khẩu","password")}
-                    <p>Khi bạn Khi bạn nhấn ĐĂNG KÝ, bạn đã đồng ý với những <span><Link to="/dieu-khoan">Điều Khoản</Link></span> và <span><Link to="/chinh-sach">Chính Sách</Link></span>  của QTV Guitar Shop.</p>
+                    <p>Khi bạn Khi bạn nhấn ĐĂNG KÝ, bạn đã đồng ý với những <span><Link to="/dieu-khoan-dich-vu">Điều Khoản</Link></span> của QTV Guitar Shop.</p>
                     <button type="submit" disabled={this.state.disabled}>Đăng Ký</button>
                 </form>
                 <p>Bạn đã có tài khoản? <span><Link to="/dang-nhap" onClick={this.handleToggle}>Đăng nhập</Link></span></p>

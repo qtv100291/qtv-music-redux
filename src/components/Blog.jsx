@@ -10,6 +10,7 @@ import pen from '../assets/blog/pen-1.png';
 import BreadCrumb from './common/breadCrumb';
 import additionalFunctionDom from '../ultis/additionalFunctionDom';
 
+
 const Blog = ({onLoadingScreen}) => {
     const title_1 = "Chester Bennington một cuộc đời để nhớ";
     const title_2 = "Đô Thị Phần Lan Trong Cuộc Đua Giành Ngôi Vị Thủ Đô Metal";
@@ -30,6 +31,9 @@ const Blog = ({onLoadingScreen}) => {
     return ( 
         <main className="blog-section">
             <BreadCrumb titleParent="Blog"/>
+            <div className="bread-crumb-line">
+                    <Link to="/">Trang Chủ</Link>  /  Blog
+            </div>
             <section className="article-section">
                 <div className="article-item d-flex justify-content-between flex-row-reverse">
                     <div className="article-item-photo">

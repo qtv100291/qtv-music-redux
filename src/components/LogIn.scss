@@ -34,6 +34,9 @@
                 outline: none;
                 display: block;
                 margin: 50px auto 30px auto;
+                @include mobile{
+                    width: 100%;
+                }
                 &:hover:not(:disabled){
                     cursor: pointer;
                     background-color: $color-active-hover;

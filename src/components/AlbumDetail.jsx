@@ -26,27 +26,39 @@ class AlbumDetail extends Component {
         this.props.onLoadingScreen();
         additionalFunctionDom.fixBody();
         const albumId = addfunc.getAlbumId(this.props.location.pathname);
-        try{
-            const { data : album } = await getAlbumDetail(albumId);
-            await this.setState({ album });
-            const relatedAlbum  = await getRelatedAlbum(this.state.album.bandName, this.state.album.country, this.state.album.id);
-            this.setState( { relatedAlbum } )
-            document.title = this.state.album.albumName;
-            const windowWidth = window.innerWidth;
-            window.addEventListener("resize",this.updateWindowWidth);
-            this.setState({ windowWidth })
-            setTimeout( () => {
-                this.props.onLoadingScreen();
-                additionalFunctionDom.releaseBody();
-            },300)  
-        }
-        catch(ex){
-            if (ex.response && ex.response.status === 404){
-                this.props.onLoadingScreen();
-                additionalFunctionDom.releaseBody();
-                this.props.history.replace("/khong-tim-thay")
-            }
-        }
+        const { data : album } = await getAlbumDetail(albumId);
+        await this.setState({ album });
+        const relatedAlbum  = await getRelatedAlbum(this.state.album.bandName, this.state.album.country, this.state.album.id);
+        this.setState( { relatedAlbum } )
+        document.title = this.state.album.albumName;
+        const windowWidth = window.innerWidth;
+        window.addEventListener("resize",this.updateWindowWidth);
+        this.setState({ windowWidth })
+        setTimeout( () => {
+            this.props.onLoadingScreen();
+            additionalFunctionDom.releaseBody();
+        },300)  
+        // try{
+        //     const { data : album } = await getAlbumDetail(albumId);
+        //     await this.setState({ album });
+        //     const relatedAlbum  = await getRelatedAlbum(this.state.album.bandName, this.state.album.country, this.state.album.id);
+        //     this.setState( { relatedAlbum } )
+        //     document.title = this.state.album.albumName;
+        //     const windowWidth = window.innerWidth;
+        //     window.addEventListener("resize",this.updateWindowWidth);
+        //     this.setState({ windowWidth })
+        //     setTimeout( () => {
+        //         this.props.onLoadingScreen();
+        //         additionalFunctionDom.releaseBody();
+        //     },300)  
+        // }
+        // catch(ex){
+        //     if (ex.response && ex.response.status === 404){
+        //         this.props.onLoadingScreen();
+        //         additionalFunctionDom.releaseBody();
+        //         this.props.history.replace("/khong-tim-thay")
+        //     }
+        // }
     }
 
     componentDidUpdate(prevProps) {

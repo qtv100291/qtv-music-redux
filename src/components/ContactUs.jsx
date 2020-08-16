@@ -2,6 +2,8 @@ import React, {useEffect} from 'react';
 import BreadCrumb from './common/breadCrumb';
 import './ContactUs.scss';
 import additionalFunctionDom from '../ultis/additionalFunctionDom';
+import { Link } from 'react-router-dom';
+
 
 const ContactUs = ({onLoadingScreen}) => {
     useEffect(() => {
@@ -18,6 +20,9 @@ const ContactUs = ({onLoadingScreen}) => {
     return ( 
         <main className="contact-us">
             <BreadCrumb titleParent="Liên Hệ"/>
+            <div className="bread-crumb-line">
+                    <Link to="/">Trang Chủ</Link>  /  Liên Hệ
+            </div>
             <section className="about-us">
                 <h2 className="about-us-title title-section">Câu Chuyện Về Chúng Tôi</h2>
                 <p>Đầu những năm 90 của thế kỉ trước, khi mà Rock và Metal bắt đầu được phổ biến rộng rãi hơn tại Việt Nam, đặc biệt là trong giới sinh viên. Khi ấy niềm vui được sỡ hữu một băng catset hay một đĩa CD chính gốc thật khó có gì diễn tả nổi. Trong đó có một nhóm sinh viên đến từ các trường Xây Dựng, Bách Khoa,... đã cùng đứng ra mở một cửa hiệu kinh doanh băng đĩa nhạc chính hãng, với mong muốn lan tỏa và chia sẻ niềm đam mê được sở hữu những album chất lượng đến với các fan hâm mộ của thể loại Rock/Metal tại Việt Nam, đó cũng chính là tiền thân của QTV Music hiện nay.</p>

@@ -18,6 +18,13 @@ class LogIn extends Form {
         emailLogIn: "emailCheck"
     }
 
+    
+    componentDidMount() {
+        document.title = "Đăng Nhập";
+        window.scrollTo(0,0)
+    }
+    
+
     doSubmit = async () => {
         try {
             const { data : user } = this.state ;

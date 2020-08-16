@@ -195,7 +195,7 @@ class App extends Component {
       <React.Fragment>
         <LoadingScreen isLoadingScreen = {this.state.isLoadingScreen}/>
         <NavBar user = {user} shoppingCart= {shoppingCart}/>
-        <NavbarMobile />
+        <NavbarMobile user = {user} shoppingCart= {shoppingCart}/>
         <Switch>
             <Route path="/san-pham/:album" 
               render={(props) => <AlbumDetail {...props} 
@@ -233,7 +233,7 @@ class App extends Component {
                     onOpenLoadingScreen = {this.handleOpenLoadingScreen}
                     onCloseLoadingScreen = {this.handleCloseLoadingScreen}
             />}/>
-            <ProtectedRoute path="/thanh-toan" 
+            {userData && <ProtectedRoute path="/thanh-toan" 
                             component= {Payout} 
                             userData={userData}
                             shoppingCart= { shoppingCart } 
@@ -241,7 +241,7 @@ class App extends Component {
                             onCloseLoadingScreen = {this.handleCloseLoadingScreen}
                             onTradeHistory ={this.handleUpdateTradeHistory}
                             
-            />
+            />}
             <ProtectedRoute path="/tai-khoan" 
                             component= {Account} 
                             onOpenLoadingScreen = {this.handleOpenLoadingScreen}
@@ -251,7 +251,7 @@ class App extends Component {
             />
             <Route path="/khong-tim-thay" component={NotFoundPage}/>
             <Route exact path="/" render={(props) => <HomePage {...props} updateShoppingCart= {this.handleUpdateShoppingCart} onLoadingScreen = {this.handleLoadingScreen}/>}/>
-            <Redirect to="/khong-tim-thay"/>
+            {/* <Redirect to="/khong-tim-thay"/> */}
         </Switch>
         <ScrollTopIcon/>
         <Footer/>

@@ -59,8 +59,8 @@ class Payout extends Form {
     userDataProperty = [["name"], ["phone"], ["address","province"], ["address","district"], ["address","commune"], ["address","street"], ["payment","cardType"], ["payment", "cardNumber"], ["payment", "cardOwner"], ["payment", "cardExpireDate"], ["payment", "cardCvv"]];
 
     async componentDidMount(){
-        if (!this.props.shoppingCart) return;
-        if(this.props.shoppingCart.length === 0) window.location ="/"
+        if (!this.props.shoppingCart) return null;
+        if (this.props.shoppingCart.length === 0 ) window.location ="/";
         window.scrollTo(0, 0);
         this.props.onOpenLoadingScreen();
         additionalFunctionDom.fixBody();
@@ -94,11 +94,11 @@ class Payout extends Form {
         },800)  
     }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.userData !== this.props.userData || prevProps.shoppingCart !== this.props.shoppingCart ){
-            this.componentDidMount();
-        }
-    }
+    // componentDidUpdate(prevProps) {
+    //     if (prevProps.userData !== this.props.userData || prevProps.shoppingCart !== this.props.shoppingCart ){
+    //         this.componentDidMount();
+    //     }
+    // }
 
     handleWaitPropsFullyLoaded = () => {
         setTimeout(() => {
@@ -147,9 +147,7 @@ class Payout extends Form {
             confirmButtonText: 'Quay Về Trang Chủ',
           }).then(() => {
             window.location ="/"
-        })
-
-        
+        })        
     }
 
 

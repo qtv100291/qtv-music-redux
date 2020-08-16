@@ -15,23 +15,30 @@ class BlogArticle extends Component {
         this.props.onLoadingScreen();
         additionalFunctionDom.fixBody();
         const articleId = addfunc.getAlbumId(this.props.location.pathname);
-        try{
-            const { data : article } = await getArticle(articleId);
-            this.setState({ article })
-            document.title = article.title;
-            setTimeout( () => {
-                this.props.onLoadingScreen();
-                additionalFunctionDom.releaseBody();
-            },800)  
-        }
-        catch(ex){
-            console.log(ex.response)
-            if (ex.response && ex.response.status === 404){
-                this.props.onLoadingScreen();
-                additionalFunctionDom.releaseBody();
-                this.props.history.replace("/khong-tim-thay")
-            }
-        }    
+        const { data : article } = await getArticle(articleId);
+        this.setState({ article })
+        document.title = article.title;
+        setTimeout( () => {
+            this.props.onLoadingScreen();
+            additionalFunctionDom.releaseBody();
+        },800)  
+        // try{
+        //     const { data : article } = await getArticle(articleId);
+        //     this.setState({ article })
+        //     document.title = article.title;
+        //     setTimeout( () => {
+        //         this.props.onLoadingScreen();
+        //         additionalFunctionDom.releaseBody();
+        //     },800)  
+        // }
+        // catch(ex){
+        //     console.log(ex.response)
+        //     if (ex.response && ex.response.status === 404){
+        //         this.props.onLoadingScreen();
+        //         additionalFunctionDom.releaseBody();
+        //         this.props.history.replace("/khong-tim-thay")
+        //     }
+        // }    
     }
 
     componentDidUpdate(prevProps){
