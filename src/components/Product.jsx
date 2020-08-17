@@ -82,6 +82,8 @@ class Product extends Component {
         if ( previousPage === 1 ) return;
         const pageNow = previousPage - 1;
         this.setState({ currentPage : pageNow });
+        document.documentElement.classList.add('on-top');
+        setTimeout(() => window.scrollTo(0,0),100);
     }
 
     handleNextPage = maxPage => {
@@ -89,6 +91,8 @@ class Product extends Component {
         if ( previousPage === maxPage ) return;
         const pageNow = previousPage + 1;
         this.setState({ currentPage : pageNow });
+        document.documentElement.classList.add('on-top');
+        setTimeout(() => window.scrollTo(0,0),100);
     }
 
     handleFilter = filterValue => {

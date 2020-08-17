@@ -24,6 +24,7 @@
     }
     .section-album-detail-container{
         margin-top: 70px;
+        width: 100%;
         @include large-tablet {
             margin-top: 55px;
         }
@@ -49,7 +50,7 @@
                 margin: 0 auto;
             }
             @include mobile{
-                width: 100%;
+                max-width: 100%;
             }
             .album-cover-photo-container{
                 width: 100%;

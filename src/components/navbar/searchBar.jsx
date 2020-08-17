@@ -58,6 +58,18 @@ class SearchBar extends Component {
         }
     }
 
+    handleGoToSeachPageByClickIcon = () => {
+        if (this.state.keyword === "") return;
+        const { keyword } = this.state;
+            const queryString= keyword.replace(" ","+");
+            history.push({
+                pathname:"/tim-kiem",
+                search: `?q=${queryString}`,
+                state : { keyword }
+            })
+            this.setState({ isDisplaying:false, keyword: "", searchResult:null });
+    }
+
     renderSearchResult=( result, searchInputRaw) =>{
         const searchInput = addfunc.removeAccents(searchInputRaw).toLowerCase();
         const resultPath = '/san-pham/' + (result.albumName && result.albumName.replace(/ /g, "-")) + '-' + result.id;
@@ -92,7 +104,7 @@ class SearchBar extends Component {
                         onKeyDown={this.handleGoToSeachPage}
                     />
                     <div className="icon-search-container">
-                        <FontAwesomeIcon icon = "search" className="real-font-awesome icon-search"/>
+                        <FontAwesomeIcon icon = "search" className="real-font-awesome icon-search" onClick={this.handleGoToSeachPageByClickIcon}/>
                         <div className={isLoading? "loading-search-bar" : "loading-search-bar turn-off"}>
                             <img src={loadingIconSmall} alt="loading icon"/>
                         </div>

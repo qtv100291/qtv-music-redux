@@ -44,6 +44,8 @@ const SearchPage = (props) => {
         if ( previousPage === 1 ) return;
         const pageNow = previousPage - 1;
         setCurrentPage(pageNow);
+        document.documentElement.classList.add('on-top');
+        setTimeout(() => window.scrollTo(0,0),100);
     }
 
     const handleNextPage = maxPage => {
@@ -51,6 +53,8 @@ const SearchPage = (props) => {
         if ( previousPage === maxPage ) return;
         const pageNow = previousPage + 1;
         setCurrentPage(pageNow);
+        document.documentElement.classList.add('on-top');
+        setTimeout(() => window.scrollTo(0,0),100);
     }
 
     const handlePageChange = page => {
