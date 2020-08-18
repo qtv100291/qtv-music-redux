@@ -63,6 +63,8 @@ function productSortBy ( albumList, sortOrderBy ){
         case "Giá Giảm Dần":
             sortedAlbum = sortPriceMaxToMin(albumList)
             break
+        default:
+            break
     }
     return sortedAlbum;
 }

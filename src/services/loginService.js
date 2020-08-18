@@ -2,7 +2,6 @@ import http from './httpService';
 import { apiUrl } from "../config.json";
 import jwtDecode from "jwt-decode";
 import shoppingCartFunc from '../ultis/shoppingCartFunc';
-import addfunc from '../ultis/additionalFunction';
 
 
 const apiEndpoint = apiUrl + '/login';
@@ -46,12 +45,3 @@ export default {
     getCurrentUser,
     getUserData
 }
-
-
-// const InfoItem = ({ textitem }) => {
-//     return (
-//       <div>
-//         {textitem.parts.map(part => <p key={part.id}>{part.name} {part.exercises}</p>)}
-//       </div>
-//     );
-// };

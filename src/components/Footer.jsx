@@ -8,10 +8,10 @@ import additionalFunctionDom from '../ultis/additionalFunctionDom';
 const NavBar = () => {
     const [isOpening, setIsOpening] = useState(false);
 
-    const handleOpening = () => {
-        additionalFunctionDom.fixBody();
-        setIsOpening(true)
-    }
+    // const handleOpening = () => {
+    //     additionalFunctionDom.fixBody();
+    //     setIsOpening(true)
+    // }
 
     const handleClosing = () => {
         additionalFunctionDom.releaseBody();

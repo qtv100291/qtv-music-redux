@@ -186,22 +186,6 @@ class Form extends Component {
           obligatory={obligatory}
           error = {errors[name]}
           onChange={this.handleChangeSelect}
-          error={errors[name]}
-        />
-      );
-    }
-
-    renderTextArea(name, label, placeholder, rows) {
-      const { data, errors } = this.state;
-      return (
-        <TextArea
-          name={name}
-          value={data[name]}
-          label={label}
-          rows={rows}
-          placeholder={placeholder}
-          error = {errors[name]}
-          onChange={this.handleChange}
         />
       );
     }

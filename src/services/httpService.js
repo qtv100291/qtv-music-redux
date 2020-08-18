@@ -32,7 +32,6 @@ export default {
     post: axios.post,
     put: axios.put,
     delete: axios.delete,
-    put:axios.put,
     patch: axios.patch
 }
 

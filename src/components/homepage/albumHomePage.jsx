@@ -8,8 +8,6 @@ import 'swiper/swiper.scss';
 import 'swiper/components/navigation/navigation.scss';
 import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
-import { Link } from 'react-router-dom';
-import { auto } from '@popperjs/core';
 
 // install Swiper components
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
@@ -27,6 +25,8 @@ const AlbumHomePage = ({title, album, onOpen, windowWidth}) => {
                 return 2;
             case  windowWidth < 580: 
                 return 1;
+            default :
+                return 0;
         }
     }
 

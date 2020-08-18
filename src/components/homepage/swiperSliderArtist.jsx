@@ -15,7 +15,6 @@ import 'swiper/components/navigation/navigation.scss';
 import 'swiper/components/pagination/pagination.scss';
 import 'swiper/components/scrollbar/scrollbar.scss';
 import { Link } from 'react-router-dom';
-import { auto } from '@popperjs/core';
 
 // install Swiper components
 SwiperCore.use([Navigation, Pagination, Scrollbar, A11y]);
@@ -29,6 +28,8 @@ export default ({windowWidth}) => {
                 return 2; 
             case  windowWidth < 576: 
                 return 1;
+            default: 
+                break
             }
     }  
 
@@ -40,6 +41,8 @@ export default ({windowWidth}) => {
                 return 25; 
             case  windowWidth < 576: 
                 return 20;
+            default: 
+                break
         }
     }  
 

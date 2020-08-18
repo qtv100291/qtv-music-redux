@@ -1,6 +1,6 @@
 import http from './httpService';
 import { apiUrl } from "../config.json";
-import _, { values } from 'lodash';
+import _ from 'lodash';
 import addfunc from '../ultis/additionalFunction';
 
 const apiEndpoint = apiUrl + '/musicData';

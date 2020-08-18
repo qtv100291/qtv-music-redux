@@ -140,7 +140,7 @@ class Payout extends Form {
         const tradeHistory = addfunc.buildHistoryTrade(shoppingCart);
         const orderInfo = new addfunc.GetPaymentInfo( data, shoppingCart);
         this.props.onTradeHistory(tradeHistory);
-        // sendOrder(orderInfo);
+        sendOrder(orderInfo);
         MySwal.fire({
             icon: 'success',
             text: 'Cảm ơn quý khách đã tin tưởng QTV Music, nhân viên của chúng tôi sẽ liên lạc với quý khách trong thời gian sớm nhất.',
