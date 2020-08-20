@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import ShoppingCartItem from '../components/shoppingcart/shoppingCartItem';
 import addfunc from '../ultis/additionalFunction';
 import './ShoppingCart.scss';
@@ -19,7 +19,6 @@ const ShoppingCart = ({ shoppingCart,
         window.scrollTo(0, 0);
         onOpenLoadingScreen();
         additionalFunctionDom.fixBody();
-        console.log("hehe")
         setTimeout( () => {
             onCloseLoadingScreen();
             additionalFunctionDom.releaseBody();
@@ -33,12 +32,12 @@ const ShoppingCart = ({ shoppingCart,
             <h2 className="shopping-cart-title">Giỏ Hàng <span>( {( Boolean(shoppingCart) === false || shoppingCart.length === 0) ? "0" : addfunc.totalItemCalculation(shoppingCart)} sản phẩm )</span></h2>
             <div className="shopping-cart-container d-flex justify-content-between">
                 <section className="list-item-section">
-                    {(shoppingCart.length === 0) ? 
+                    {(shoppingCart.length === 0) ?
                     <h3>Chưa Có Sản Phẩm</h3>
-                    : shoppingCart.map( item => <ShoppingCartItem 
-                                                    key={item.id} {...item}  
-                                                    onPlusQuantity={onPlusQuantity} 
-                                                    onMinusQuantity={onMinusQuantity} 
+                    : shoppingCart.map( item => <ShoppingCartItem
+                                                    key={item.id} {...item}
+                                                    onPlusQuantity={onPlusQuantity}
+                                                    onMinusQuantity={onMinusQuantity}
                                                     onChangeQuantity={onChangeQuantity}
                                                     onDeleteItem={onDeleteItem}
                                                     onCheckEmpty = {onCheckEmpty}
@@ -52,7 +51,6 @@ const ShoppingCart = ({ shoppingCart,
                     </div>
                     {(Boolean(shoppingCart) === true && shoppingCart.length !== 0) && <Link to="thanh-toan"><div className="payout-button d-flex align-items-center justify-content-center">THANH TOÁN</div></Link>}
                 </section>
-                
             </div>
         </main>
     )

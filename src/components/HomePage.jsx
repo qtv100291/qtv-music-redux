@@ -74,13 +74,13 @@ class HomePage extends Component {
                     title = {"Rock/Metal Quốc Tế"}
                     album = {this.state.internationalAlbum}
                     onOpen = {this.handleOpening}
-                    windowWidth ={ this.state.windowWidth }
+                    windowWidth ={this.state.windowWidth}
                 />
                 <AlbumOfTheWeek {...this.state.albumOfTheWeek[0]}/>
-                <FamousArtist windowWidth ={ this.state.windowWidth }/>
+                <FamousArtist windowWidth ={this.state.windowWidth}/>
                 <Subscription/>
             </main>
-         );
+        );
     }
 }
  

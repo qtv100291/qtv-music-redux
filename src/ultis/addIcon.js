@@ -7,7 +7,7 @@ function addIcon(){
     library.add( fab, fas,  faSearch, faUserLock, faShoppingBag, 
         faUserCheck, faPlayCircle, faPlay,faTimesCircle, faTimes, 
         faPlus, faMinus, faTrash, faUserAlt, faBookmark, faBars, 
-        faFilter, faCompactDisc, faUser, faHome, faPhoneAlt )
+        faFilter, faCompactDisc, faUser, faHome, faPhoneAlt, faPlus )
 };
 
 export default {

@@ -1,18 +1,16 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Form from './common/form';
 import './Register.scss';
 import { Link } from 'react-router-dom';
 import registerNewUser from '../services/registerService';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import additionalFunctionDom from '../ultis/additionalFunctionDom';
 
-
-
 class Register extends Form {
     state = { 
-        data :{},
-        errors : {} ,
+        data : {},
+        errors : {},
         serverError: "",
         disabled : true
     }

@@ -8,16 +8,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import additionalFunctionDom from '../ultis/additionalFunctionDom';
 
 const NavbarMobile = ({user, shoppingCart }) => {
-    const [isOpening, setIsOpening] = useState(false)
+    const [isOpening, setIsOpening] = useState(false);
 
     const handleOpening = () => {
         additionalFunctionDom.fixBody();
-        setIsOpening(true)
+        setIsOpening(true);
     }
 
     const handleClosing = () => {
         additionalFunctionDom.releaseBody();
-        setIsOpening(false)
+        setIsOpening(false);
     }
 
     return ( 
@@ -27,7 +27,7 @@ const NavbarMobile = ({user, shoppingCart }) => {
                     <h1>QTV Music</h1>
                 </Link>
                 <div className="navbar-mobile-container-item d-flex justify-content-between align-items-center">
-                    <SearchBar /><span></span><MenuIcon onOpening={handleOpening}/>
+                    <SearchBar idInput={"search-bar-mobile"}/><span></span><MenuIcon onOpening={handleOpening}/>
                 </div>
                 <div className={isOpening ? "mobile-navbar-board displaying" : "mobile-navbar-board"} onClick ={handleClosing}>
                     <div className="mobile-navbar-board-content">
@@ -44,7 +44,7 @@ const NavbarMobile = ({user, shoppingCart }) => {
                 </div>
             </div>
         </nav>
-     );
+    );
 }
  
 export default NavbarMobile;

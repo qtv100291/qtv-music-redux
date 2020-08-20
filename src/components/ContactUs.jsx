@@ -33,7 +33,7 @@ const ContactUs = ({onLoadingScreen}) => {
                 <h2 className="shop-information-title title-section"> Thông Tin Liên Hệ</h2>
                 <div className="shop-information-container d-flex justify-content-between">
                     <div className="shop-google-map">
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.352280371583!2d105.7827840507617!3d20.978511294798526!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135acd2875155ef%3A0xb4e3002e25c0426b!2zSOG7kyBHxrDGoW0gUGxhemEgSMOgIMSQw7RuZw!5e0!3m2!1sen!2s!4v1596277513831!5m2!1sen!2s"></iframe>
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3725.352280371583!2d105.7827840507617!3d20.978511294798526!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135acd2875155ef%3A0xb4e3002e25c0426b!2zSOG7kyBHxrDGoW0gUGxhemEgSMOgIMSQw7RuZw!5e0!3m2!1sen!2s!4v1596277513831!5m2!1sen!2s" title="google-map"></iframe>
                     </div>
                     <div className="shop-information-detail">
                         <h3>QTV Music Entertainment</h3>

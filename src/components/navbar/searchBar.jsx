@@ -97,7 +97,7 @@ class SearchBar extends Component {
                         onChange={this.handleSearchInput}
                         onBlur = {this.handleLoseFocus} 
                         placeholder="Tìm Kiếm..." 
-                        id="search-bar-input" 
+                        id={this.props.idInput}
                         value={keyword} 
                         ref={this.myInput}
                         autoComplete="off"

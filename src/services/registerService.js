@@ -10,6 +10,7 @@ export default function registerNewUser(user){
         password : user.passwordRegister,
         name : user.nameRegister,
         shoppingCart : [],
+        avatar:"",
         address : {
             province : "",
             district : "",

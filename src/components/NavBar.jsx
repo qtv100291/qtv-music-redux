@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import ShoppingIcon from './navbar/shoppingIcon';
 import SearchBar from './navbar/searchBar';
@@ -43,7 +43,7 @@ const NavBar = ({ user, shoppingCart }) => {
                     </NavLink>
                 </div>
                 <div className="navbar-icon d-flex">
-                    <SearchBar />
+                    <SearchBar idInput = {"search-bar-desktop"}/>
                     <NavLink 
                         style ={{marginLeft:"25px"}}
                         title = "Giỏ Hàng"

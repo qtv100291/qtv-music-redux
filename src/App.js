@@ -177,6 +177,14 @@ class App extends Component {
     updateUser(this.state.user.sub, userData, shoppingCart);
   }
 
+  handleUpdateAvatar = urlAvatar => {
+    const shoppingCart = [...this.state.shoppingCart];
+    const userData = {...this.state.userData};
+    userData.avatar = urlAvatar;
+    this.setState({ userData });
+    updateUser(this.state.user.sub, userData, shoppingCart);
+  }
+
   handleCloseLoadingScreen = () => {
     this.setState( { isLoadingScreen: false} )
     
@@ -246,6 +254,7 @@ class App extends Component {
                             onCloseLoadingScreen = {this.handleCloseLoadingScreen}
                             userData={userData}
                             onUpdateUser={this.handleUpdateUserInformation}
+                            onUpdateAvatar = {this.handleUpdateAvatar}
             />
             <Route path="/khong-tim-thay" component={NotFoundPage}/>
             <Route exact path="/" render={(props) => <HomePage {...props} updateShoppingCart= {this.handleUpdateShoppingCart} onLoadingScreen = {this.handleLoadingScreen}/>}/>
