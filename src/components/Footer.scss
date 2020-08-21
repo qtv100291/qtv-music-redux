@@ -18,6 +18,9 @@ footer.fixed{
         max-width: 1200px;
         margin: 0 auto;
         height: 72px;
+        @include desktop{
+            width: 95%;
+        }
         @include large-tablet{
             flex-wrap: wrap;
             height: auto;

@@ -34,7 +34,7 @@ const Account = ({onOpenLoadingScreen, onCloseLoadingScreen, userData, onUpdateU
     const uploadAvatarToServer = async ({ currentTarget : input }) => {
         const userAvatarFolderRef = storageRef.child('userAvatar');
         const userAvatarRef = userAvatarFolderRef.child(`${userData.id}-avatar`)
-        userAvatarRef.delete();
+        if (userData.avatar) userAvatarRef.delete();
         const file = input.files[0];
         await userAvatarRef.put(file);
         let urlAvatar;

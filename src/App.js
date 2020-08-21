@@ -258,7 +258,7 @@ class App extends Component {
             />
             <Route path="/khong-tim-thay" component={NotFoundPage}/>
             <Route exact path="/" render={(props) => <HomePage {...props} updateShoppingCart= {this.handleUpdateShoppingCart} onLoadingScreen = {this.handleLoadingScreen}/>}/>
-            {/* <Redirect to="/khong-tim-thay"/> */}
+            <Redirect to="/khong-tim-thay"/>
         </Switch>
         <ScrollTopIcon/>
         <Footer/>
