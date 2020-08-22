@@ -10,6 +10,10 @@ class ShoppingCartItem extends Component {
         if ( this.props.count === 1) return
         this.props.onMinusQuantity(this.props.id)
     }
+    plusQuantity = () => {
+        if ( this.props.count === 99) return
+        this.props.onPlusQuantity(this.props.id)
+    }
 
     removeSomeCharacter = event  => {// not allow to press button e, + , -, . on keyboard
         const invalidKey = [69,187,189,190]
@@ -48,7 +52,7 @@ class ShoppingCartItem extends Component {
                             onBlur = {e => this.props.onCheckEmpty(this.props.id, e.currentTarget)}
                             onKeyDown = {this.removeSomeCharacter} 
                         />
-                        <div className="plus-button button-quantity d-flex justify-content-center align-items-center" onClick={() => this.props.onPlusQuantity(this.props.id)}>
+                        <div className="plus-button button-quantity d-flex justify-content-center align-items-center" onClick={this.plusQuantity}>
                             <FontAwesomeIcon icon = "plus" className="real-font-awesome" />
                         </div>
                     </div>
