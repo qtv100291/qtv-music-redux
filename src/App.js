@@ -20,6 +20,7 @@ import SearchPage from './components/SearchPage';
 import NotFoundPage from './components/NotFoundPage';
 import Account from './components/Account';
 import ProtectedRoute from './components/common/protectedRoute';
+import PreviewModal from './components/common/previewModal';
 import IconLibrary from './ultis/addIcon';
 import authService from './services/loginService';
 import shoppingCartFunc from './ultis/shoppingCartFunc';
@@ -199,6 +200,7 @@ class App extends Component {
     const { shoppingCart, user, userData} = this.state;
     return ( 
       <React.Fragment>
+        <PreviewModal />
         <LoadingScreen isLoadingScreen = {this.state.isLoadingScreen}/>
         <NavBar user = {user} shoppingCart= {shoppingCart}/>
         <NavbarMobile user = {user} shoppingCart= {shoppingCart}/>

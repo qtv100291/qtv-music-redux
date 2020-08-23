@@ -7,11 +7,15 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import additionalFunctionDom from './ultis/additionalFunctionDom';
+import { Provider } from 'react-redux';
+import store from './store/configureStore';
 
 ReactDOM.render(
-  <Router history={history}>
-    <App />
-  </Router>,
+  <Provider store = {store}>
+    <Router history={history}>
+      <App />
+    </Router>
+  </Provider>,
   document.getElementById('root')
 );
 
@@ -20,6 +24,7 @@ const resizeObserver = new ResizeObserver( ()=> {
   additionalFunctionDom.checkhtmlHeight();
 })
 resizeObserver.observe(document.documentElement)
+
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

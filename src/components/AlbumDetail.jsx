@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import BreadCrumb from './common/breadCrumb';
 import AudioPlayer from './common/audioPlayer';
 import AlbumHomePage from './homepage/albumHomePage';
-import PreviewModal from './common/previewModal';
 import { getAlbumDetail, getRelatedAlbum } from '../services/albumServiceHomePage';
 import addfunc from '../ultis/additionalFunction';
 import additionalFunctionDom from '../ultis/additionalFunctionDom';
@@ -16,9 +15,6 @@ class AlbumDetail extends Component {
         currentTab:"1",
         relatedAlbum: [],
         isOpeningModal : false, 
-        previewId: null,
-        inPreView : false,
-        windowWidth: null
     }
 
     async componentDidMount(){
@@ -68,16 +64,6 @@ class AlbumDetail extends Component {
         }
     }
 
-    handleOpening = id => {
-        additionalFunctionDom.fixBody();
-        this.setState({ isOpeningModal : true, previewId : id, inPreView: true });
-    }
-
-    handleClose = () => {
-        additionalFunctionDom.releaseBody();
-        this.setState({ isOpeningModal : false, previewId: null, inPreView : false });
-    }
-
     handleActiveTab = ({currentTarget : tab})=>{
         const currentTab = tab.getAttribute('data-button')
         this.setState({ currentTab })
@@ -112,12 +98,6 @@ class AlbumDetail extends Component {
 
         return ( 
             <main className="section-album-detail">
-                <PreviewModal   isOpeningModal = {this.state.isOpeningModal} 
-                                previewId = {this.state.previewId}
-                                onClose={this.handleClose}
-                                inPreView = {this.state.inPreView}
-                                updateShoppingCart={this.props.updateShoppingCart}
-                />
                 <BreadCrumb title={albumName} titleParent="Sản Phẩm"/>
                 <div className="bread-crumb-line">
                     <Link to="/">Trang Chủ</Link>  /  <Link to="/san-pham">Sản Phẩm</Link>  / {albumName}

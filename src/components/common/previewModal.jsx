@@ -7,6 +7,23 @@ import shoppingCartFunc from '../../ultis/shoppingCartFunc';
 import './previewModal.scss'
 import { createRef } from 'react';
 import loadingIconSmall from '../../assets/homepage-assets/loading-icon-small.gif';
+import { connect } from 'react-redux';
+import additionalFunctionDom from '../../ultis/additionalFunctionDom';
+import { closeQuickViewModal } from '../../store/quickViewModal';
+
+
+
+const mapStateToProps = state => ({
+    isOpeningModal : state.quickViewModal.isOpening,
+    quickViewId : state.quickViewModal.quickViewId 
+})
+
+const mapDispatchToProps = dispatch => ({
+    handleCloseModal : () => {
+        additionalFunctionDom.releaseBody();
+        dispatch(closeQuickViewModal())
+    }
+})
 
 class PreviewModal extends Component {
     state = { 
@@ -17,18 +34,14 @@ class PreviewModal extends Component {
     myModal = createRef();
 
     async componentDidUpdate(prevProps) {
-        if (this.props.isOpeningModal !== prevProps.isOpeningModal){
-            if (this.props.previewId === null) return
+        if (this.props.quickViewId !== prevProps.quickViewId){
+            if (this.props.quickViewId === null) return
             this.setState({ isLoading : true })
-            const {data : album} = await getAlbumDetail(this.props.previewId);
+            const {data : album} = await getAlbumDetail(this.props.quickViewId);
             this.setState({ album });
             this.myModal.current.scrollTo (0,0);
             this.setState({ isLoading : false })
         }
-    }
-
-    handleCloseModal= () => {
-        this.props.onClose()
     }
 
     handleAddToCart = () =>{
@@ -62,12 +75,12 @@ class PreviewModal extends Component {
                     <div className={isLoading? "loading-screen-modal" : "loading-screen-modal turn-off"}>
                         <img src={loadingIconSmall} alt="loading icon"/>
                     </div>
-                    <div className="close-button d-flex justify-content-center align-items-center" onClick={this.handleCloseModal}><FontAwesomeIcon icon="times-circle"/></div>
+                    <div className="close-button d-flex justify-content-center align-items-center" onClick={this.props.handleCloseModal}><FontAwesomeIcon icon="times-circle"/></div>
                     <div className="preview-modal-photo">
                         <img src={imagePath} alt={albumName}/>
                     </div>
                     <div className="preview-modal-content" ref={this.myModal}>
-                        <Link to={productPath} onClick={this.handleCloseModal}>
+                        <Link to={productPath} onClick={this.props.handleCloseModal}>
                             <h3 className="album-name">{albumName}</h3>
                         </Link>
                         <h3 className="album-band-name">{bandName}</h3>
@@ -86,8 +99,8 @@ class PreviewModal extends Component {
                     </div>
                 </div>
             </div>
-         );
+        );
     }
 }
  
-export default PreviewModal;
+export default connect(mapStateToProps,mapDispatchToProps)(PreviewModal);

@@ -4,13 +4,12 @@ import BreadCrumb from './common/breadCrumb';
 import AlbumItem from './common/albumItem';
 import Dropdown from 'react-bootstrap/Dropdown';
 import PaginationBasic from './common/pagination';
-import PreviewModal from './common/previewModal';
 import { getAllAlbum } from '../services/albumServiceHomePage';
 import addfunc from '../ultis/additionalFunction';
 import { Link } from 'react-router-dom';
 import additionalFunctionDom from '../ultis/additionalFunctionDom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Modal from 'react-bootstrap/Modal'
+import Modal from 'react-bootstrap/Modal';
 import './Product.scss';
 
 class Product extends Component {
@@ -23,9 +22,6 @@ class Product extends Component {
         sortOrderBy : "Tên Từ A Đến Z",
         albumPerPage : 12,
         currentPage : 1,
-        isOpeningModal : false, 
-        previewId: null,
-        inPreView : false,
         isModalShowing: false
      }
 
@@ -54,16 +50,6 @@ class Product extends Component {
         if (prevState.selectedFilterValue !== this.state.selectedFilterValue && this.state.selectedFilterValue === null){
             this.setState({selectedFilterValue : null});
         }
-    }
-
-    handleOpening = id => {
-        additionalFunctionDom.fixBody();
-        this.setState({ isOpeningModal : true, previewId : id, inPreView: true });
-    }
-
-    handleClose = () => {
-        additionalFunctionDom.releaseBody();
-        this.setState({ isOpeningModal : false, previewId: null, inPreView : false });
     }
 
     handleSort = sortValue => {
@@ -141,12 +127,6 @@ class Product extends Component {
                         />
                     </Modal.Body>
                 </Modal>
-                <PreviewModal   
-                    isOpeningModal = {this.state.isOpeningModal} 
-                    previewId = {this.state.previewId}
-                    onClose={this.handleClose}
-                    updateShoppingCart={this.props.updateShoppingCart}
-                />
                 <div className="bread-crumb-line">
                     <Link to="/">Trang Chủ</Link>  /  Sản Phẩm
                 </div>

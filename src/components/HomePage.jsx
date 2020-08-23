@@ -57,12 +57,12 @@ class HomePage extends Component {
     render() { 
         return (
             <main className="main-container">
-                <PreviewModal   isOpeningModal = {this.state.isOpeningModal} 
+                {/* <PreviewModal   isOpeningModal = {this.state.isOpeningModal} 
                                 previewId = {this.state.previewId}
                                 onClose={this.handleClose}
                                 inPreView = {this.state.inPreView}
                                 updateShoppingCart={this.props.updateShoppingCart}
-                />
+                /> */}
                 <CarouselFade/>
                 <AlbumHomePage 
                     title = {"Rock/Metal Việt Nam"}
