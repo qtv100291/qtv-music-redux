@@ -1,3 +1,6 @@
+import store from '../store/configureStore'
+import updateUser from '../services/updateService';
+
 function loadCartLocal(){//load infomation from qtv cart in localstorage
     if (localStorage.getItem('qtv-cart') === null) return []
     else {
@@ -68,13 +71,23 @@ function merge2shoppingCart(cart_1, cart_2){
     return shoppingCart;
 }
 
+function saveShoppingCart(){
+    const shoppingCart = store.getState().shoppingCart;
+    const isLogged = store.getState().user.isLogged;
+    const userId = store.getState().user.userData.id;
+    const userData = store.getState().user.userData;
+    if (!isLogged) saveCartLocal(shoppingCart) 
+    else updateUser(userId, userData, shoppingCart)
+}
+
 export default {
     loadCartLocal,
     saveCartLocal,
     countItemInShoppingCart,
     addItemToShoppingCart,
     Item,
-    merge2shoppingCart
+    merge2shoppingCart,
+    saveShoppingCart
 }
 
 

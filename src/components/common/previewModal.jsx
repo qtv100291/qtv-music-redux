@@ -10,18 +10,23 @@ import loadingIconSmall from '../../assets/homepage-assets/loading-icon-small.gi
 import { connect } from 'react-redux';
 import additionalFunctionDom from '../../ultis/additionalFunctionDom';
 import { closeQuickViewModal } from '../../store/quickViewModal';
-
+import { cartAddItem } from '../../store/shoppingCart';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 
 
 const mapStateToProps = state => ({
     isOpeningModal : state.quickViewModal.isOpening,
-    quickViewId : state.quickViewModal.quickViewId 
+    quickViewId : state.quickViewModal.quickViewId,
 })
 
 const mapDispatchToProps = dispatch => ({
     handleCloseModal : () => {
         additionalFunctionDom.releaseBody();
         dispatch(closeQuickViewModal())
+    },
+    cartAddItem : (item) => {
+        dispatch(cartAddItem(item));
     }
 })
 
@@ -44,13 +49,26 @@ class PreviewModal extends Component {
         }
     }
 
-    handleAddToCart = () =>{
+    handleAddToCart = async () => {
         const { id, albumName, price, albumCover, bandName } = this.state.album;
         const imagePath = '/' + albumCover + '/cover.jpg';
+        const MySwal = withReactContent(Swal)
         const newItem = new shoppingCartFunc.Item(id, albumName, price, imagePath, bandName);
-        this.props.updateShoppingCart(newItem);
-        this.handleCloseModal();
+        this.props.cartAddItem(newItem);
+        this.props.handleCloseModal(); 
+        additionalFunctionDom.fixBody();
+        shoppingCartFunc.saveShoppingCart()
+        MySwal.fire({
+            icon: 'success',
+            html: 'Đã Thêm Vào Giỏ Hàng',
+            showConfirmButton: false,
+            timer: 1250,
+        }).then(() => {
+            additionalFunctionDom.releaseBody();
+        })
     }
+
+    
 
     render() { 
         const {

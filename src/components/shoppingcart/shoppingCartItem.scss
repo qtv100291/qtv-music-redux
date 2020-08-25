@@ -6,6 +6,9 @@
     padding: 15px 0;
     margin-bottom: 40px;
     border-radius: 5px;
+    @include mobile{
+        justify-content: space-between!important;
+    }
     .item-photo {
         width: 150px;
         margin: 15px 30px;
@@ -18,8 +21,8 @@
             margin: 15px 15px;
         }
         @include mobile{
-            width: 120px;
-            margin: 15px 25px;
+            width: 110px;
+            margin: 10px 20px 10px 0;
         }
         .item-photo-container{
             width: 100%;
@@ -49,8 +52,7 @@
                 width: 50%;
             }
             @include mobile{
-                width: 50%;
-                min-width: 180px;
+                width: 100%;
             }
             a {
                 text-decoration:none;

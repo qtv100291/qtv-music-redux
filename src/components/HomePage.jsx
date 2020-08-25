@@ -4,12 +4,9 @@ import AlbumHomePage from './homepage/albumHomePage';
 import AlbumOfTheWeek from './homepage/albumOfTheWeek';
 import FamousArtist from './homepage/famousArtist';
 import Subscription from './homepage/subscription';
-import PreviewModal from './common/previewModal';
 import additionalFunctionDom from '../ultis/additionalFunctionDom';
 import { getAlbum } from '../services/albumServiceHomePage';
 import './HomePage.scss';
-
-
 
 class HomePage extends Component {
     state = { 
@@ -39,16 +36,6 @@ class HomePage extends Component {
         },200)
     }
 
-    handleOpening = id => {
-        additionalFunctionDom.fixBody();
-        this.setState({ isOpeningModal : true, previewId : id, inPreView: true });
-    }
-
-    handleClose = () => {
-        additionalFunctionDom.releaseBody();
-        this.setState({ isOpeningModal : false, previewId: null, inPreView : false });
-    }
-
     updateWindowWidth = () => {
         const windowWidth = window.innerWidth;
         this.setState({ windowWidth })
@@ -57,12 +44,6 @@ class HomePage extends Component {
     render() { 
         return (
             <main className="main-container">
-                {/* <PreviewModal   isOpeningModal = {this.state.isOpeningModal} 
-                                previewId = {this.state.previewId}
-                                onClose={this.handleClose}
-                                inPreView = {this.state.inPreView}
-                                updateShoppingCart={this.props.updateShoppingCart}
-                /> */}
                 <CarouselFade/>
                 <AlbumHomePage 
                     title = {"Rock/Metal Việt Nam"}

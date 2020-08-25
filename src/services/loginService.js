@@ -34,7 +34,7 @@ export async function getUserData(userId){//get user's data and synchronize serv
     const shoppingCart = shoppingCartFunc.merge2shoppingCart(shoppingCartServer, shoppingCartLocal) // merger shopping from server and shopping card on user's computer
     const userData = {...user}
     userData.shoppingCart = [...shoppingCart];
-    http.patch(apiEndpointUser + `/${userId}`,userData);//update shopping car on server
+    http.patch(apiEndpointUser + `/${userId}`,userData);//update shopping cart on server
     localStorage.removeItem("qtv-cart");
     delete userData.password;
     return userData

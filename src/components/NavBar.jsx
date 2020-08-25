@@ -5,10 +5,13 @@ import SearchBar from './navbar/searchBar';
 import LoginIcon from './navbar/logIn';
 import AccountIcon from './navbar/account';
 import './NavBar.scss';
+import { useSelector } from 'react-redux';
+import { isLogged, userData } from '../store/authentication';
 
 
-const NavBar = ({ user, shoppingCart }) => {
-
+const NavBar = () => {
+    const isLoggedUser = useSelector(isLogged);
+    const { name } = useSelector(userData);
     return ( 
         <nav className="navbar-desktop justify-content-between align-items-center">
             <div className="navbar-container d-flex justify-content-between align-items-center">
@@ -48,13 +51,13 @@ const NavBar = ({ user, shoppingCart }) => {
                         style ={{marginLeft:"25px"}}
                         title = "Giỏ Hàng"
                         to="/gio-hang">
-                            <ShoppingIcon shoppingCart = {shoppingCart}/>
+                            <ShoppingIcon />
                     </NavLink>
                     <NavLink 
                         style ={{marginLeft:"25px"}}
-                        title = {user ? `Xin chào ${user.name}` : "Đăng Nhập"}
-                        to={user ? "/tai-khoan" : "/dang-nhap"}>
-                            {user ? <AccountIcon /> : <LoginIcon/>}
+                        title = {isLoggedUser ? `Xin chào ${name}` : "Đăng Nhập"}
+                        to={isLoggedUser ? "/tai-khoan" : "/dang-nhap"}>
+                            {isLoggedUser ? <AccountIcon /> : <LoginIcon/>}
                     </NavLink>
                 </div>
                 </div>

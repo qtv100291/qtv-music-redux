@@ -8,7 +8,6 @@ import additionalFunctionDom from '../../ultis/additionalFunctionDom';
 const mapDispatchToProps = (dispatch, ownProps) => ({
     handleOpenModal : () => {
         additionalFunctionDom.fixBody();
-        console.log(openQuickViewModal({id : ownProps.id }))
         dispatch(openQuickViewModal({ id : ownProps.id }))
     }
 })

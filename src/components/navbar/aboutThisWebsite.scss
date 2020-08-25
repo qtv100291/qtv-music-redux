@@ -6,21 +6,28 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 30px;
+    z-index: 35;
     display: none;
-    background-color: rgba($color: #000000, $alpha: 0.75);
+    background-color: rgba($color: #000000, $alpha: 0.9);
     overflow: auto;
     &.displaying{
         display: flex;
         justify-content: center;
-        align-items: center;
     }
     .about-website-content{
         width: 90%;
         max-width: 1200px;
         font-size: 18px;
         color: white;
+        margin-top: 100px;
+        @include large-tablet {
+            margin-top: 70px;
+        }
+        @include tablet {
+            margin-top: 50px;
+        }
         @include mobile {
+            margin-top: 30px;
             font-size: 16px;
         }
         h2 {
@@ -35,6 +42,7 @@
             text-decoration: underline;
         }
         .close-about-website{
+            @include button;
             width: 100px;
             height: 35px;
             padding: 5px 0px;

@@ -7,33 +7,35 @@ import addfunc from '../ultis/additionalFunction';
 import additionalFunctionDom from '../ultis/additionalFunctionDom';
 import shoppingCartFunc from '../ultis/shoppingCartFunc';
 import { Link } from 'react-router-dom';
+import { cartAddItem } from '../store/shoppingCart';
 import'./AlbumDetail.scss';
+import { connect } from 'react-redux';
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+
+const mapStateToProps = state => ({
+    shoppingCart : state.shoppingCart,
+    isLogged : state.isLogged
+})
+
+const mapDispatchToProps = dispatch => ({
+    cartAddItem : (item) => {
+        dispatch(cartAddItem(item));
+    }
+})
 
 class AlbumDetail extends Component {
     state = { 
         album :{},
         currentTab:"1",
         relatedAlbum: [],
-        isOpeningModal : false, 
     }
 
     async componentDidMount(){
         window.scrollTo(0, 0);
         this.props.onLoadingScreen();
         additionalFunctionDom.fixBody();
-        const albumId = addfunc.getAlbumId(this.props.location.pathname);
-        // const { data : album } = await getAlbumDetail(albumId);
-        // await this.setState({ album });
-        // const relatedAlbum  = await getRelatedAlbum(this.state.album.bandName, this.state.album.country, this.state.album.id);
-        // this.setState( { relatedAlbum } )
-        // document.title = this.state.album.albumName;
-        // const windowWidth = window.innerWidth;
-        // window.addEventListener("resize",this.updateWindowWidth);
-        // this.setState({ windowWidth })
-        // setTimeout( () => {
-        //     this.props.onLoadingScreen();
-        //     additionalFunctionDom.releaseBody();
-        // },300)  
+        const albumId = addfunc.getAlbumId(this.props.location.pathname); 
         try{
             const { data : album } = await getAlbumDetail(albumId);
             await this.setState({ album });
@@ -69,11 +71,22 @@ class AlbumDetail extends Component {
         this.setState({ currentTab })
     }
 
-    handleAddToCart = () =>{
+    handleAddToCart = () => {
         const { id, albumName, price, albumCover, bandName } = this.state.album;
         const imagePath = '/' + albumCover + '/cover.jpg';
+        const MySwal = withReactContent(Swal)
         const newItem = new shoppingCartFunc.Item(id, albumName, price, imagePath, bandName);
-        this.props.updateShoppingCart(newItem);
+        this.props.cartAddItem(newItem);
+        shoppingCartFunc.saveShoppingCart() ;
+        additionalFunctionDom.fixBody();
+        MySwal.fire({
+            icon: 'success',
+            html: 'Đã Thêm Vào Giỏ Hàng',
+            showConfirmButton: false,
+            timer: 1250,
+        }).then(() => {
+            additionalFunctionDom.releaseBody();
+        })
     }
 
     updateWindowWidth = () => {
@@ -169,4 +182,4 @@ class AlbumDetail extends Component {
     }
 }
  
-export default AlbumDetail;
+export default connect(mapStateToProps,mapDispatchToProps)(AlbumDetail);

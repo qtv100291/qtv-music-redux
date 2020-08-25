@@ -2,20 +2,16 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Footer.scss';
-import AboutThisWebsite from './navbar/aboutThisWebsite';
 import additionalFunctionDom from '../ultis/additionalFunctionDom';
+import { useDispatch } from 'react-redux';
+import { openAboutThisWebsiteModal } from '../store/aboutThisWebsiteModal';
 
 const NavBar = () => {
-    const [isOpening, setIsOpening] = useState(false);
+    const dispatch = useDispatch();
 
-    // const handleOpening = () => {
-    //     additionalFunctionDom.fixBody();
-    //     setIsOpening(true)
-    // }
-
-    const handleClosing = () => {
-        additionalFunctionDom.releaseBody();
-        setIsOpening(false)
+    const handleOpeningModal = () => {
+        additionalFunctionDom.fixBody();
+        dispatch(openAboutThisWebsiteModal());
     }
 
     return ( 
@@ -53,9 +49,8 @@ const NavBar = () => {
                     </div>
                 </div>
             </nav>
-            <AboutThisWebsite onClose ={handleClosing} isOpening={isOpening}/>
             <div className="footer-about-website d-flex justify-content-center">
-                    <h5>QTV Music @ 2020</h5>
+                    <h5>QTV Music @ 2020 - <span onClick={handleOpeningModal}>About This Website</span></h5>
             </div>
         </footer>
         
