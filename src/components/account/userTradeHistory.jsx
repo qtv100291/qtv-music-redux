@@ -1,9 +1,12 @@
 import React from 'react';
 import addfunc from '../../ultis/additionalFunction';
 import './userTradeHistory.scss';
+import { useSelector } from 'react-redux';
+import { selectTradeHistory } from '../../store/authentication';
 
-const userTradeHisotry = ({tradeHistory}) => {
-    return ( 
+const UserTradeHisotry = () => {
+    const tradeHistory = useSelector(selectTradeHistory);
+    return (
         <div className="trade-history">
             <h2>LỊCH SỬ GIAO DỊCH</h2>
             <div className ="trade-history-container">
@@ -24,4 +27,4 @@ const userTradeHisotry = ({tradeHistory}) => {
     );
 }
  
-export default userTradeHisotry;
+export default UserTradeHisotry;

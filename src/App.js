@@ -79,34 +79,12 @@ class App extends Component {
     this.setState({isLoadingScreen});
   }
 
-  handleUpdateUserInformation = userData => {
-    const MySwal = withReactContent(Swal)
-    this.setState({ userData });
-    updateUser(this.state.user.sub, userData, this.state.shoppingCart);
-    MySwal.fire({
-      icon: 'success',
-      html: 'Đã Cập Nhật Thông Tin',
-      showConfirmButton: false,
-      timer: 1250,
-    }).then(() => {
-      additionalFunctionDom.releaseBody();
-    })
-  }
-
   handleUpdateTradeHistory = tradeHistory => {
     const shoppingCart = [];
     const userData = {...this.state.userData}
     const tradeHistoryUpdate = [...this.state.userData.tradeHistory,...tradeHistory];
     userData.tradeHistory = [...tradeHistoryUpdate];
     this.setState({userData,shoppingCart});
-    updateUser(this.state.user.sub, userData, shoppingCart);
-  }
-
-  handleUpdateAvatar = urlAvatar => {
-    const shoppingCart = [...this.state.shoppingCart];
-    const userData = {...this.state.userData};
-    userData.avatar = urlAvatar;
-    this.setState({ userData });
     updateUser(this.state.user.sub, userData, shoppingCart);
   }
 
@@ -141,7 +119,8 @@ class App extends Component {
               />}/>
             <Route path="/blog/:article" 
               render = {(props) => <BlogArticle {...props}  
-                onLoadingScreen = {this.handleLoadingScreen}/>} />
+              onLoadingScreen = {this.handleLoadingScreen}
+            />}/>
             <Route path="/blog" render = {(props) => <Blog {...props} onLoadingScreen = {this.handleLoadingScreen}/>}/>
             <Route path="/dang-nhap" render = {(props) => <LogIn {...props} onLoadingScreen = {this.handleLoadingScreen}/>}/>
             <Route path="/dang-ky" render = {(props) => <Register {...props} onLoadingScreen = {this.handleLoadingScreen}/>}/>
@@ -166,15 +145,11 @@ class App extends Component {
                             onOpenLoadingScreen = {this.handleOpenLoadingScreen}
                             onCloseLoadingScreen = {this.handleCloseLoadingScreen}
                             onTradeHistory ={this.handleUpdateTradeHistory}
-                            
             />
             <ProtectedRoute path="/tai-khoan" 
                             component= {Account} 
                             onOpenLoadingScreen = {this.handleOpenLoadingScreen}
                             onCloseLoadingScreen = {this.handleCloseLoadingScreen}
-                            userData={userData}
-                            onUpdateUser={this.handleUpdateUserInformation}
-                            onUpdateAvatar = {this.handleUpdateAvatar}
             />
             <Route path="/khong-tim-thay" component={NotFoundPage}/>
             <Route exact path="/" render={(props) => <HomePage {...props} updateShoppingCart= {this.handleUpdateShoppingCart} onLoadingScreen = {this.handleLoadingScreen}/>}/>

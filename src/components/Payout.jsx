@@ -8,6 +8,24 @@ import sendOrder from '../services/orderService';
 import additionalFunctionDom from '../ultis/additionalFunctionDom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
+import { updateUserInformation, updateTradeHistory } from '../store/authentication';
+import { getTotalMoney  } from '../store/shoppingCart';
+import { connect } from 'react-redux';
+
+
+const mapStateToProps = state => ({
+    userData : state.user.userData,
+    getTotalMoney : getTotalMoney(state)
+})
+
+const mapDispatchToProps = dispatch => ({
+    onUpdateUser : userInfo => {
+        dispatch(updateUserInformation(userInfo))
+    },
+    onTradeHistory: tradeHistory => {
+        dispatch(updateTradeHistory(tradeHistory))
+    }
+})
 
 class Payout extends Form {
     provinceInit = {
@@ -59,44 +77,63 @@ class Payout extends Form {
     userDataProperty = [["name"], ["phone"], ["address","province"], ["address","district"], ["address","commune"], ["address","street"], ["payment","cardType"], ["payment", "cardNumber"], ["payment", "cardOwner"], ["payment", "cardExpireDate"], ["payment", "cardCvv"]];
 
     async componentDidMount(){
-        // if (!this.props.shoppingCart) return null;
         window.scrollTo(0, 0);
         this.props.onOpenLoadingScreen();
         additionalFunctionDom.fixBody();
-        const { userData } = this.props;
-        if (!userData) return;
-        const userLoadProperty  = [...this.userLoadProperty];
-        const userDataProperty = [...this.userDataProperty];
-        const userLoad = {};
-        for (let i = 0; i < userLoadProperty.length ; i++){
-            if (userDataProperty[i].length === 1){
-                userLoad[userLoadProperty[i]] = userData[userDataProperty[i][0]];
+        const  { userData } = this.props;
+        if (Object.keys(userData).length !== 0) {
+            const  userLoadProperty  = [...this.userLoadProperty];
+            const userDataProperty = [...this.userDataProperty];
+            const userLoad = {};
+            for (let i = 0; i < userLoadProperty.length ; i++){
+                if (userDataProperty[i].length === 1){
+                    userLoad[userLoadProperty[i]] = userData[userDataProperty[i][0]];
+                }
+                else {
+                    userLoad[userLoadProperty[i]] = userData[userDataProperty[i][0]][userDataProperty[i][1]];
+                }
             }
-            else {
-                userLoad[userLoadProperty[i]] = userData[userDataProperty[i][0]][userDataProperty[i][1]];
+            const provinceList = await payoutService.getProvince();
+            const province =[{...this.provinceInit},...provinceList];
+            if (userLoad.userProvince !== "") {
+                await this.hanldeDistrict(userLoad.userProvince)
             }
+            if (userLoad.userDistrict !== "") {
+                await this.hanldeCommune(userLoad.userDistrict)
+            }
+            this.setState({data : userLoad, province})
         }
-        const provinceList = await payoutService.getProvince();
-        const province =[{...this.provinceInit},...provinceList];
-        userLoad["paymentMethod"] = "cash";
-        if (userLoad.userProvince !== "") {
-            await this.hanldeDistrict(userLoad.receiverProvince)
-        }
-        if (userLoad.userDistrict !== "") {
-            await this.hanldeCommune(userLoad.receiverDistrict)
-        }
-        this.setState({ data : userLoad, province })
         document.title = "Thanh Toán";
         setTimeout( () => {
             this.props.onCloseLoadingScreen();
             additionalFunctionDom.releaseBody();
-        },400)  
+        },500)  
     }
 
-    componentDidUpdate(prevProps) {
-        if (prevProps.userData !== this.props.userData || prevProps.shoppingCart !== this.props.shoppingCart ){
-            const prevHistory = prevProps.userData ? prevProps.userData.tradeHistory.length : this.props.userData.tradeHistory.length;
-            if (prevHistory === this.props.userData.tradeHistory.length) this.componentDidMount()
+    async componentDidUpdate(prevProps) {
+        if (Object.keys(prevProps.userData).length === 0){
+            const  { userData } = this.props;
+            console.log(userData)
+            const  userLoadProperty  = [...this.userLoadProperty];
+            const userDataProperty = [...this.userDataProperty];
+            const userLoad = {};
+            for (let i = 0; i < userLoadProperty.length ; i++){
+                if (userDataProperty[i].length === 1){
+                    userLoad[userLoadProperty[i]] = userData[userDataProperty[i][0]];
+                }
+                else {
+                    userLoad[userLoadProperty[i]] = userData[userDataProperty[i][0]][userDataProperty[i][1]];
+                }
+            }
+            const provinceList = await payoutService.getProvince();
+            const province =[{...this.provinceInit},...provinceList];
+            if (userLoad.userProvince !== "") {
+                await this.hanldeDistrict(userLoad.userProvince)
+            }
+            if (userLoad.userDistrict !== "") {
+                await this.hanldeCommune(userLoad.userDistrict)
+            }
+            this.setState({data : userLoad, province});
         }
     }
 
@@ -153,7 +190,7 @@ class Payout extends Form {
 
     render() { 
         const { province, district, commune} = this.state;
-        const { shoppingCart, userData } = this.props;
+        const { shoppingCart } = this.props;
         const { paymentMethod } = this.state.data;   
         const cardType = [
             {
@@ -175,8 +212,6 @@ class Payout extends Form {
             }
         ]
         
-        if (Boolean(userData) === false || Boolean(shoppingCart) === false) return null;
-        else
         return (  
             <main className="payout-main">
                 <h2 className="payout-title">Thanh Toán</h2>
@@ -207,7 +242,7 @@ class Payout extends Form {
                                     <p className="empty-warning"><span className="obligation-mark">*</span> Bạn không được để trống mục này</p>
                                 </div>
                             </div>
-                            <button className="order-button" disabled={shoppingCart.length === 0 ? true : false}>Đặt Hàng</button>
+                            <button className="order-button" disabled={(shoppingCart && shoppingCart.length === 0) ? true : false}>Đặt Hàng</button>
                             <p className="note-order-button">(Kiểm tra kĩ thông tin trước khi nhấn nút)</p>
                         </form>
                     </section>
@@ -227,9 +262,9 @@ class Payout extends Form {
                             )}
                         </div>
                         <div className="payout-shopping-footer">
-                            <div className="provisional-sum d-flex justify-content-between"><span>Tạm tính:</span> {addfunc.separator1000(addfunc.totalMoneyCalculation(shoppingCart))} VND</div>
-                            <div className="tax-vat d-flex justify-content-between"><span>Thuế VAT: </span>{addfunc.separator1000(addfunc.totalMoneyCalculation(shoppingCart)/10)} VND</div>
-                            <div className="total-money d-flex justify-content-between"><strong>Tổng tiền:</strong> <span> {addfunc.separator1000((addfunc.totalMoneyCalculation(shoppingCart)*1.1).toFixed(0))} VND</span></div>
+                            <div className="provisional-sum d-flex justify-content-between"><span>Tạm tính:</span> {addfunc.separator1000(this.props.getTotalMoney)} VND</div>
+                            <div className="tax-vat d-flex justify-content-between"><span>Thuế VAT: </span>{addfunc.separator1000(this.props.getTotalMoney/10)} VND</div>
+                            <div className="total-money d-flex justify-content-between"><strong>Tổng tiền:</strong> <span> {addfunc.separator1000((this.props.getTotalMoney*1.1).toFixed(0))} VND</span></div>
                         </div>
                     </section>
                 </div>
@@ -238,4 +273,4 @@ class Payout extends Form {
     }
 }
 
-export default Payout;
+export default connect(mapStateToProps, mapDispatchToProps)(Payout);

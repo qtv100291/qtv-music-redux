@@ -90,7 +90,7 @@ export const getTotalMoney = createSelector (
     shoppingCart => {
         const itemTotalMoney = shoppingCart.reduce((acc, item) => {
             const count = item.count || 0;
-            return acc + item.count*item.price.replace(/\./g,"")
+            return acc + count*item.price.replace(/\./g,"")
         },0)
         return addfunc.separator1000(itemTotalMoney)
     }

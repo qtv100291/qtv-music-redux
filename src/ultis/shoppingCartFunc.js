@@ -1,4 +1,4 @@
-import store from '../store/configureStore'
+import store from '../store/configureStore';
 import updateUser from '../services/updateService';
 
 function loadCartLocal(){//load infomation from qtv cart in localstorage
@@ -72,12 +72,12 @@ function merge2shoppingCart(cart_1, cart_2){
 }
 
 function saveShoppingCart(){
-    const shoppingCart = store.getState().shoppingCart;
     const isLogged = store.getState().user.isLogged;
-    const userId = store.getState().user.userData.id;
-    const userData = store.getState().user.userData;
-    if (!isLogged) saveCartLocal(shoppingCart) 
-    else updateUser(userId, userData, shoppingCart)
+    if (!isLogged) {
+        const shoppingCart = store.getState().shoppingCart;
+        saveCartLocal(shoppingCart) 
+    }
+    else updateUser()
 }
 
 export default {

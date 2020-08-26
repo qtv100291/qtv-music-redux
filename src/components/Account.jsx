@@ -1,14 +1,16 @@
 import React, { useEffect, useRef } from 'react';
-// import Avatar from '../assets/homepage-assets/manager.svg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import UserInformation from '../components/account/userInformation';
 import UserTradeHistory from '../components/account/userTradeHistory';
 import additionalFunctionDom from '../ultis/additionalFunctionDom';
-import './Account.scss'
+import './Account.scss';
 import { useState } from 'react';
 import storageRef from '../services/firebaseStorage';
+import {  userData, updateAvatar } from '../store/authentication';
+import { useSelector, useDispatch } from 'react-redux';
+import updateUser from '../services/updateService';
 
-const Account = ({onOpenLoadingScreen, onCloseLoadingScreen, userData, onUpdateUser, onUpdateAvatar}) => {
+const Account = ({onOpenLoadingScreen, onCloseLoadingScreen}) => {
     const [activeTab, setActiveTab] = useState(1);
     useEffect(()=>{
         document.title = "Tài Khoản";
@@ -20,6 +22,10 @@ const Account = ({onOpenLoadingScreen, onCloseLoadingScreen, userData, onUpdateU
             additionalFunctionDom.releaseBody();
         },1200) 
     },[])
+
+    const dispatch = useDispatch();
+
+    const { name, avatar, id } = useSelector(userData);
 
     const handleChangeTab = id => {
         if (id === activeTab) return 
@@ -33,13 +39,14 @@ const Account = ({onOpenLoadingScreen, onCloseLoadingScreen, userData, onUpdateU
 
     const uploadAvatarToServer = async ({ currentTarget : input }) => {
         const userAvatarFolderRef = storageRef.child('userAvatar');
-        const userAvatarRef = userAvatarFolderRef.child(`${userData.id}-avatar`)
-        if (userData.avatar) userAvatarRef.delete();
+        const userAvatarRef = userAvatarFolderRef.child(`${id}-avatar`)
+        if (avatar) userAvatarRef.delete();
         const file = input.files[0];
         await userAvatarRef.put(file);
         let urlAvatar;
         await userAvatarRef.getDownloadURL().then(url => urlAvatar = url);
-        onUpdateAvatar(urlAvatar);
+        dispatch(updateAvatar(urlAvatar));
+        updateUser();
     }
 
     const inputButton = useRef();
@@ -48,8 +55,6 @@ const Account = ({onOpenLoadingScreen, onCloseLoadingScreen, userData, onUpdateU
         inputButton.current.click();
     }
 
-    if (!userData) return null;
-    else
     return( 
         <main className="account-main">
             <div className="account-container d-flex justify-content-between">
@@ -57,13 +62,13 @@ const Account = ({onOpenLoadingScreen, onCloseLoadingScreen, userData, onUpdateU
                     <div className="account-menu-member-general d-flex align-items-center">
                         <div className="avatar-container">
                             <div className="avatar-picture d-flex align-items-center justify-content-center" onClick={uploadImageFile}>
-                                {userData.avatar ? <img src={userData.avatar} alt="avatar"/> : <FontAwesomeIcon icon="plus"/>}
+                                {avatar ? <img src={avatar} alt="avatar"/> : <FontAwesomeIcon icon="plus"/>}
                             </div>
                             <input type="file" id="upload-image" accept="image/*" ref={inputButton} onChange = {uploadAvatarToServer}/>
                         </div>
                         
                         <div className="welcome-member">Xin Chào
-                            <strong className="member-name" title={userData.name}> {userData.name}</strong>
+                            <strong className="member-name" title={name}> {name}</strong>
                         </div>
                     </div>
                     <ul className="account-menu-sidebar">
@@ -79,8 +84,7 @@ const Account = ({onOpenLoadingScreen, onCloseLoadingScreen, userData, onUpdateU
                     <div className="log-out-button" onClick={handleLogOut}>Đăng Xuất</div>
                 </section>
                 <section className="account-content">
-                    {activeTab === 1 ? <UserInformation userData ={userData} onUpdateUser ={onUpdateUser} /> 
-                                        : <UserTradeHistory tradeHistory = {userData.tradeHistory}/>}
+                    {activeTab === 1 ? <UserInformation /> : <UserTradeHistory />}
                 </section>
             </div>
         </main>

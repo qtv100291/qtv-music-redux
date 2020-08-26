@@ -2,8 +2,24 @@ import React from 'react';
 import Form from '../common/form';
 import payoutService from '../../services/payoutService';
 import './userInformation.scss';
+import { connect } from 'react-redux';
+import { updateUserInformation } from '../../store/authentication';
+import updateUser from '../../services/updateService'; 
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
+import additionalFunctionDom from '../../ultis/additionalFunctionDom';
 
- 
+
+const mapStateToProps = state => ({
+    userData : state.user.userData
+})
+
+const mapDispatchToProps = dispatch => ({
+    onUpdateUser : userInfo => {
+        dispatch(updateUserInformation(userInfo))
+    }
+})
+
 class UserInformation extends Form {
     provinceInit = {
         idProvince:"None",
@@ -37,28 +53,55 @@ class UserInformation extends Form {
     }
     
     async componentDidMount() {
-        const { userData } = this.props;
-        const  userLoadProperty  = [...this.userLoadProperty];
-        const userDataProperty = [...this.userDataProperty];
-        const userLoad = {};
-        for (let i = 0; i < userLoadProperty.length ; i++){
-            if (userDataProperty[i].length === 1){
-                userLoad[userLoadProperty[i]] = userData[userDataProperty[i][0]];
+        const  { userData } = this.props;
+        if (Object.keys(userData).length !== 0) {
+            const  userLoadProperty  = [...this.userLoadProperty];
+            const userDataProperty = [...this.userDataProperty];
+            const userLoad = {};
+            for (let i = 0; i < userLoadProperty.length ; i++){
+                if (userDataProperty[i].length === 1){
+                    userLoad[userLoadProperty[i]] = userData[userDataProperty[i][0]];
+                }
+                else {
+                    userLoad[userLoadProperty[i]] = userData[userDataProperty[i][0]][userDataProperty[i][1]];
+                }
             }
-            else {
-                userLoad[userLoadProperty[i]] = userData[userDataProperty[i][0]][userDataProperty[i][1]];
+            const provinceList = await payoutService.getProvince();
+            const province =[{...this.provinceInit},...provinceList];
+            if (userLoad.userProvince !== "") {
+                await this.hanldeDistrict(userLoad.userProvince)
             }
+            if (userLoad.userDistrict !== "") {
+                await this.hanldeCommune(userLoad.userDistrict)
+            }
+            this.setState({data : userLoad, province})
         }
-        const provinceList = await payoutService.getProvince();
-        const province =[{...this.provinceInit},...provinceList];
-        if (userLoad.userProvince !== "") {
-            await this.hanldeDistrict(userLoad.userProvince)
+    }
+    
+    async componentDidUpdate(prevProps){
+        if (Object.keys(prevProps.userData).length === 0){
+            const  { userData } = this.props;
+            const  userLoadProperty  = [...this.userLoadProperty];
+            const userDataProperty = [...this.userDataProperty];
+            const userLoad = {};
+            for (let i = 0; i < userLoadProperty.length ; i++){
+                if (userDataProperty[i].length === 1){
+                    userLoad[userLoadProperty[i]] = userData[userDataProperty[i][0]];
+                }
+                else {
+                    userLoad[userLoadProperty[i]] = userData[userDataProperty[i][0]][userDataProperty[i][1]];
+                }
+            }
+            const provinceList = await payoutService.getProvince();
+            const province =[{...this.provinceInit},...provinceList];
+            if (userLoad.userProvince !== "") {
+                await this.hanldeDistrict(userLoad.userProvince)
+            }
+            if (userLoad.userDistrict !== "") {
+                await this.hanldeCommune(userLoad.userDistrict)
+            }
+            this.setState({data : userLoad, province});
         }
-        if (userLoad.userDistrict !== "") {
-            await this.hanldeCommune(userLoad.userDistrict)
-        }
-        this.setState({data : userLoad, province});
-        document.title = "Tài Khoản";
     }
 
     hanldeDistrict = async idProvince => {
@@ -86,7 +129,7 @@ class UserInformation extends Form {
     doSubmit = () => {
         const userData = {...this.props.userData};
         userData.address = {};
-        userData.payment = {}
+        userData.payment = {};
         const userLoadProperty  = [...this.userLoadProperty];
         const userDataProperty = [...this.userDataProperty];
         const userDataUpdate = {...this.state.data};
@@ -99,7 +142,19 @@ class UserInformation extends Form {
             }
         }
         userData.tradeHistory = [...this.props.userData.tradeHistory]
-        this.props.onUpdateUser(userData)
+        this.props.onUpdateUser(userData);
+        updateUser();
+        const MySwal = withReactContent(Swal)
+        this.setState({ userData });
+        updateUser(this.state.user.sub, userData, this.state.shoppingCart);
+        MySwal.fire({
+        icon: 'success',
+        html: 'Đã Cập Nhật Thông Tin',
+        showConfirmButton: false,
+        timer: 1250,
+        }).then(() => {
+        additionalFunctionDom.releaseBody();
+        })
     }
 
     render() { 
@@ -123,7 +178,9 @@ class UserInformation extends Form {
                 name: "JCB"
             }
         ]
-        
+
+        console.log("rendered")
+
         return ( 
         <div className="user-information">
             <form className="form-account" onSubmit={this.handleSubmit}>
@@ -151,44 +208,5 @@ class UserInformation extends Form {
     }
 }
  
-export default UserInformation;
+export default connect(mapStateToProps,mapDispatchToProps)(UserInformation);
 
-// {
-//     "email": "quang@gmail.com",
-//     "password": "$2a$10$.uSpF3U9PawVQjYxWUD5XOctEvQNwHsXdFEcwibUt0Vq2TThce06i",
-//     "phone": "0962461650",
-//     "name": "hehe",
-//     "shoppingCart": [
-//       {
-//         "id": "10",
-//         "name": "Lối Thoát",
-//         "price": "200.000",
-//         "image": "/album-cover-and-audio/Loi_Thoat/cover.jpg",
-//         "bandName": "Microwave",
-//         "count": 12
-//       },
-//       {
-//         "id": "14",
-//         "name": "Unlimited Giáng sinh",
-//         "price": "180.000",
-//         "image": "/album-cover-and-audio/Giang_Sinh/cover.jpg",
-//         "bandName": "UnlimiteD",
-//         "count": 8
-//       }
-//     ],
-//     "address": {
-//       "province": "",
-//       "district": "",
-//       "commune": "",
-//       "street": ""
-//     },
-//     "payment": {
-//       "cardType": "",
-//       "cardNumber": "",
-//       "cardOwner": "",
-//       "cardExpireDate": "",
-//       "cardCvv": ""
-//     },
-//     "tradeHistory": [],
-//     "id": 1
-//   }

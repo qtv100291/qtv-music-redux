@@ -1,15 +1,15 @@
 import * as firebase from 'firebase';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBcqKFIc8p0WZsMdCq9MD1bKI205FCb3so",
-    authDomain: "qtv-music.firebaseapp.com",
-    databaseURL: "https://qtv-music.firebaseio.com",
-    projectId: "qtv-music",
-    storageBucket: "qtv-music.appspot.com",
-    messagingSenderId: "515984949894",
-    appId: "1:515984949894:web:2177ebd6f99dfc9da18707",
-    measurementId: "G-40SFKG9SPR"
+    apiKey: "AIzaSyAdvK5_3Dzwj9TCLK0bchXRczpXAI7VjlU",
+    authDomain: "qtv-music-shop.firebaseapp.com",
+    databaseURL: "https://qtv-music-shop.firebaseio.com",
+    projectId: "qtv-music-shop",
+    storageBucket: "qtv-music-shop.appspot.com",
+    messagingSenderId: "486744017757",
+    measurementId: "G-9LVF68HCQ8"
 };
+
 firebase.initializeApp(firebaseConfig)
 const storage = firebase.storage();
 const storageRef = storage.ref();
