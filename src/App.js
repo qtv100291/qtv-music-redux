@@ -24,15 +24,11 @@ import PreviewModal from './components/common/previewModal';
 import AboutThisWebsite from './components/navbar/aboutThisWebsite';
 import NavbarMobile from './components/NavbarMobile';
 import IconLibrary from './ultis/addIcon';
-import authService, { getUserData, login } from './services/loginService';
+import authService from './services/loginService';
 import shoppingCartFunc from './ultis/shoppingCartFunc';
 import updateUser from './services/updateService';
-import addfunc from './ultis/additionalFunction';
-import additionalFunctionDom from './ultis/additionalFunctionDom';
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import { getInitialValue } from './store/shoppingCart';
 import { setLogin } from './store/authentication';
 
@@ -63,7 +59,7 @@ class App extends Component {
       const userData = await authService.getUserData(userId)
       user.name = userData.name;
       const shoppingCart = [...userData.shoppingCart];
-      userData.shoppingCart = [...new Array()];
+      userData.shoppingCart = [];
       this.props.getInitialShoppingCart(shoppingCart);
       this.props.getInitialUser(userData);
     }
@@ -90,7 +86,6 @@ class App extends Component {
 
   handleCloseLoadingScreen = () => {
     this.setState( { isLoadingScreen: false} )
-    
   }
 
   handleOpenLoadingScreen = () => {
@@ -98,7 +93,7 @@ class App extends Component {
   }
 
   render() { 
-    const { shoppingCart, user, userData} = this.state;
+    const { shoppingCart } = this.state;
     return ( 
       <React.Fragment>
         <PreviewModal />
@@ -140,11 +135,8 @@ class App extends Component {
             />}/>
             <ProtectedRoute path="/thanh-toan" 
                             component= {Payout} 
-                            userData={userData}
-                            shoppingCart= { shoppingCart } 
                             onOpenLoadingScreen = {this.handleOpenLoadingScreen}
                             onCloseLoadingScreen = {this.handleCloseLoadingScreen}
-                            onTradeHistory ={this.handleUpdateTradeHistory}
             />
             <ProtectedRoute path="/tai-khoan" 
                             component= {Account} 

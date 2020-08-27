@@ -73,7 +73,7 @@ class AlbumDetail extends Component {
 
     handleAddToCart = () => {
         const { id, albumName, price, albumCover, bandName } = this.state.album;
-        const imagePath = '/' + albumCover + '/cover.jpg';
+        const imagePath = albumCover ;
         const MySwal = withReactContent(Swal)
         const newItem = new shoppingCartFunc.Item(id, albumName, price, imagePath, bandName);
         this.props.cartAddItem(newItem);
@@ -106,8 +106,8 @@ class AlbumDetail extends Component {
                 listSong, 
                 listSongDuration} = this.state.album;
 
-        const imagePath = '/' + albumCover + '/cover.jpg';
-        const mp3Path = '/' + albumCover + '/' + previewSong;
+        const imagePath = albumCover ;
+        const mp3Path = previewSong;
 
         return ( 
             <main className="section-album-detail">

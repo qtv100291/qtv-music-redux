@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect';
-import addfunc from '../ultis/additionalFunction';
+
 
 const slice = createSlice({
     name:"shoppingCart",
@@ -64,12 +64,15 @@ const slice = createSlice({
                     return;
                 }
             }
+        },
+        removeAllItem : shoppingCart => {
+            shoppingCart.length = 0;
         }
     }
 })
 
 //actions
-export const { cartAddItem, cartMinusItem, cartPlusItem, cartDeleteItem, cartChangeQuantity, cartCheckEmpty, getInitialValue } = slice.actions;
+export const { cartAddItem, cartMinusItem, cartPlusItem, cartDeleteItem, cartChangeQuantity, cartCheckEmpty, getInitialValue, removeAllItem } = slice.actions;
 
 //selector
 export const selectShoppingCart = createSelector(
@@ -92,7 +95,7 @@ export const getTotalMoney = createSelector (
             const count = item.count || 0;
             return acc + count*item.price.replace(/\./g,"")
         },0)
-        return addfunc.separator1000(itemTotalMoney)
+        return itemTotalMoney
     }
 )
     

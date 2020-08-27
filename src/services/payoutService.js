@@ -1,5 +1,5 @@
 import http from './httpService';
-import { apiUrl } from "../config.json";
+import { apiUrl } from "../config";
 
 const apiEndpointProvince = apiUrl + '/province';
 const apiEndpointDistrict = apiUrl + '/district';

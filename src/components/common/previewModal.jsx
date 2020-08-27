@@ -21,7 +21,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    handleCloseModal : () => {
+    closeModal : ()=> {
         additionalFunctionDom.releaseBody();
         dispatch(closeQuickViewModal())
     },
@@ -49,13 +49,17 @@ class PreviewModal extends Component {
         }
     }
 
+    handleCloseModal = event =>{
+        if (event.target.classList.contains("preview-modal")) this.props.closeModal();
+    }
+
     handleAddToCart = async () => {
         const { id, albumName, price, albumCover, bandName } = this.state.album;
-        const imagePath = '/' + albumCover + '/cover.jpg';
+        const imagePath = albumCover ;
         const MySwal = withReactContent(Swal)
         const newItem = new shoppingCartFunc.Item(id, albumName, price, imagePath, bandName);
         this.props.cartAddItem(newItem);
-        this.props.handleCloseModal(); 
+        this.props.closeModal(); 
         additionalFunctionDom.fixBody();
         shoppingCartFunc.saveShoppingCart()
         MySwal.fire({
@@ -77,23 +81,21 @@ class PreviewModal extends Component {
             bandName, 
             albumCover, 
             price, 
-            // previewSong, 
-            // previewSongName, 
             description,} = this.state.album;
         const { isLoading } = this.state
-        const imagePath = '/' + albumCover + '/cover.jpg';
-        // const mp3Path = '/' + albumCover + '/' + previewSong;
+        const imagePath = albumCover;
         const productPath = '/san-pham/' + (albumName && albumName.replace(/ /g, "-")) + '-' +id;
         return ( 
             <div className={this.props.isOpeningModal ?  
                             "preview-modal active-mode" 
                             : "preview-modal"}
+                onClick={this.handleCloseModal}
                 > 
                 <div className="preview-modal-container d-flex justify-content-between align-items-center" >
                     <div className={isLoading? "loading-screen-modal" : "loading-screen-modal turn-off"}>
                         <img src={loadingIconSmall} alt="loading icon"/>
                     </div>
-                    <div className="close-button d-flex justify-content-center align-items-center" onClick={this.props.handleCloseModal}><FontAwesomeIcon icon="times-circle"/></div>
+                    <div className="close-button d-flex justify-content-center align-items-center" onClick={this.props.closeModal}><FontAwesomeIcon icon="times-circle"/></div>
                     <div className="preview-modal-photo">
                         <img src={imagePath} alt={albumName}/>
                     </div>

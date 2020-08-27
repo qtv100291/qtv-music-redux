@@ -3,7 +3,6 @@ import { Link, NavLink} from 'react-router-dom';
 import SearchBar from '../components/navbar/searchBar';
 import './NavbarMobile.scss';
 import MenuIcon from './navbar/menuIcon';
-import shoppingCartFunc from '../ultis/shoppingCartFunc';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import additionalFunctionDom from '../ultis/additionalFunctionDom';
 import { useSelector } from 'react-redux';

@@ -15,7 +15,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 class AlbumItem extends Component {
     render() { 
         const { id, albumName, bandName, albumCover, price} = this.props;
-        const imagePath = '/' + albumCover + '/cover.jpg';
+        const imagePath = albumCover ;
         const productPath = '/san-pham/' + (albumName && albumName.replace(/ /g, "-")) + '-' +id;
         return (
         <React.Fragment>

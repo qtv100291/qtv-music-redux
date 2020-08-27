@@ -9,13 +9,15 @@ import additionalFunctionDom from '../ultis/additionalFunctionDom';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import { updateUserInformation, updateTradeHistory } from '../store/authentication';
-import { getTotalMoney  } from '../store/shoppingCart';
+import { getTotalMoney, selectShoppingCart, removeAllItem } from '../store/shoppingCart';
+import updateUser from '../services/updateService';
 import { connect } from 'react-redux';
 
 
 const mapStateToProps = state => ({
     userData : state.user.userData,
-    getTotalMoney : getTotalMoney(state)
+    getTotalMoney : getTotalMoney(state),
+    shoppingCart: selectShoppingCart(state)
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -23,6 +25,7 @@ const mapDispatchToProps = dispatch => ({
         dispatch(updateUserInformation(userInfo))
     },
     onTradeHistory: tradeHistory => {
+        dispatch(removeAllItem())
         dispatch(updateTradeHistory(tradeHistory))
     }
 })
@@ -78,11 +81,12 @@ class Payout extends Form {
 
     async componentDidMount(){
         window.scrollTo(0, 0);
+        document.title = "Thanh Toán";
         this.props.onOpenLoadingScreen();
         additionalFunctionDom.fixBody();
         const  { userData } = this.props;
         if (Object.keys(userData).length !== 0) {
-            const  userLoadProperty  = [...this.userLoadProperty];
+            const userLoadProperty  = [...this.userLoadProperty];
             const userDataProperty = [...this.userDataProperty];
             const userLoad = {};
             for (let i = 0; i < userLoadProperty.length ; i++){
@@ -94,27 +98,28 @@ class Payout extends Form {
                 }
             }
             const provinceList = await payoutService.getProvince();
-            const province =[{...this.provinceInit},...provinceList];
+            const province = [{...this.provinceInit},...provinceList];
             if (userLoad.userProvince !== "") {
-                await this.hanldeDistrict(userLoad.userProvince)
+                await this.hanldeDistrict(userLoad.receiverProvince)
             }
             if (userLoad.userDistrict !== "") {
-                await this.hanldeCommune(userLoad.userDistrict)
+                await this.hanldeCommune(userLoad.receiverDistrict)
             }
             this.setState({data : userLoad, province})
+            setTimeout( () => {
+                this.props.onCloseLoadingScreen();
+                additionalFunctionDom.releaseBody();
+            },500)  
         }
-        document.title = "Thanh Toán";
-        setTimeout( () => {
-            this.props.onCloseLoadingScreen();
-            additionalFunctionDom.releaseBody();
-        },500)  
+        
     }
 
     async componentDidUpdate(prevProps) {
-        if (Object.keys(prevProps.userData).length === 0){
+        if (Object.keys(prevProps.userData).length === 0 && Object.keys(this.props.userData).length !== 0){
+            this.props.onOpenLoadingScreen();
+            additionalFunctionDom.fixBody();
             const  { userData } = this.props;
-            console.log(userData)
-            const  userLoadProperty  = [...this.userLoadProperty];
+            const userLoadProperty  = [...this.userLoadProperty];
             const userDataProperty = [...this.userDataProperty];
             const userLoad = {};
             for (let i = 0; i < userLoadProperty.length ; i++){
@@ -127,24 +132,18 @@ class Payout extends Form {
             }
             const provinceList = await payoutService.getProvince();
             const province =[{...this.provinceInit},...provinceList];
-            if (userLoad.userProvince !== "") {
-                await this.hanldeDistrict(userLoad.userProvince)
+            if (userLoad.userProvince !== ""){
+                await this.hanldeDistrict(userLoad.receiverProvince)
             }
-            if (userLoad.userDistrict !== "") {
-                await this.hanldeCommune(userLoad.userDistrict)
+            if (userLoad.userDistrict !== ""){
+                await this.hanldeCommune(userLoad.receiverDistrict)
             }
             this.setState({data : userLoad, province});
+            setTimeout( () => {
+                this.props.onCloseLoadingScreen();
+                additionalFunctionDom.releaseBody();
+            },500)
         }
-    }
-
-    handleWaitPropsFullyLoaded = () => {
-        setTimeout(() => {
-            const { userData } = this.props;
-            if (!userData) {
-                this.handleWaitPropsFullyLoaded();
-            }
-            else return userData
-        },100)
     }
 
     hanldeDistrict = async idProvince => {
@@ -173,11 +172,12 @@ class Payout extends Form {
         additionalFunctionDom.fixBody()
         const MySwal = withReactContent(Swal)
         const {data} = this.state;
-        const { shoppingCart } = this.props;
+        const  shoppingCart  = JSON.parse(JSON.stringify(this.props.shoppingCart));
         const tradeHistory = addfunc.buildHistoryTrade(shoppingCart);
         const orderInfo = new addfunc.GetPaymentInfo( data, shoppingCart);
         this.props.onTradeHistory(tradeHistory);
         sendOrder(orderInfo);
+        updateUser();
         MySwal.fire({
             icon: 'success',
             text: 'Cảm ơn quý khách đã tin tưởng QTV Music, nhân viên của chúng tôi sẽ liên lạc với quý khách trong thời gian sớm nhất.',

@@ -142,11 +142,10 @@ class UserInformation extends Form {
             }
         }
         userData.tradeHistory = [...this.props.userData.tradeHistory]
+        this.setState({ userData });
         this.props.onUpdateUser(userData);
         updateUser();
         const MySwal = withReactContent(Swal)
-        this.setState({ userData });
-        updateUser(this.state.user.sub, userData, this.state.shoppingCart);
         MySwal.fire({
         icon: 'success',
         html: 'Đã Cập Nhật Thông Tin',
@@ -178,8 +177,6 @@ class UserInformation extends Form {
                 name: "JCB"
             }
         ]
-
-        console.log("rendered")
 
         return ( 
         <div className="user-information">

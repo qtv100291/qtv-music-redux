@@ -9,7 +9,7 @@ const AlbumOfTheWeek = ({
                         albumCover, 
                         price, 
                         description, }) => {
-    const imagePath = '/' + albumCover + '/cover.jpg'
+    const imagePath = albumCover;
     const productPath = '/san-pham/' + (albumName && albumName.replace(/ /g, "-")) + '-' +id;
     return ( 
         <section className="album-section">

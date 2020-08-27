@@ -21,7 +21,7 @@ const ShoppingCart = ({ onOpenLoadingScreen, onCloseLoadingScreen }) => {
         setTimeout( () => {
             onCloseLoadingScreen();
             additionalFunctionDom.releaseBody();
-        },300)
+        },700)
     },[])
     if (!shoppingCart) return null
     else
@@ -38,9 +38,9 @@ const ShoppingCart = ({ onOpenLoadingScreen, onCloseLoadingScreen }) => {
                 </section>
                 <section className="total-money">
                     <div className="total-money-container">
-                        <p className="total-money-title d-flex justify-content-between">Tạm Tính<span>{ moneyTotalNumber } VND</span></p>
-                        <p className="total-money-tax d-flex justify-content-between">Thuế VAT <span>{ addfunc.separator1000(moneyTotalNumber.replace(/\./g,"") /10) } VND</span></p> 
-                        <p className="total-money-value d-flex justify-content-between align-items-center">TỔNG<span>{ addfunc.separator1000((moneyTotalNumber.replace(/\./g,"")*1.1).toFixed(0))} VND</span></p> 
+                        <p className="total-money-title d-flex justify-content-between">Tạm Tính<span>{addfunc.separator1000( moneyTotalNumber) } VND</span></p>
+                        <p className="total-money-tax d-flex justify-content-between">Thuế VAT <span>{ addfunc.separator1000(moneyTotalNumber/10) } VND</span></p> 
+                        <p className="total-money-value d-flex justify-content-between align-items-center">TỔNG<span>{ addfunc.separator1000((moneyTotalNumber*1.1).toFixed(0))} VND</span></p> 
                     </div>
                     {(shoppingCart.length !== 0) && <Link to="thanh-toan"><div className="payout-button d-flex align-items-center justify-content-center">THANH TOÁN</div></Link>}
                 </section>

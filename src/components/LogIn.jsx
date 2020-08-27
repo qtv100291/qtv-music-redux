@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Form from './common/form';
 import './LogIn.scss';
 import authService from '../services/loginService';
@@ -8,10 +8,13 @@ import { Link } from 'react-router-dom';
 
 class LogIn extends Form {
     state = { 
-        data :{},
+        data :{
+            emailLogIn: "user@gmail.com",
+            passwordLogIn: "123456"
+        },
         errors : {} ,
         serverError: "",
-        disabled: true
+        disabled: false
     }
 
     inputCheck = {
