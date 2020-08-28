@@ -109,9 +109,12 @@ class UserInformation extends Form {
             this.setState( { district: [{...this.districtInit}], commune: [{...this.communeInit}]} )
         }
         else {
+            document.querySelector('.userDistrict > span').style.display = "block";
             const districtList  = await payoutService.getDistrict(idProvince);
             const district = [{...this.districtInit}, ...districtList];
             this.setState({ district, commune: [{...this.communeInit}] })
+            document.querySelector('.userDistrict > span').style.display = "none";
+
         }
     }
 
@@ -120,9 +123,12 @@ class UserInformation extends Form {
             this.setState( { commune: [{...this.communeInit}]} )
         }
         else {
+            document.querySelector('.userCommune > span').style.display = "block";
             const communeList  = await payoutService.getCommune(idDistrict);
             const commune = [{...this.communeInit},...communeList];
             this.setState({ commune })
+            document.querySelector('.userCommune > span').style.display = "none";
+
         }
     }
 

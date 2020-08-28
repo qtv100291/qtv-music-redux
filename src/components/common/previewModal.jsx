@@ -100,7 +100,7 @@ class PreviewModal extends Component {
                         <img src={imagePath} alt={albumName}/>
                     </div>
                     <div className="preview-modal-content" ref={this.myModal}>
-                        <Link to={productPath} onClick={this.props.handleCloseModal}>
+                        <Link to={productPath} onClick={this.props.closeModal}>
                             <h3 className="album-name">{albumName}</h3>
                         </Link>
                         <h3 className="album-band-name">{bandName}</h3>

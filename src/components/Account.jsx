@@ -55,7 +55,7 @@ const Account = ({onOpenLoadingScreen, onCloseLoadingScreen}) => {
         inputButton.current.click();
     }
 
-    return( 
+    return(
         <main className="account-main">
             <div className="account-container d-flex justify-content-between">
                 <section className="account-side-bar">
@@ -66,7 +66,6 @@ const Account = ({onOpenLoadingScreen, onCloseLoadingScreen}) => {
                             </div>
                             <input type="file" id="upload-image" accept="image/*" ref={inputButton} onChange = {uploadAvatarToServer}/>
                         </div>
-                        
                         <div className="welcome-member">Xin Chào
                             <strong className="member-name" title={name}> {name}</strong>
                         </div>

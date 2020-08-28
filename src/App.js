@@ -75,15 +75,6 @@ class App extends Component {
     this.setState({isLoadingScreen});
   }
 
-  handleUpdateTradeHistory = tradeHistory => {
-    const shoppingCart = [];
-    const userData = {...this.state.userData}
-    const tradeHistoryUpdate = [...this.state.userData.tradeHistory,...tradeHistory];
-    userData.tradeHistory = [...tradeHistoryUpdate];
-    this.setState({userData,shoppingCart});
-    updateUser(this.state.user.sub, userData, shoppingCart);
-  }
-
   handleCloseLoadingScreen = () => {
     this.setState( { isLoadingScreen: false} )
   }

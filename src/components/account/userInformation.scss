@@ -40,3 +40,19 @@
         }
     }
 }
+
+.userDistrict, .userCommune{
+    position: relative;
+    z-index: 1;
+    > span{
+        background-image: url("/loading-icon-small.gif");
+        background-size: cover;
+        position: absolute;
+        width: 22px;
+        height: 22px;
+        right: 20px;
+        top: 7px;
+        display: none;
+        z-index: 5;
+    }
+}

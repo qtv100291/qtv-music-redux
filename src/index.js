@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router} from "react-router-dom";
+import { Router } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.css';
 import history from './ultis/history';
 import './index.css';
@@ -9,14 +9,11 @@ import * as serviceWorker from './serviceWorker';
 import additionalFunctionDom from './ultis/additionalFunctionDom';
 import { Provider } from 'react-redux';
 import store from './store/configureStore';
-// import { PersistGate } from 'redux-persist/integration/react';
 
 ReactDOM.render(
   <Provider store = {store}>
     <Router history={history}>
-      {/* <PersistGate loading={null} persistor={persistor}> */}
         <App />
-      {/* </PersistGate> */}
     </Router>
   </Provider>,
   document.getElementById('root')

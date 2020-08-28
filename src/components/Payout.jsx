@@ -56,6 +56,8 @@ class Payout extends Form {
         province: [{...this.provinceInit}],
         district: [{...this.districtInit}],
         commune : [{...this.communeInit}],
+        isLoadingDistrict: false,
+        isLoadingCommune:false
     }
 
     inputCheck = {
@@ -151,9 +153,11 @@ class Payout extends Form {
             this.setState( { district: [{...this.districtInit}], commune: [{...this.communeInit}]} )
         }
         else {
+            document.querySelector('.receiverDistrict > span').style.display = "block";
             const districtList  = await payoutService.getDistrict(idProvince);
             const district = [{...this.districtInit}, ...districtList];
             this.setState({ district, commune: [{...this.communeInit}] })
+            document.querySelector('.receiverDistrict > span').style.display = "none";
         }
     }
 
@@ -162,9 +166,12 @@ class Payout extends Form {
             this.setState( { commune: [{...this.communeInit}]} )
         }
         else {
+            document.querySelector('.receiverCommune > span').style.display = "block";
             const communeList  = await payoutService.getCommune(idDistrict);
             const commune = [{...this.communeInit},...communeList];
             this.setState({ commune })
+            document.querySelector('.receiverCommune > span').style.display = "none";
+
         }
     }
 
