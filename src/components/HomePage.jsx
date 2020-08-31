@@ -33,7 +33,7 @@ class HomePage extends Component {
         setTimeout(() => {
             this.props.onLoadingScreen();
             additionalFunctionDom.releaseBody();
-        },200)
+        },500)
     }
 
     updateWindowWidth = () => {

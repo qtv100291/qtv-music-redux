@@ -16,8 +16,7 @@ const slice = createSlice({
         cartAddItem: (shoppingCart, action) => {
             for (let i = 0; i < shoppingCart.length; i++){
                 if( action.payload.id === shoppingCart[i].id ){
-                    const countItem = shoppingCart[i].count + 1; 
-                    shoppingCart[i] = {...shoppingCart[i], count : countItem}
+                    shoppingCart[i] = {...shoppingCart[i], count : shoppingCart[i].count + 1}
                     return;
                 }
             }

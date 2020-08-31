@@ -15,18 +15,15 @@ const ShoppingCartItem = ({id, name, count, image, price, bandName}) => {
     const minusQuantity = () => {
         if ( count === 1) return
         dispatch(cartMinusItem({id}));
-        shoppingCartFunc.saveShoppingCart()
     }
 
     const plusQuantity = () => {
         if ( count === 99 ) return
         dispatch(cartPlusItem({id}));
-        shoppingCartFunc.saveShoppingCart()
     }
 
     const deleteItem = () => {
         dispatch(cartDeleteItem({id}));
-        shoppingCartFunc.saveShoppingCart()
     }
 
     const changeQuantity = ({currentTarget : input}) => {
@@ -35,13 +32,11 @@ const ShoppingCartItem = ({id, name, count, image, price, bandName}) => {
             id,
             count: value
         }))
-        shoppingCartFunc.saveShoppingCart()
     }
 
     const checkEmpty = ({currentTarget : input}) => {
         if ( input.value !== "") return 
         else dispatch(cartCheckEmpty({ id }))
-        shoppingCartFunc.saveShoppingCart()
     }
 
     const removeSomeCharacter = event  => {// not allow to press button e, + , -, . on keyboard

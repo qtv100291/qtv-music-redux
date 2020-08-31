@@ -61,7 +61,6 @@ class PreviewModal extends Component {
         this.props.cartAddItem(newItem);
         this.props.closeModal(); 
         additionalFunctionDom.fixBody();
-        shoppingCartFunc.saveShoppingCart()
         MySwal.fire({
             icon: 'success',
             html: 'Đã Thêm Vào Giỏ Hàng',

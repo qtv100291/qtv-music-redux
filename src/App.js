@@ -26,12 +26,10 @@ import NavbarMobile from './components/NavbarMobile';
 import IconLibrary from './ultis/addIcon';
 import authService from './services/loginService';
 import shoppingCartFunc from './ultis/shoppingCartFunc';
-import updateUser from './services/updateService';
 import './App.scss';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getInitialValue } from './store/shoppingCart';
 import { setLogin } from './store/authentication';
-
 import { connect } from 'react-redux';
 
 
