@@ -10,6 +10,10 @@
         .not-found-photo{
             height: 550px;
             margin-bottom: 100px;
+            @include large-desktop{
+                height: 50%;
+                margin-bottom: 10%;
+            }
             @include large-tablet{
                 height: 50%;
                 margin-bottom: 10%;

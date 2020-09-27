@@ -47,3 +47,8 @@ export const selectTradeHistory = createSelector(
 
 //reducer
 export default slice.reducer;
+
+
+function minSubArrayLen(arr, number){
+    
+}

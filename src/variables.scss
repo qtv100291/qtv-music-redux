@@ -9,6 +9,7 @@ $tablet-width: 767px;
 $large-tablet: 991px;
 $desktop-width: 1199px;
 $large-desktop: 1200px;
+$super-large-desktop: 1600px;
 
 
 @mixin button{
@@ -43,13 +44,19 @@ $large-desktop: 1200px;
 }
 
 @mixin desktop {
-    @media (min-width: #{$large-tablet+1px}) and (max-width:#{$desktop-width}) {
+    @media (min-width:#{$large-tablet+1px}) and (max-width:#{$desktop-width}) {
         @content;
     }
 }
 
 @mixin large-desktop {
-    @media (min-width: #{$large-desktop}) {
+    @media (min-width:#{$large-desktop}) and (max-width:#{$super-large-desktop}) {
+        @content;
+    }
+}
+
+@mixin super-large-desktop {
+    @media (min-width: #{$super-large-desktop + 1px}) {
         @content;
     }
 }

@@ -70,9 +70,9 @@ class Form extends Component {
 
     handleOnlyDigit = ( digitNumber, input) => {
       //allow user to type only digit 
-      const regexVariable= `^\\d{0,${digitNumber}}$`
-      const testRegex = new RegExp (regexVariable,"g")
-      if (testRegex.test(input.value)) {
+      const regexVariable= `^\\d{0,${digitNumber}}$`;
+      const testRegex = new RegExp (regexVariable,"g");
+      if (testRegex.test(input.value)){
         let data = {...this.state.data};
         data[input.name] = input.value;
         this.setState({data});

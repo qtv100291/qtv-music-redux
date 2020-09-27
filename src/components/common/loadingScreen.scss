@@ -14,11 +14,17 @@
         top: 50%;
         transform: translate(-50%, -55%);
         height: 400px;
-        @include large-tablet{
+        @include large-desktop{
             height: 350px;
         }
-        @include tablet{
+        @include desktop{
+            height: 325px;
+        }
+        @include large-tablet{
             height: 300px;
+        }
+        @include tablet{
+            height: 250px;
         }
         @include mobile{
             height: auto;

@@ -41,6 +41,7 @@ const Account = ({onOpenLoadingScreen, onCloseLoadingScreen}) => {
         const userAvatarFolderRef = storageRef.child('userAvatar');
         const userAvatarRef = userAvatarFolderRef.child(`${id}-avatar`)
         if (avatar) userAvatarRef.delete();
+        if (input.files.length === 0) return;
         const file = input.files[0];
         await userAvatarRef.put(file);
         let urlAvatar;

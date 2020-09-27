@@ -10,7 +10,7 @@ import Banner3 from '../../assets/homepage-assets/banner3.jpg';
 
 const CarouselHomePage = () => {
     return ( 
-        <Carousel fade={true} className="carousel-home-page" indicators={false} interval={7000}>
+        <Carousel fade={true} className="carousel-home-page" indicators={false} interval={5500}>
             <Carousel.Item id="carousel-main-item">
                 <Link to ='/san-pham'>  
                     <div className ="carousel-banner">

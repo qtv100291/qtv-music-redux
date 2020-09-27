@@ -17,6 +17,9 @@
     @include large-desktop {
         display: none;
     }
+    @include super-large-desktop {
+        display: none;
+    }
     .navbar-mobile-container{
         width: 95%;
         height: 100%;
